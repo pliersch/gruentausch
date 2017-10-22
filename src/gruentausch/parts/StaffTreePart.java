@@ -71,7 +71,7 @@ public class StaffTreePart {
 		viewer.setContentProvider(new ViewContentProvider());
 		menuService.registerContextMenu(
         viewer.getControl(),
-        "gruenzeug.popupmenu.edit.staff");
+        "gruentausch.popupmenu.edit.staff");
 
 		TreeViewerColumn mainColumn = new TreeViewerColumn(viewer, SWT.NONE);
 		mainColumn.getColumn().setText("Name");
@@ -115,9 +115,9 @@ public class StaffTreePart {
 			public void widgetSelected(SelectionEvent e) {
 //				Object data = item.getData();
 //				if (data instanceof Employee) {
-//					displayPart("gruenzeug.part.filebrowser");
+//					displayPart("gruentausch.part.filebrowser");
 //				} else if (data instanceof Year) {
-//					displayPart("gruenzeug.part.mitarbeiter");
+//					displayPart("gruentausch.part.mitarbeiter");
 //				}
 				TreeItem item = (TreeItem) e.item;
 				if (item.getItemCount() > 0) {
@@ -136,7 +136,7 @@ public class StaffTreePart {
 //	}
 
 	// private void hidePart(){
-	// MPart mpart=partService.findPart("gruenzeug.part.filebrowser");
+	// MPart mpart=partService.findPart("gruentausch.part.filebrowser");
 	// mpart.setVisible(false);
 	// partService.hidePart(mpart);
 	// }

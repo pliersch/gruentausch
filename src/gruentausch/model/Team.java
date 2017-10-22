@@ -6,7 +6,7 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(namespace = "liersch.gruenzeug")
+@XmlRootElement(namespace = "liersch.gruentausch")
 public class Team {
 
 	private List<Employee> employees = new ArrayList<Employee>();
