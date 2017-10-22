@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="4.7"?>
+<plugin>
+
+   <extension
+         id="product"
+         point="org.eclipse.core.runtime.products">
+      <product
+            name="gruentausch"
+            application="org.eclipse.e4.ui.workbench.swt.E4Application">
+         <property
+			    name="lifeCycleURI"
+			    value="bundleclass://gruentausch/gruentausch.lifecycle.E4LifeCycle">
+		</property>
+         <property
+               name="appName"
+               value="gruentausch">
+         </property>
+         <property
+     name="applicationCSS"
+     value="platform:/plugin/gruentausch/css/default.css">
+     </property>
+      </product>
+   </extension>
+   <extension
+         point="org.eclipse.core.expressions.definitions">
+      <definition
+            id="gruenzeug.definition.isemployee">
+         <with
+               variable="org.eclipse.ui.selection">
+            <instanceof
+                  value="gruentausch.model.Employee">
+            </instanceof>
+         </with>
+      </definition>
+   </extension>
+
+</plugin>

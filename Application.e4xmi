@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmlns:ui="http://www.eclipse.org/ui/2010/UIModel/application/ui" xmi:id="_6wlLcMgZEeSyMNYR5xypkQ" elementId="gruenzeug.application" bindingContexts="_6wlLecgZEeSyMNYR5xypkQ">
+  <children xsi:type="basic:TrimmedWindow" xmi:id="_6wlLccgZEeSyMNYR5xypkQ" elementId="gruenzeug.window.main" label="Grünzeug">
+    <children xsi:type="basic:PartSashContainer" xmi:id="_6wlLksgZEeSyMNYR5xypkQ" elementId="gruenzeug.partsashcontainer.sample" horizontal="true">
+      <children xsi:type="basic:PartSashContainer" xmi:id="_I5dcoKFPEeee4_RCE8SNaQ" elementId="gruenzeug.partsashcontainer.0">
+        <children xsi:type="basic:PartStack" xmi:id="_6wlLk8gZEeSyMNYR5xypkQ" elementId="gruenzeug.partstack.sample">
+          <children xsi:type="basic:Part" xmi:id="_nXXDoKw-EeeVp4vuU55giw" elementId="gruenzeug.part.staff" contributionURI="bundleclass://gruenzeug/gruenzeug.parts.StaffTreePart" label="Staff">
+            <menus xsi:type="menu:PopupMenu" xmi:id="_kWBzYK_dEeegLNstlHNCTQ" elementId="gruenzeug.popupmenu.edit.staff" label="Staff">
+              <children xsi:type="menu:HandledMenuItem" xmi:id="_nNqH0K_dEeegLNstlHNCTQ" elementId="gruenzeug.handledmenuitem.edit" label="Edit" command="_ltqo0K_qEeegLNstlHNCTQ">
+                <visibleWhen xsi:type="ui:CoreExpression" xmi:id="_Jdf0oLAzEeeA2JCQ9GzHRw" coreExpressionId="gruenzeug.definition.isemployee"/>
+              </children>
+            </menus>
+          </children>
+          <children xsi:type="basic:Part" xmi:id="_xOjlMKFcEeee4_RCE8SNaQ" elementId="gruenzeug.part.mitarbeiter" contributionURI="bundleclass://gruenzeug/gruenzeug.parts.StaffTreeSamplePart" label="Mitarbeiter" closeable="true"/>
+        </children>
+        <children xsi:type="basic:PartStack" xmi:id="_Jo6joKFPEeee4_RCE8SNaQ" elementId="gruenzeug.partstack.0">
+          <children xsi:type="basic:Part" xmi:id="_tMgIAK_hEeegLNstlHNCTQ" elementId="gruenzeug.part.employee" contributionURI="bundleclass://gruenzeug/gruenzeug.parts.EmployeePart" label="Employee" closeable="true"/>
+          <children xsi:type="basic:Part" xmi:id="_KHdg0KFPEeee4_RCE8SNaQ" elementId="gruenzeug.part.maps" contributionURI="bundleclass://gruenzeug/gruenzeug.parts.GMapsPart" label="Maps" closeable="true"/>
+          <children xsi:type="basic:Part" xmi:id="_ZremEKIEEeee4_RCE8SNaQ" elementId="gruenzeug.part.filebrowser" contributionURI="bundleclass://gruenzeug/gruenzeug.parts.FileBrowserPart" label="File Browser" closeable="true"/>
+        </children>
+      </children>
+      <children xsi:type="basic:PartSashContainer" xmi:id="_ZiDXEKz2EeeLicm9Za6Psw" elementId="gruenzeug.partsashcontainer.2">
+        <children xsi:type="basic:PartStack" xmi:id="_fSVRoK0MEeeLicm9Za6Psw" elementId="gruenzeug.partstack.3">
+          <children xsi:type="basic:Part" xmi:id="_U2FIgKnHEeeF25w3b0OHmw" elementId="gruenzeug.part.tabelle" contributionURI="bundleclass://gruenzeug/gruenzeug.parts.TimeTablePart" label="Tabelle"/>
+          <children xsi:type="basic:Part" xmi:id="_gep60K0MEeeLicm9Za6Psw" elementId="gruenzeug.part.tabtest" contributionURI="bundleclass://gruenzeug/gruenzeug.parts.TabPart" label="tab test" closeable="true"/>
+          <children xsi:type="basic:Part" xmi:id="_3xCjALF8EeeO8sBMUMk4hA" elementId="gruenzeug.part.textausgabe" contributionURI="bundleclass://gruenzeug/gruenzeug.parts.RichTextPart" label="Text Ausgabe"/>
+        </children>
+      </children>
+      <children xsi:type="basic:PartSashContainer" xmi:id="_gkTGUKnLEeeF25w3b0OHmw" elementId="gruenzeug.partsashcontainer.1">
+        <children xsi:type="basic:PartStack" xmi:id="_wcUP8KFcEeee4_RCE8SNaQ" elementId="gruenzeug.partstack.1">
+          <children xsi:type="basic:Part" xmi:id="_AmoBMKNnEeep-4sTJaJiGw" elementId="gruenzeug.part.monthchart" contributionURI="bundleclass://gruenzeug/gruenzeug.parts.MonthChart" label="MonthChart"/>
+        </children>
+        <children xsi:type="basic:PartStack" xmi:id="_k8VdkKnLEeeF25w3b0OHmw" elementId="gruenzeug.partstack.2">
+          <children xsi:type="basic:Part" xmi:id="_waZTwK6WEeeisotk6eulKw" elementId="gruenzeug.part.logger" contributionURI="bundleclass://gruenzeug/gruenzeug.parts.LoggingPart" label="Logger" closeable="true">
+            <toolbar xmi:id="_yyF4gK_WEeegLNstlHNCTQ" elementId="gruenzeug.toolbar.0">
+              <children xsi:type="menu:HandledToolItem" xmi:id="_2qiJsK_WEeegLNstlHNCTQ" elementId="gruenzeug.handledtoolitem.foo" label="foo" command="_2LUWsLMOEee7s_JGSTuN6A"/>
+              <children xsi:type="menu:HandledToolItem" xmi:id="_757mwK_WEeegLNstlHNCTQ" elementId="gruenzeug.handledtoolitem.bar" label="bar" command="_ZGSfQLMkEee6DOUgizHkHw"/>
+            </toolbar>
+          </children>
+          <children xsi:type="basic:Part" xmi:id="_6wlLlMgZEeSyMNYR5xypkQ" elementId="gruenzeug.part.sample" contributionURI="bundleclass://gruenzeug/gruenzeug.parts.SamplePart" label="Sample Part" closeable="true"/>
+        </children>
+      </children>
+    </children>
+    <mainMenu xmi:id="_6wlLicgZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.main.menu">
+      <children xsi:type="menu:Menu" xmi:id="_6wlLisgZEeSyMNYR5xypkQ" elementId="gruenzeug.menu.datei" label="Datei">
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_6wlLi8gZEeSyMNYR5xypkQ" elementId="gruenzeug.handleditem.file.open" label="Open" iconURI="platform:/plugin/gruenzeug/icons/sample.png" command="_6wlLgMgZEeSyMNYR5xypkQ"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_6wlLjMgZEeSyMNYR5xypkQ" elementId="gruenzeug.handleditem.save" label="Save" iconURI="platform:/plugin/gruenzeug/icons/save_edit.png" command="_6wlLg8gZEeSyMNYR5xypkQ"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_6wlLjcgZEeSyMNYR5xypkQ" elementId="gruenzeug.handleditem.quit" label="Quit" command="_6wlLfMgZEeSyMNYR5xypkQ"/>
+      </children>
+      <children xsi:type="menu:Menu" xmi:id="_kSX8IKLcEeee4_RCE8SNaQ" elementId="gruenzeug.menu.stammdaten" label="Stammdaten">
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_3uUXcKLcEeee4_RCE8SNaQ" elementId="gruenzeug.handledmenuitem.mitarbeiter" label="Mitarbeiter" command="_fnYLoKLnEeee4_RCE8SNaQ"/>
+      </children>
+      <children xsi:type="menu:Menu" xmi:id="_NAYTkKKgEeee4_RCE8SNaQ" elementId="gruenzeug.menu.einstellungen" label="Einstellungen">
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_QLgLwKKgEeee4_RCE8SNaQ" elementId="gruenzeug.handledmenuitem.preferences" label="Preferences" command="_uZlJYKKfEeee4_RCE8SNaQ"/>
+      </children>
+      <children xsi:type="menu:Menu" xmi:id="_6wlLjsgZEeSyMNYR5xypkQ" elementId="hilfe" label="Hilfe">
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_6wlLj8gZEeSyMNYR5xypkQ" elementId="gruenzeug.handleditem.about" label="About" command="_6wlLhsgZEeSyMNYR5xypkQ"/>
+      </children>
+    </mainMenu>
+    <windows xsi:type="basic:TrimmedWindow" xmi:id="_BTFJgKKhEeee4_RCE8SNaQ" elementId="gruenzeug.trimmedwindow.einstellungen" visible="false" label="Einstellungen"/>
+    <trimBars xmi:id="_6wlLlcgZEeSyMNYR5xypkQ" elementId="gruenzeug.trimbar.top">
+      <children xsi:type="menu:ToolBar" xmi:id="_6wlLlsgZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.main.toolbar">
+        <children xsi:type="menu:HandledToolItem" xmi:id="_6wlLl8gZEeSyMNYR5xypkQ" elementId="gruenzeug.handleditem.trimbar.top.open" iconURI="platform:/plugin/gruenzeug/icons/sample.png" command="_6wlLgMgZEeSyMNYR5xypkQ"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_6wlLmMgZEeSyMNYR5xypkQ" elementId="gruenzeug.handleditem.trimbar.top.save" iconURI="platform:/plugin/gruenzeug/icons/save_edit.png" command="_6wlLg8gZEeSyMNYR5xypkQ"/>
+      </children>
+    </trimBars>
+  </children>
+  <handlers xmi:id="_6wlLfcgZEeSyMNYR5xypkQ" elementId="gruenzeug.handler.quitCommand" contributionURI="bundleclass://gruenzeug/gruenzeug.handlers.QuitHandler" command="_6wlLfMgZEeSyMNYR5xypkQ"/>
+  <handlers xmi:id="_6wlLgcgZEeSyMNYR5xypkQ" elementId="gruenzeug.handler.openCommand" contributionURI="bundleclass://gruenzeug/gruenzeug.handlers.OpenHandler" command="_6wlLgMgZEeSyMNYR5xypkQ"/>
+  <handlers xmi:id="_6wlLhMgZEeSyMNYR5xypkQ" elementId="gruenzeug.handler.saveCommand" contributionURI="bundleclass://gruenzeug/gruenzeug.handlers.SaveHandler" command="_6wlLg8gZEeSyMNYR5xypkQ"/>
+  <handlers xmi:id="_6wlLh8gZEeSyMNYR5xypkQ" elementId="gruenzeug.handler.aboutCommand" contributionURI="bundleclass://gruenzeug/gruenzeug.handlers.AboutHandler" command="_6wlLhsgZEeSyMNYR5xypkQ"/>
+  <handlers xmi:id="_IBYEIKK6Eeee4_RCE8SNaQ" elementId="gruenzeug.handler.preferencesCommand" contributionURI="bundleclass://gruenzeug/gruenzeug.handlers.PreferencesHandler" command="_uZlJYKKfEeee4_RCE8SNaQ"/>
+  <handlers xmi:id="_v8HlcKLnEeee4_RCE8SNaQ" elementId="gruenzeug.handler.newEmployeeWizzardCommand" contributionURI="bundleclass://gruenzeug/gruenzeug.handlers.NewEmployeeWizardHandler" command="_fnYLoKLnEeee4_RCE8SNaQ"/>
+  <handlers xmi:id="_tiw80K_qEeegLNstlHNCTQ" elementId="gruenzeug.handler.0" contributionURI="bundleclass://gruenzeug/gruenzeug.handlers.EditEmployeeHandler" command="_ltqo0K_qEeegLNstlHNCTQ"/>
+  <handlers xmi:id="_fVdWELMKEee7s_JGSTuN6A" elementId="gruenzeug.handler.sendMail" contributionURI="bundleclass://gruenzeug/gruenzeug.handlers.SendMailHandler" command="_2LUWsLMOEee7s_JGSTuN6A"/>
+  <handlers xmi:id="_c1swQLMkEee6DOUgizHkHw" elementId="gruenzeug.handler.receiveMail" contributionURI="bundleclass://gruenzeug/gruenzeug.handlers.ReceiveMailHandler" command="_ZGSfQLMkEee6DOUgizHkHw"/>
+  <bindingTables xmi:id="_6wlLfsgZEeSyMNYR5xypkQ" elementId="gruenzeug.bindingtable" bindingContext="_6wlLecgZEeSyMNYR5xypkQ">
+    <bindings xmi:id="_6wlLf8gZEeSyMNYR5xypkQ" elementId="gruenzeug.keybinding.m1q" keySequence="M1+Q" command="_6wlLfMgZEeSyMNYR5xypkQ"/>
+    <bindings xmi:id="_6wlLgsgZEeSyMNYR5xypkQ" elementId="gruenzeug.keybinding.m1o" keySequence="M1+O" command="_6wlLgMgZEeSyMNYR5xypkQ"/>
+    <bindings xmi:id="_6wlLhcgZEeSyMNYR5xypkQ" elementId="gruenzeug.keybinding.m1s" keySequence="M1+S" command="_6wlLg8gZEeSyMNYR5xypkQ"/>
+    <bindings xmi:id="_6wlLiMgZEeSyMNYR5xypkQ" elementId="gruenzeug.keybinding.m1a" keySequence="M1+A" command="_6wlLhsgZEeSyMNYR5xypkQ"/>
+  </bindingTables>
+  <rootContext xmi:id="_6wlLecgZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.contexts.dialogAndWindow" name="In Dialog and Windows">
+    <children xmi:id="_6wlLesgZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.contexts.window" name="In Windows"/>
+    <children xmi:id="_6wlLe8gZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.contexts.dialog" name="In Dialogs"/>
+  </rootContext>
+  <commands xmi:id="_6wlLfMgZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.file.exit" commandName="quitCommand"/>
+  <commands xmi:id="_6wlLgMgZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.file.open" commandName="openCommand"/>
+  <commands xmi:id="_6wlLg8gZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.file.save" commandName="saveCommand"/>
+  <commands xmi:id="_6wlLhsgZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.help.aboutAction" commandName="aboutCommand"/>
+  <commands xmi:id="_uZlJYKKfEeee4_RCE8SNaQ" elementId="gruenzeug.command.preferencesCommand" commandName="preferencesCommand"/>
+  <commands xmi:id="_fnYLoKLnEeee4_RCE8SNaQ" elementId="gruenzeug.command.newEmployeeWizzardCommand" commandName="NewEmployeeWizzardCommand"/>
+  <commands xmi:id="_ltqo0K_qEeegLNstlHNCTQ" elementId="gruenzeug.command.edit.employee" commandName="EditEmployeeCommand"/>
+  <commands xmi:id="_2LUWsLMOEee7s_JGSTuN6A" elementId="gruenzeug.command.sendmailcommand" commandName="SendMailCommand"/>
+  <commands xmi:id="_ZGSfQLMkEee6DOUgizHkHw" elementId="gruenzeug.command.receivemailcommand" commandName="ReceiveMailCommand"/>
+  <addons xmi:id="_6wlLcsgZEeSyMNYR5xypkQ" elementId="org.eclipse.e4.core.commands.service" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
+  <addons xmi:id="_6wlLc8gZEeSyMNYR5xypkQ" elementId="org.eclipse.e4.ui.contexts.service" contributionURI="bundleclass://org.eclipse.e4.ui.services/org.eclipse.e4.ui.services.ContextServiceAddon"/>
+  <addons xmi:id="_6wlLdMgZEeSyMNYR5xypkQ" elementId="org.eclipse.e4.ui.bindings.service" contributionURI="bundleclass://org.eclipse.e4.ui.bindings/org.eclipse.e4.ui.bindings.BindingServiceAddon"/>
+  <addons xmi:id="_6wlLdcgZEeSyMNYR5xypkQ" elementId="org.eclipse.e4.ui.workbench.commands.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.CommandProcessingAddon"/>
+  <addons xmi:id="_6wlLdsgZEeSyMNYR5xypkQ" elementId="org.eclipse.e4.ui.workbench.handler.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.HandlerProcessingAddon"/>
+  <addons xmi:id="_6wlLd8gZEeSyMNYR5xypkQ" elementId="org.eclipse.e4.ui.workbench.contexts.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.ContextProcessingAddon"/>
+  <addons xmi:id="_6wlLeMgZEeSyMNYR5xypkQ" elementId="org.eclipse.e4.ui.workbench.bindings.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.swt/org.eclipse.e4.ui.workbench.swt.util.BindingProcessingAddon"/>
+  <addons xmi:id="__j7x0K6uEeeisotk6eulKw" elementId="gruenzeug.addon.0" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.addons.swt/org.eclipse.e4.ui.workbench.addons.cleanupaddon.CleanupAddon"/>
+</application:Application>
