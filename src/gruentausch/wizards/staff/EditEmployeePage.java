@@ -10,6 +10,8 @@ import gruentausch.parts.EmployeePart;
 
 public class EditEmployeePage extends WizardPage {
 
+	private EmployeePart part;
+
 	@Inject
 	public EditEmployeePage() {
 		super("EditEmployeePage1");
@@ -19,12 +21,15 @@ public class EditEmployeePage extends WizardPage {
 
 	public void createControl(Composite parent) {
 		Composite container = new Composite(parent, SWT.NONE);
-		// we could also create this class via DI but
-		// in this example we stay with the next operator
-		EmployeePart part = new EmployeePart();
+		part = new EmployeePart();
 		part.createControls(container);
 		part.setEditable(true);
 		setControl(container);
+	}
+	
+	@Override
+	public boolean isPageComplete() {
+		return part.canFinish();
 	}
 
 }

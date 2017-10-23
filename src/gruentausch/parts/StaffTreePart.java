@@ -91,7 +91,6 @@ public class StaffTreePart {
 			public void selectionChanged(SelectionChangedEvent event) {
 				IStructuredSelection selection = (IStructuredSelection) event.getSelection();
 				Object firstElement = selection.getFirstElement();
-				IEclipseContext context = application.getContext();
 
 				if (firstElement instanceof Employee) {
 					Employee employee = (Employee) firstElement;
