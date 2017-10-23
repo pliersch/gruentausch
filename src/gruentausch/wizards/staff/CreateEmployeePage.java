@@ -18,6 +18,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
+import gruentausch.model.Employee;
 import gruentausch.util.RegExUtil;
 
 public class CreateEmployeePage extends WizardPage {
@@ -121,6 +122,16 @@ public class CreateEmployeePage extends WizardPage {
 	@Override
 	public boolean isPageComplete() {
 		return _isValidCity && _isValidGivenname && _isValidPLZ && _isValidStreet && _isValidSurname;
+	}
+	
+	public Employee getEmployee() {
+		Employee employee = new Employee();
+		employee.setGivenname(_txtGivenname.getText());
+		employee.setSurname(_txtSurname.getText());
+//		employee.setGivenname(_txtGivenname.getText());
+//		employee.setGivenname(_txtGivenname.getText());
+//		employee.setGivenname(_txtGivenname.getText());
+		return employee;
 	}
 
 	private void showWarning(ControlDecoration decoration) {

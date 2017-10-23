@@ -14,9 +14,10 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Monitor;
 import org.eclipse.swt.widgets.Shell;
 
+import gruentausch.model.Team;
 import gruentausch.parts.LoggingPart;
-import gruentausch.util.DummyCreator;
 import gruentausch.util.FileAndFolderManager;
+import gruentausch.util.XMLManager;
 
 /**
  * This is a stub implementation containing e4 LifeCycle annotated
@@ -31,7 +32,7 @@ public class E4LifeCycle {
 	@PostContextCreate
 	void postContextCreate(IApplicationContext appContext) {
 		final Shell shell = new Shell(SWT.SHELL_TRIM);
-//		LoginDialog dialog = new LoginDialog(shell);
+		// LoginDialog dialog = new LoginDialog(shell);
 
 		// close the static splash screen
 		appContext.applicationRunning();
@@ -39,11 +40,11 @@ public class E4LifeCycle {
 		// position the shell
 		setLocation(shell.getDisplay(), shell);
 
-//		if (dialog.open() != Window.OK) {
-//			// close the application
-//			System.exit(-1);
-//		}
-		
+		// if (dialog.open() != Window.OK) {
+		// // close the application
+		// System.exit(-1);
+		// }
+
 		try {
 			FileAndFolderManager.createFolder("data");
 		} catch (IOException e1) {
@@ -57,10 +58,7 @@ public class E4LifeCycle {
 			e.printStackTrace();
 			LoggingPart.log(e.getMessage());
 		}
-
-		new DummyCreator().createDummyContent();
 	}
-
 
 	private void setLocation(Display display, Shell shell) {
 		Monitor monitor = display.getPrimaryMonitor();
@@ -78,6 +76,8 @@ public class E4LifeCycle {
 
 	@ProcessAdditions
 	void processAdditions(IEclipseContext workbenchContext) {
+		Team team = (Team) new XMLManager().readFile("data/Mitarbeiter.xml", Team.class);
+		workbenchContext.set(Team.class, team);
 		System.out.println("@ProcessAdditions");
 	}
 
