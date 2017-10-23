@@ -36,7 +36,7 @@ public class CreateEmployeeWizard extends Wizard {
 		Team team = application.getContext().get(Team.class);
 		Employee employee = page1.getEmployee();
 		team.addEmployee(employee);
-		File file = new XMLManager().writeFile(team, "data/Employee.xml");
+		File file = new XMLManager().writeFile(team, "data/Mitarbeiter.xml");
 		return true;
 	}
 
