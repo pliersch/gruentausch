@@ -48,7 +48,14 @@
         <children xsi:type="menu:HandledMenuItem" xmi:id="_6wlLjcgZEeSyMNYR5xypkQ" elementId="gruentausch.handleditem.quit" label="Quit" command="_6wlLfMgZEeSyMNYR5xypkQ"/>
       </children>
       <children xsi:type="menu:Menu" xmi:id="_kSX8IKLcEeee4_RCE8SNaQ" elementId="gruentausch.menu.stammdaten" label="Stammdaten">
-        <children xsi:type="menu:HandledMenuItem" xmi:id="_3uUXcKLcEeee4_RCE8SNaQ" elementId="gruentausch.handledmenuitem.mitarbeiter" label="Mitarbeiter" command="_fnYLoKLnEeee4_RCE8SNaQ"/>
+        <children xsi:type="menu:Menu" xmi:id="_040I4LczEeeksNRVvWoyTQ" elementId="gruentausch.menu.mitarbeiter" label="Mitarbeiter">
+          <children xsi:type="menu:HandledMenuItem" xmi:id="_3uUXcKLcEeee4_RCE8SNaQ" elementId="gruentausch.handledmenuitem.staff.create" label="Anlegen" command="_fnYLoKLnEeee4_RCE8SNaQ"/>
+          <children xsi:type="menu:HandledMenuItem" xmi:id="__fmhYLczEeeksNRVvWoyTQ" elementId="gruentausch.handledmenuitem.staff.edit" label="Bearbeiten"/>
+        </children>
+        <children xsi:type="menu:Menu" xmi:id="_5GBwMLczEeeksNRVvWoyTQ" elementId="gruentausch.menu.kunden" label="Kunden">
+          <children xsi:type="menu:HandledMenuItem" xmi:id="_NJjI4Lc0EeeksNRVvWoyTQ" elementId="gruentausch.handledmenuitem.customer.create" label="Anlegen"/>
+          <children xsi:type="menu:HandledMenuItem" xmi:id="_QwrnoLc0EeeksNRVvWoyTQ" elementId="gruentausch.handledmenuitem.customer.edit" label="Bearbeiten"/>
+        </children>
       </children>
       <children xsi:type="menu:Menu" xmi:id="_NAYTkKKgEeee4_RCE8SNaQ" elementId="gruentausch.menu.einstellungen" label="Einstellungen">
         <children xsi:type="menu:HandledMenuItem" xmi:id="_QLgLwKKgEeee4_RCE8SNaQ" elementId="gruentausch.handledmenuitem.preferences" label="Preferences" command="_uZlJYKKfEeee4_RCE8SNaQ"/>
@@ -70,7 +77,7 @@
   <handlers xmi:id="_6wlLhMgZEeSyMNYR5xypkQ" elementId="gruentausch.handler.saveCommand" contributionURI="bundleclass://gruentausch/gruentausch.handlers.SaveHandler" command="_6wlLg8gZEeSyMNYR5xypkQ"/>
   <handlers xmi:id="_6wlLh8gZEeSyMNYR5xypkQ" elementId="gruentausch.handler.aboutCommand" contributionURI="bundleclass://gruentausch/gruentausch.handlers.AboutHandler" command="_6wlLhsgZEeSyMNYR5xypkQ"/>
   <handlers xmi:id="_IBYEIKK6Eeee4_RCE8SNaQ" elementId="gruentausch.handler.preferencesCommand" contributionURI="bundleclass://gruentausch/gruentausch.handlers.PreferencesHandler" command="_uZlJYKKfEeee4_RCE8SNaQ"/>
-  <handlers xmi:id="_v8HlcKLnEeee4_RCE8SNaQ" elementId="gruentausch.handler.newEmployeeWizzardCommand" contributionURI="bundleclass://gruentausch/gruentausch.handlers.NewEmployeeWizardHandler" command="_fnYLoKLnEeee4_RCE8SNaQ"/>
+  <handlers xmi:id="_v8HlcKLnEeee4_RCE8SNaQ" elementId="gruentausch.handler.newEmployeeWizzardCommand" contributionURI="bundleclass://gruentausch/gruentausch.handlers.NewEmployeeHandler" command="_fnYLoKLnEeee4_RCE8SNaQ"/>
   <handlers xmi:id="_tiw80K_qEeegLNstlHNCTQ" elementId="gruentausch.handler.0" contributionURI="bundleclass://gruentausch/gruentausch.handlers.EditEmployeeHandler" command="_ltqo0K_qEeegLNstlHNCTQ"/>
   <handlers xmi:id="_fVdWELMKEee7s_JGSTuN6A" elementId="gruentausch.handler.sendMail" contributionURI="bundleclass://gruentausch/gruentausch.handlers.SendMailHandler" command="_2LUWsLMOEee7s_JGSTuN6A"/>
   <handlers xmi:id="_c1swQLMkEee6DOUgizHkHw" elementId="gruentausch.handler.receiveMail" contributionURI="bundleclass://gruentausch/gruentausch.handlers.ReceiveMailHandler" command="_ZGSfQLMkEee6DOUgizHkHw"/>

@@ -1,34 +1,32 @@
 package gruentausch.parts;
 
 import javax.annotation.PostConstruct;
-import javax.inject.Inject;
-import javax.inject.Named;
 
-import org.eclipse.e4.core.di.annotations.Optional;
-import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.jface.fieldassist.AutoCompleteField;
 import org.eclipse.jface.fieldassist.ControlDecoration;
 import org.eclipse.jface.fieldassist.FieldDecorationRegistry;
 import org.eclipse.jface.fieldassist.TextContentAdapter;
+import org.eclipse.jface.viewers.ArrayContentProvider;
+import org.eclipse.jface.viewers.ComboViewer;
+import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
-import gruentausch.model.Employee;
-
-public class EmployeePart {
-
+public class CustomerPart {
+	
 	private Text _txtStreet;
 	private Text _txtSurname;
 	private Text _txtGivenname;
 	private Text _txtPLZ;
 	private Text _txtCity;
-
+	
 	@PostConstruct
 	public void createControls(Composite parent) {
 		parent.setLayout(new FillLayout());
@@ -106,27 +104,61 @@ public class EmployeePart {
 				new AutoCompleteField(_txtCity, new TextContentAdapter(), cities);
 			}
 		}
-	}
-	
-	@Inject
-	void updateEmployee(@Optional @Named(IServiceConstants.ACTIVE_SELECTION) Employee employee) {
-		if (employee != null) {
-			_txtGivenname.setText(employee.getGivenname());
-			_txtSurname.setText(employee.getSurname());
+		{
+			Label lblLand = new Label(container, SWT.NONE);
+			lblLand.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+			lblLand.setText("Land:");
 		}
-	}
+		{
+			ComboViewer comboViewer = new ComboViewer(container, SWT.NONE);
+			comboViewer.setContentProvider(ArrayContentProvider.getInstance());
+			// comboViewer.setInput(AddressBookServices.getAddressService().getAllCountries());
+			comboViewer.setLabelProvider(new LabelProvider() {
+				@Override
+				public String getText(Object element) {
 
-	public void setEditable(boolean b) {
-		_txtSurname.setEditable(true);
-		_txtGivenname.setEditable(true);
-		_txtStreet.setEditable(true);
-		_txtPLZ.setEditable(true);
-		_txtCity.setEditable(true);
-		
-	}
+					return "foo";
+				}
+			});
+			Combo combo = comboViewer.getCombo();
+			combo.setEnabled(false);
+			combo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
+			combo.select(0);
+			{
+				ControlDecoration controlDecoration = new ControlDecoration(container, SWT.LEFT | SWT.TOP);
+				controlDecoration.setDescriptionText("Some description");
+			}
 
-	public boolean canFinish() {
-		return true;
+			// comboViewer
+			// .addSelectionChangedListener(new ISelectionChangedListener() {
+			// public void selectionChanged(SelectionChangedEvent event) {
+			// IStructuredSelection selection = (IStructuredSelection) event
+			// .getSelection();
+			// Country country = (Country) selection
+			// .getFirstElement();
+			// System.out.println(country.getName());
+			// }
+			// });
+		}
+
+		// ISelectionService selectionService = getSite().getWorkbenchWindow()
+		// .getSelectionService();
+		// selectionService.addSelectionListener(new ISelectionListener() {
+		//
+		// @Override
+		// public void selectionChanged(IWorkbench part, ISelection selection) {
+		// if (!(selection instanceof IStructuredSelection))
+		// return;
+		// Iterator iterator = ((IStructuredSelection) selection)
+		// .iterator();
+		// while (iterator.hasNext()) {
+		// Object object = iterator.next();
+		// if (object instanceof Address) {
+		// setAddress((Address) object);
+		// }
+		// }
+		// }
+		// });
 	}
 
 }

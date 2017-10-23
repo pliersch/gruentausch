@@ -5,16 +5,16 @@ import javax.inject.Inject;
 import org.eclipse.jface.wizard.IWizardPage;
 import org.eclipse.jface.wizard.Wizard;
 
-public class EditEmployeeWizard extends Wizard {
+public class CreateEmployeeWizard extends Wizard {
 
 	boolean finish = false;
 
 	@Inject
-	EditEmployeePage page1;
+	CreateEmployeePage page1;
 
 	@Inject
-	public EditEmployeeWizard() {
-		setWindowTitle("Mitarbeiter bearbeiten");
+	public CreateEmployeeWizard() {
+		setWindowTitle("Mitarbeiter anlegen");
 	}
 
 	@Override
@@ -29,7 +29,7 @@ public class EditEmployeeWizard extends Wizard {
 
 	@Override
 	public boolean canFinish() {
-		return finish;
+		return page1.canFinish();
 	}
 
 	@Override

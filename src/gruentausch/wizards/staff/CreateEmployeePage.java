@@ -8,23 +8,27 @@ import org.eclipse.swt.widgets.Composite;
 
 import gruentausch.parts.EmployeePart;
 
-public class EditEmployeePage extends WizardPage {
+public class CreateEmployeePage extends WizardPage {
+
+	private EmployeePart part;
 
 	@Inject
-	public EditEmployeePage() {
-		super("EditEmployeePage1");
+	public CreateEmployeePage() {
+		super("CreateEmployeePage1");
 		setTitle("der titel");
 		setDescription("die beschreibung");
 	}
 
 	public void createControl(Composite parent) {
 		Composite container = new Composite(parent, SWT.NONE);
-		// we could also create this class via DI but
-		// in this example we stay with the next operator
-		EmployeePart part = new EmployeePart();
+		part = new EmployeePart();
 		part.createControls(container);
 		part.setEditable(true);
 		setControl(container);
+	}
+
+	public boolean canFinish() {
+		return part.canFinish();
 	}
 
 }
