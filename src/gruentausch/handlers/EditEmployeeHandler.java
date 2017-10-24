@@ -13,7 +13,7 @@ import org.eclipse.swt.widgets.Shell;
 
 import gruentausch.model.Employee;
 import gruentausch.wizards.staff.EditEmployeeWizard;
-import gruentausch.wizards.staff.EmployeePage;
+import gruentausch.wizards.staff.EditEmployeePage;
 
 public class EditEmployeeHandler {
 	
@@ -24,9 +24,9 @@ public class EditEmployeeHandler {
 		// create new context
 		IEclipseContext wizardCtx = ctx.createChild();
 
-		EmployeePage page = ContextInjectionFactory.make(EmployeePage.class, wizardCtx);
+		EditEmployeePage page = ContextInjectionFactory.make(EditEmployeePage.class, wizardCtx);
 		page.setEmployee(employee);
-		wizardCtx.set(EmployeePage.class, page);
+		wizardCtx.set(EditEmployeePage.class, page);
 		
 		EditEmployeeWizard wizard = ContextInjectionFactory.make(EditEmployeeWizard.class, wizardCtx);
 		 

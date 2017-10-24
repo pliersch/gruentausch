@@ -15,7 +15,7 @@ import gruentausch.util.XMLManager;
 public class CreateEmployeeWizard extends Wizard {
 	
 	@Inject
-	EmployeePage page1;
+	CreateEmployeePage page1;
 
 	@Inject
 	MApplication application;
@@ -40,7 +40,7 @@ public class CreateEmployeeWizard extends Wizard {
 
 	@Override
 	public boolean canFinish() {
-		return page1.canFinish();
+		return page1.isPageComplete();
 	}
 
 	@Override

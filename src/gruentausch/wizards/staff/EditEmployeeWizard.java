@@ -14,10 +14,8 @@ import gruentausch.util.XMLManager;
 
 public class EditEmployeeWizard extends Wizard {
 
-	boolean finish = false;
-
 	@Inject
-	EmployeePage page1;
+	EditEmployeePage page1;
 	
 	@Inject
 	MApplication application;
@@ -36,19 +34,14 @@ public class EditEmployeeWizard extends Wizard {
 	public boolean performFinish() {
 		Team team = application.getContext().get(Team.class);
 		Employee employee = page1.getEmployee();
-		if (team.contain(employee)) {
-			team.updateEmployee(employee);
-			File file = new XMLManager().writeFile(team, "data/Mitarbeiter.xml");
-		} else {
-			team.addEmployee(employee);
-			File file = new XMLManager().writeFile(team, "data/Mitarbeiter.xml");			
-		}
+		team.updateEmployee(employee);
+		File file = new XMLManager().writeFile(team, "data/Mitarbeiter.xml");
 		return true;
 	}
 
 	@Override
 	public boolean canFinish() {
-		return page1.canFinish();
+		return page1.isPageComplete();
 	}
 
 	@Override

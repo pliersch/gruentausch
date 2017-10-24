@@ -6,7 +6,7 @@ import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.widgets.Shell;
 
-import gruentausch.wizards.staff.EmployeePage;
+import gruentausch.wizards.staff.CreateEmployeePage;
 import gruentausch.wizards.staff.CreateEmployeeWizard;
 
 public class NewEmployeeHandler {
@@ -16,8 +16,8 @@ public class NewEmployeeHandler {
 		// create new context
 		IEclipseContext wizardCtx = ctx.createChild();
 
-		EmployeePage page = ContextInjectionFactory.make(EmployeePage.class, wizardCtx);
-		wizardCtx.set(EmployeePage.class, page);
+		CreateEmployeePage page = ContextInjectionFactory.make(CreateEmployeePage.class, wizardCtx);
+		wizardCtx.set(CreateEmployeePage.class, page);
 
 		CreateEmployeeWizard wizard = ContextInjectionFactory.make(CreateEmployeeWizard.class, wizardCtx);
 
