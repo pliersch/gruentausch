@@ -36,8 +36,13 @@ public class EditEmployeeWizard extends Wizard {
 	public boolean performFinish() {
 		Team team = application.getContext().get(Team.class);
 		Employee employee = page1.getEmployee();
-		team.addEmployee(employee);
-		File file = new XMLManager().writeFile(team, "data/Mitarbeiter.xml");
+		if (team.contain(employee)) {
+			team.updateEmployee(employee);
+			File file = new XMLManager().writeFile(team, "data/Mitarbeiter.xml");
+		} else {
+			team.addEmployee(employee);
+			File file = new XMLManager().writeFile(team, "data/Mitarbeiter.xml");			
+		}
 		return true;
 	}
 

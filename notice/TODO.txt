@@ -1,0 +1,2 @@
+Clean ups
+	- EmployeePage und Part refaktorieren. ui kapseln und beerben für edit/create/delete

@@ -16,6 +16,7 @@ public class Employee extends BaseModel {
 	private String givenname;
 	private String city;
 	private String street;
+	private int plz;
 	private List<Year> years = new ArrayList<Year>();
 
 	public Employee() {
@@ -77,6 +78,13 @@ public class Employee extends BaseModel {
 
 	public void setStreet(String street) {
 		propertyChangeSupport.firePropertyChange("street", this.street, this.street = street);
-		this.street = street;
+	}
+
+	public int getPlz() {
+		return plz;
+	}
+
+	public void setPlz(int plz) {
+		propertyChangeSupport.firePropertyChange("plz", this.plz, this.plz = plz);
 	}
 }

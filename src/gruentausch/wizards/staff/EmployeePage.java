@@ -114,11 +114,38 @@ public class EmployeePage extends WizardPage {
 				new AutoCompleteField(_txtCity, new TextContentAdapter(), cities);
 			}
 		}
+
 		if (employee != null) {
-			_txtSurname.setText(employee.getSurname());
-			_txtGivenname.setText(employee.getGivenname());
-			_isValidGivenname = true;
-			_isValidSurname = true;
+			if (employee.getGivenname() != null) {
+				_txtGivenname.setText(employee.getGivenname());
+				_isValidGivenname = true;
+			} else {
+				_txtGivenname.setText("");
+			}
+			if (employee.getSurname() != null) {
+				_isValidSurname = true;
+				_txtSurname.setText(employee.getSurname());
+			} else {
+				_txtSurname.setText("");
+			}
+			if (employee.getCity() != null) {
+				_isValidCity = true;
+				_txtCity.setText(employee.getCity());
+			} else {
+				_txtCity.setText("");
+			}
+			if (employee.getPlz() != 0) {
+				_isValidPLZ = true;
+				_txtPLZ.setText(Integer.toString(employee.getPlz()));
+			} else {
+				_txtPLZ.setText("");
+			}
+			if (employee.getStreet() != null) {
+				_txtStreet.setText(employee.getStreet());
+				_isValidStreet = true;
+			} else {
+				_txtStreet.setText("");
+			}
 		}
 	}
 
@@ -130,19 +157,21 @@ public class EmployeePage extends WizardPage {
 	public boolean isPageComplete() {
 		return _isValidCity && _isValidGivenname && _isValidPLZ && _isValidStreet && _isValidSurname;
 	}
-	
+
 	public Employee getEmployee() {
-		employee = new Employee();
+		if (employee == null) {
+			employee = new Employee();
+		}
 		employee.setGivenname(_txtGivenname.getText());
 		employee.setSurname(_txtSurname.getText());
-//		employee.setGivenname(_txtGivenname.getText());
-//		employee.setGivenname(_txtGivenname.getText());
-//		employee.setGivenname(_txtGivenname.getText());
+		employee.setCity(_txtCity.getText());
+		employee.setPlz(Integer.valueOf(_txtPLZ.getText()));
+		employee.setStreet(_txtStreet.getText());
 		return employee;
 	}
-	
+
 	public void setEmployee(Employee employee) {
-		this.employee = employee; 
+		this.employee = employee;
 	}
 
 	private void showWarning(ControlDecoration decoration) {
@@ -159,13 +188,13 @@ public class EmployeePage extends WizardPage {
 			decoration.dispose();
 		}
 	}
-	
+
 	class WizardKeyListener implements KeyListener {
 
 		@Override
 		public void keyPressed(KeyEvent e) {
 			// TODO Auto-generated method stub
-			
+
 		}
 
 		@Override
@@ -229,5 +258,5 @@ public class EmployeePage extends WizardPage {
 			}
 			getWizard().getContainer().updateButtons();
 		}
-	}	
+	}
 }

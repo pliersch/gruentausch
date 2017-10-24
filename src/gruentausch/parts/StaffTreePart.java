@@ -149,6 +149,7 @@ public class StaffTreePart {
 
 	class ViewContentProvider implements ITreeContentProvider {
 		
+		@Override
 		public void inputChanged(Viewer v, Object oldInput, Object newInput) {
 			System.out.println("inputChanged");
 		}

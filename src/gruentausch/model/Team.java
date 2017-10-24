@@ -21,9 +21,27 @@ public class Team extends BaseModel {
 	}
 	
 	public void addEmployee(Employee employee) {
-		List<Employee> old = new ArrayList<>(employees);
-		this.employees.add(employee);
-		propertyChangeSupport.firePropertyChange("employees", old, this);
+		employees.add(employee);
+		// TODO can´t return team copy at the moment
+		propertyChangeSupport.firePropertyChange("employees", null, this);
+	}
+
+	public boolean contain(Employee employee) {
+		for (Employee e : employees) {
+			if (e.getId() == employee.getId()) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public void updateEmployee(Employee employee) {
+		for (Employee e : employees) {
+			if (e.getId() == employee.getId()) {
+				e = employee;
+			}
+		}
 	}
 
 }
+
