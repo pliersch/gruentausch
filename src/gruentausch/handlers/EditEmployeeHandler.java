@@ -12,8 +12,8 @@ import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.widgets.Shell;
 
 import gruentausch.model.Employee;
-import gruentausch.wizards.staff.EditEmployeePage;
 import gruentausch.wizards.staff.EditEmployeeWizard;
+import gruentausch.wizards.staff.EmployeePage;
 
 public class EditEmployeeHandler {
 	
@@ -24,9 +24,9 @@ public class EditEmployeeHandler {
 		// create new context
 		IEclipseContext wizardCtx = ctx.createChild();
 
-		// create WizardPages via CIF
-		EditEmployeePage page = ContextInjectionFactory.make(EditEmployeePage.class, wizardCtx);
-		wizardCtx.set(EditEmployeePage.class, page);
+		EmployeePage page = ContextInjectionFactory.make(EmployeePage.class, wizardCtx);
+		page.setEmployee(employee);
+		wizardCtx.set(EmployeePage.class, page);
 		
 		EditEmployeeWizard wizard = ContextInjectionFactory.make(EditEmployeeWizard.class, wizardCtx);
 		 

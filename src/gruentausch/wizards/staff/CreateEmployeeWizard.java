@@ -13,8 +13,6 @@ import gruentausch.model.Team;
 import gruentausch.util.XMLManager;
 
 public class CreateEmployeeWizard extends Wizard {
-
-	boolean finish = false;
 	
 	@Inject
 	EmployeePage page1;

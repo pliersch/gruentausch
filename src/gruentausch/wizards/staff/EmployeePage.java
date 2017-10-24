@@ -40,6 +40,7 @@ public class EmployeePage extends WizardPage {
 	private ControlDecoration _decoratorGivenname;
 	private ControlDecoration _decoratorPLZ;
 	private ControlDecoration _decoratorCity;
+	private Employee employee;
 
 	@Inject
 	public EmployeePage() {
@@ -113,6 +114,12 @@ public class EmployeePage extends WizardPage {
 				new AutoCompleteField(_txtCity, new TextContentAdapter(), cities);
 			}
 		}
+		if (employee != null) {
+			_txtSurname.setText(employee.getSurname());
+			_txtGivenname.setText(employee.getGivenname());
+			_isValidGivenname = true;
+			_isValidSurname = true;
+		}
 	}
 
 	public boolean canFinish() {
@@ -125,13 +132,17 @@ public class EmployeePage extends WizardPage {
 	}
 	
 	public Employee getEmployee() {
-		Employee employee = new Employee();
+		employee = new Employee();
 		employee.setGivenname(_txtGivenname.getText());
 		employee.setSurname(_txtSurname.getText());
 //		employee.setGivenname(_txtGivenname.getText());
 //		employee.setGivenname(_txtGivenname.getText());
 //		employee.setGivenname(_txtGivenname.getText());
 		return employee;
+	}
+	
+	public void setEmployee(Employee employee) {
+		this.employee = employee; 
 	}
 
 	private void showWarning(ControlDecoration decoration) {
@@ -216,12 +227,7 @@ public class EmployeePage extends WizardPage {
 					_decoratorSurname = null;
 				}
 			}
-			CreateEmployeeWizard wizard = (CreateEmployeeWizard) getWizard();
-			wizard.finish = canFinish();
-			wizard.getContainer().updateButtons();
-			
+			getWizard().getContainer().updateButtons();
 		}
-		
-	}
-	
+	}	
 }

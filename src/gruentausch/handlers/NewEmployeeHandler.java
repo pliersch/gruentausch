@@ -16,7 +16,6 @@ public class NewEmployeeHandler {
 		// create new context
 		IEclipseContext wizardCtx = ctx.createChild();
 
-		// create WizardPages via CIF
 		EmployeePage page = ContextInjectionFactory.make(EmployeePage.class, wizardCtx);
 		wizardCtx.set(EmployeePage.class, page);
 
