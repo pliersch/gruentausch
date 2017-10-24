@@ -1,5 +1,7 @@
 package gruentausch.parts;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.net.URL;
 
@@ -44,8 +46,6 @@ import gruentausch.model.Month;
 import gruentausch.model.Team;
 import gruentausch.model.Year;
 import gruentausch.util.CalendarUtil;
-import gruentausch.util.DummyCreator;
-import gruentausch.util.XMLManager;
 
 public class StaffTreePart {
 
@@ -54,19 +54,12 @@ public class StaffTreePart {
 
 	@Inject
 	private ESelectionService selectionService;
-	
-	MApplication application;
 
 	private TreeViewer viewer;
 
 	@PostConstruct
 	public void createControls(Composite parent, EMenuService menuService, MApplication application) {
-
-		this.application = application;
-		IEclipseContext context = application.getContext();
 		
-		context.set("debugEnabled", Boolean.TRUE);
-		context.declareModifiable("debugEnabled");
 		viewer = new TreeViewer(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL);
 		viewer.setContentProvider(new ViewContentProvider());
 		menuService.registerContextMenu(
@@ -78,10 +71,18 @@ public class StaffTreePart {
 		mainColumn.getColumn().setWidth(300);
 		mainColumn.setLabelProvider(new DelegatingStyledCellLabelProvider(new ViewLabelProvider(createImageDescriptor())));
 
-		Team team = new DummyCreator().createDummyContent();
-		File file = new XMLManager().writeFile(team, "data/Mitarbeiter.xml");
-
-		if (file != null) {
+		IEclipseContext context = application.getContext();
+		Team team = (Team) context.get(Team.class);
+		team.addPropertyChangeListener("employees", new PropertyChangeListener() {
+			
+			@Override
+			public void propertyChange(PropertyChangeEvent evt) {
+				Object newValue = evt.getNewValue();
+				viewer.setInput(newValue);
+				System.out.println("event");
+			}
+		});
+		if (team != null) {
 			viewer.setInput(team);
 		}	
 
@@ -91,7 +92,6 @@ public class StaffTreePart {
 			public void selectionChanged(SelectionChangedEvent event) {
 				IStructuredSelection selection = (IStructuredSelection) event.getSelection();
 				Object firstElement = selection.getFirstElement();
-				IEclipseContext context = application.getContext();
 
 				if (firstElement instanceof Employee) {
 					Employee employee = (Employee) firstElement;
@@ -148,7 +148,9 @@ public class StaffTreePart {
 	}
 
 	class ViewContentProvider implements ITreeContentProvider {
+		
 		public void inputChanged(Viewer v, Object oldInput, Object newInput) {
+			System.out.println("inputChanged");
 		}
 
 		@Override

@@ -12,19 +12,16 @@ import gruentausch.model.Employee;
 import gruentausch.model.Team;
 import gruentausch.util.XMLManager;
 
-public class EditEmployeeWizard extends Wizard {
-
-	boolean finish = false;
-
-	@Inject
-	EmployeePage page1;
+public class CreateEmployeeWizard extends Wizard {
 	
 	@Inject
-	MApplication application;
+	EmployeePage page1;
 
 	@Inject
-	public EditEmployeeWizard() {
-		setWindowTitle("Mitarbeiter bearbeiten");
+	MApplication application;
+	
+	public CreateEmployeeWizard() {
+		setWindowTitle("Mitarbeiter anlegen");
 	}
 
 	@Override

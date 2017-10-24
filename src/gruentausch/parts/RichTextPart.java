@@ -3,16 +3,12 @@ package gruentausch.parts;
 import javax.annotation.PostConstruct;
 
 import org.eclipse.jface.layout.GridDataFactory;
-import org.eclipse.nebula.paperclips.core.PaperClips;
 import org.eclipse.nebula.paperclips.core.Print;
-import org.eclipse.nebula.paperclips.core.PrintJob;
 import org.eclipse.nebula.paperclips.core.text.StyledTextPrint;
-import org.eclipse.nebula.paperclips.core.text.TextPrint;
 import org.eclipse.nebula.paperclips.core.text.TextStyle;
 import org.eclipse.nebula.widgets.richtext.RichTextEditor;
 import org.eclipse.nebula.widgets.richtext.RichTextViewer;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridLayout;

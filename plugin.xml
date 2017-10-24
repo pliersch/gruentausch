@@ -25,7 +25,7 @@
    <extension
          point="org.eclipse.core.expressions.definitions">
       <definition
-            id="gruenzeug.definition.isemployee">
+            id="gruentausch.definition.isemployee">
          <with
                variable="org.eclipse.ui.selection">
             <instanceof

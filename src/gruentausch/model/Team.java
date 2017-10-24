@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(namespace = "liersch.gruentausch")
-public class Team {
+public class Team extends BaseModel {
 
 	private List<Employee> employees = new ArrayList<Employee>();
 
@@ -21,7 +21,9 @@ public class Team {
 	}
 	
 	public void addEmployee(Employee employee) {
+		List<Employee> old = new ArrayList<>(employees);
 		this.employees.add(employee);
+		propertyChangeSupport.firePropertyChange("employees", old, this);
 	}
 
 }
