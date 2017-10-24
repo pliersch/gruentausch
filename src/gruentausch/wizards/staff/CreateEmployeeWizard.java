@@ -17,7 +17,7 @@ public class CreateEmployeeWizard extends Wizard {
 	boolean finish = false;
 	
 	@Inject
-	CreateEmployeePage page1;
+	EmployeePage page1;
 
 	@Inject
 	MApplication application;

@@ -21,7 +21,7 @@ import org.eclipse.swt.widgets.Text;
 import gruentausch.model.Employee;
 import gruentausch.util.RegExUtil;
 
-public class CreateEmployeePage extends WizardPage {
+public class EmployeePage extends WizardPage {
 
 	private Text _txtStreet;
 	private Text _txtSurname;
@@ -42,7 +42,7 @@ public class CreateEmployeePage extends WizardPage {
 	private ControlDecoration _decoratorCity;
 
 	@Inject
-	public CreateEmployeePage() {
+	public EmployeePage() {
 		super("CreateEmployeePage1");
 		setTitle("der titel");
 		setDescription("die beschreibung");
