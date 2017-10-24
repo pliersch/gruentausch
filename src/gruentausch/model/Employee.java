@@ -8,12 +8,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class Employee extends BaseModel {
+
+	private static int ID_COUNTER = 0;
+
+	private final int id = ID_COUNTER++;
 	private String surname;
 	private String givenname;
+	private String city;
+	private String street;
 	private List<Year> years = new ArrayList<Year>();
 
 	public Employee() {
-
 	}
 
 	public Employee(String givenname, String surname) {
@@ -24,6 +29,10 @@ public class Employee extends BaseModel {
 
 	public String getSurname() {
 		return surname;
+	}
+
+	public int getId() {
+		return id;
 	}
 
 	public void setSurname(String name) {
@@ -52,5 +61,22 @@ public class Employee extends BaseModel {
 		years.add(year);
 		propertyChangeSupport.firePropertyChange("years", oldYears, this.years);
 
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		propertyChangeSupport.firePropertyChange("city", this.city, this.city = city);
+	}
+
+	public String getStreet() {
+		return street;
+	}
+
+	public void setStreet(String street) {
+		propertyChangeSupport.firePropertyChange("street", this.street, this.street = street);
+		this.street = street;
 	}
 }
