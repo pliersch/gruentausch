@@ -43,5 +43,14 @@ public class Team extends BaseModel {
 		}
 	}
 
+	public void removeEmployee(Employee employee) {
+		for (Employee e : employees) {
+			if (e.getId() == employee.getId()) {
+				employees.remove(employee);
+				break;
+			}
+		}
+	}
+
 }
 

@@ -1,2 +1,1 @@
-Clean ups
-	- EmployeePage und Part refaktorieren. ui kapseln und beerben für edit/create/delete
+- gibt es beschränkungen beim löschen von daten? bsp: kunde löschen obwohl aufträge noch "offen"

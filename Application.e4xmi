@@ -9,9 +9,9 @@
               <children xsi:type="menu:HandledMenuItem" xmi:id="_nNqH0K_dEeegLNstlHNCTQ" elementId="gruentausch.handledmenuitem.edit" label="Edit" command="_ltqo0K_qEeegLNstlHNCTQ">
                 <visibleWhen xsi:type="ui:CoreExpression" xmi:id="_Jdf0oLAzEeeA2JCQ9GzHRw" coreExpressionId="gruentausch.definition.isemployee"/>
               </children>
+              <children xsi:type="menu:HandledMenuItem" xmi:id="_EaOygLlcEeeksNRVvWoyTQ" elementId="gruentausch.handledmenuitem.deleteEmployee" label="Löschen" command="_lI5dkLlbEeeksNRVvWoyTQ"/>
             </menus>
           </children>
-          <children xsi:type="basic:Part" xmi:id="_xOjlMKFcEeee4_RCE8SNaQ" elementId="gruentausch.part.mitarbeiter" contributionURI="bundleclass://gruentausch/gruentausch.parts.StaffTreeSamplePart" label="Mitarbeiter" closeable="true"/>
         </children>
         <children xsi:type="basic:PartStack" xmi:id="_Jo6joKFPEeee4_RCE8SNaQ" elementId="gruentausch.partstack.0">
           <children xsi:type="basic:Part" xmi:id="_tMgIAK_hEeegLNstlHNCTQ" elementId="gruentausch.part.employee" contributionURI="bundleclass://gruentausch/gruentausch.parts.EmployeePart" label="Employee" closeable="true"/>
@@ -51,6 +51,7 @@
         <children xsi:type="menu:Menu" xmi:id="_040I4LczEeeksNRVvWoyTQ" elementId="gruentausch.menu.mitarbeiter" label="Mitarbeiter">
           <children xsi:type="menu:HandledMenuItem" xmi:id="_3uUXcKLcEeee4_RCE8SNaQ" elementId="gruentausch.handledmenuitem.staff.create" label="Anlegen" command="_fnYLoKLnEeee4_RCE8SNaQ"/>
           <children xsi:type="menu:HandledMenuItem" xmi:id="__fmhYLczEeeksNRVvWoyTQ" elementId="gruentausch.handledmenuitem.staff.edit" label="Bearbeiten"/>
+          <children xsi:type="menu:HandledMenuItem" xmi:id="_jesQcLlZEeeksNRVvWoyTQ" elementId="gruentausch.handledmenuitem.staff.delete" label="Löschen"/>
         </children>
         <children xsi:type="menu:Menu" xmi:id="_5GBwMLczEeeksNRVvWoyTQ" elementId="gruentausch.menu.kunden" label="Kunden">
           <children xsi:type="menu:HandledMenuItem" xmi:id="_NJjI4Lc0EeeksNRVvWoyTQ" elementId="gruentausch.handledmenuitem.customer.create" label="Anlegen"/>
@@ -81,6 +82,7 @@
   <handlers xmi:id="_tiw80K_qEeegLNstlHNCTQ" elementId="gruentausch.handler.0" contributionURI="bundleclass://gruentausch/gruentausch.handlers.EditEmployeeHandler" command="_ltqo0K_qEeegLNstlHNCTQ"/>
   <handlers xmi:id="_fVdWELMKEee7s_JGSTuN6A" elementId="gruentausch.handler.sendMail" contributionURI="bundleclass://gruentausch/gruentausch.handlers.SendMailHandler" command="_2LUWsLMOEee7s_JGSTuN6A"/>
   <handlers xmi:id="_c1swQLMkEee6DOUgizHkHw" elementId="gruentausch.handler.receiveMail" contributionURI="bundleclass://gruentausch/gruentausch.handlers.ReceiveMailHandler" command="_ZGSfQLMkEee6DOUgizHkHw"/>
+  <handlers xmi:id="_te0msLlbEeeksNRVvWoyTQ" elementId="gruentausch.handler.DeleteEmployee" contributionURI="bundleclass://gruentausch/gruentausch.handlers.DeleteEmployeeHandler" command="_lI5dkLlbEeeksNRVvWoyTQ"/>
   <bindingTables xmi:id="_6wlLfsgZEeSyMNYR5xypkQ" elementId="gruentausch.bindingtable" bindingContext="_6wlLecgZEeSyMNYR5xypkQ">
     <bindings xmi:id="_6wlLf8gZEeSyMNYR5xypkQ" elementId="gruentausch.keybinding.m1q" keySequence="M1+Q" command="_6wlLfMgZEeSyMNYR5xypkQ"/>
     <bindings xmi:id="_6wlLgsgZEeSyMNYR5xypkQ" elementId="gruentausch.keybinding.m1o" keySequence="M1+O" command="_6wlLgMgZEeSyMNYR5xypkQ"/>
@@ -98,6 +100,7 @@
   <commands xmi:id="_uZlJYKKfEeee4_RCE8SNaQ" elementId="gruentausch.command.preferencesCommand" commandName="preferencesCommand"/>
   <commands xmi:id="_fnYLoKLnEeee4_RCE8SNaQ" elementId="gruentausch.command.newEmployeeWizzardCommand" commandName="NewEmployeeWizzardCommand"/>
   <commands xmi:id="_ltqo0K_qEeegLNstlHNCTQ" elementId="gruentausch.command.edit.employee" commandName="EditEmployeeCommand"/>
+  <commands xmi:id="_lI5dkLlbEeeksNRVvWoyTQ" elementId="gruentausch.command.deleteemployeecommand" commandName="DeleteEmployeeCommand"/>
   <commands xmi:id="_2LUWsLMOEee7s_JGSTuN6A" elementId="gruentausch.command.sendmailcommand" commandName="SendMailCommand"/>
   <commands xmi:id="_ZGSfQLMkEee6DOUgizHkHw" elementId="gruentausch.command.receivemailcommand" commandName="ReceiveMailCommand"/>
   <addons xmi:id="_6wlLcsgZEeSyMNYR5xypkQ" elementId="org.eclipse.e4.core.commands.service" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
