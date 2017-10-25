@@ -164,7 +164,7 @@ public class EmployeeDataView {
 		}
 		if (employee.getCity() != null) {
 			_isValidCity = true;
-			txtCity.setText(employee.getId());
+			txtCity.setText(employee.getCity());
 		} else {
 			_isValidCity = false;
 			txtCity.setText("");
@@ -188,10 +188,7 @@ public class EmployeeDataView {
 	class WizardKeyListener implements KeyListener {
 
 		@Override
-		public void keyPressed(KeyEvent e) {
-			// TODO Auto-generated method stub
-
-		}
+		public void keyPressed(KeyEvent e) {}
 
 		public void keyReleased(KeyEvent e) {
 			Text source = (Text) e.getSource();
