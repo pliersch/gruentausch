@@ -24,6 +24,7 @@ public class Team extends BaseModel {
 		employees.add(employee);
 		// TODO can´t return team copy at the moment
 		propertyChangeSupport.firePropertyChange("employees", null, this);
+		propertyChangeSupport.firePropertyChange("employee", null, employee);
 	}
 
 	public boolean contain(Employee employee) {
@@ -39,6 +40,9 @@ public class Team extends BaseModel {
 		for (Employee e : employees) {
 			if (e.getId() == employee.getId()) {
 				e = employee;
+				propertyChangeSupport.firePropertyChange("employees", null, this);
+				propertyChangeSupport.firePropertyChange("employee", null, employee);
+				break;
 			}
 		}
 	}
@@ -47,6 +51,8 @@ public class Team extends BaseModel {
 		for (Employee e : employees) {
 			if (e.getId() == employee.getId()) {
 				employees.remove(employee);
+				propertyChangeSupport.firePropertyChange("employees", null, this);
+				propertyChangeSupport.firePropertyChange("employee", null, null);
 				break;
 			}
 		}

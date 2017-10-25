@@ -178,8 +178,11 @@ public class StaffTreePart {
 
 		@Override
 		public Object getParent(Object element) {
-			File file = (File) element;
-			return file.getParentFile();
+//			File file = (File) element;
+//			return file.getParentFile();
+			//TODO
+			System.err.println("StaffTreePart#ViewContentProvider#getParent should be return a valid obj");
+			return null;
 		}
 
 		@Override

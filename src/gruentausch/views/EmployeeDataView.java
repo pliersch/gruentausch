@@ -148,6 +148,14 @@ public class EmployeeDataView {
 	}
 
 	public void updateEmployee(Employee employee) {
+		if(employee == null) {
+			clearUI();
+		} else {
+			updateUI(employee);
+		}
+	}
+
+	private void updateUI(Employee employee) {
 		if (employee.getGivenname() != null) {
 			txtGivenname.setText(employee.getGivenname());
 			_isValidGivenname = true;
@@ -183,6 +191,14 @@ public class EmployeeDataView {
 			txtStreet.setText("");
 			_isValidStreet = false;
 		}
+	}
+
+	private void clearUI() {
+		txtGivenname.setText("");
+		txtSurname.setText("");
+		txtCity.setText("");
+		txtPLZ.setText("");
+		txtStreet.setText("");
 	}
 
 	class WizardKeyListener implements KeyListener {
