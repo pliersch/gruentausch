@@ -9,7 +9,10 @@
               <children xsi:type="menu:HandledMenuItem" xmi:id="_nNqH0K_dEeegLNstlHNCTQ" elementId="gruentausch.handledmenuitem.edit" label="Edit" command="_ltqo0K_qEeegLNstlHNCTQ">
                 <visibleWhen xsi:type="ui:CoreExpression" xmi:id="_Jdf0oLAzEeeA2JCQ9GzHRw" coreExpressionId="gruentausch.definition.isemployee"/>
               </children>
-              <children xsi:type="menu:HandledMenuItem" xmi:id="_EaOygLlcEeeksNRVvWoyTQ" elementId="gruentausch.handledmenuitem.deleteEmployee" label="Löschen" command="_lI5dkLlbEeeksNRVvWoyTQ"/>
+              <children xsi:type="menu:HandledMenuItem" xmi:id="_EaOygLlcEeeksNRVvWoyTQ" elementId="gruentausch.handledmenuitem.deleteEmployee" label="Löschen" command="_lI5dkLlbEeeksNRVvWoyTQ">
+                <visibleWhen xsi:type="ui:CoreExpression" xmi:id="_7xxW0Ll6EeeksNRVvWoyTQ" coreExpressionId="gruentausch.definition.isemployee"/>
+              </children>
+              <children xsi:type="menu:HandledMenuItem" xmi:id="_D9yn8Ll5EeeksNRVvWoyTQ" elementId="gruentausch.handledmenuitem.arbeitszeit" label="Arbeitszeit " command="_m0DU0Ll8EeeksNRVvWoyTQ"/>
             </menus>
           </children>
         </children>
@@ -83,6 +86,7 @@
   <handlers xmi:id="_fVdWELMKEee7s_JGSTuN6A" elementId="gruentausch.handler.sendMail" contributionURI="bundleclass://gruentausch/gruentausch.handlers.SendMailHandler" command="_2LUWsLMOEee7s_JGSTuN6A"/>
   <handlers xmi:id="_c1swQLMkEee6DOUgizHkHw" elementId="gruentausch.handler.receiveMail" contributionURI="bundleclass://gruentausch/gruentausch.handlers.ReceiveMailHandler" command="_ZGSfQLMkEee6DOUgizHkHw"/>
   <handlers xmi:id="_te0msLlbEeeksNRVvWoyTQ" elementId="gruentausch.handler.DeleteEmployee" contributionURI="bundleclass://gruentausch/gruentausch.handlers.DeleteEmployeeHandler" command="_lI5dkLlbEeeksNRVvWoyTQ"/>
+  <handlers xmi:id="_rtGucLl8EeeksNRVvWoyTQ" elementId="gruentausch.handler.AddWorkingTime" contributionURI="bundleclass://gruentausch/gruentausch.handlers.AddWorkingTimeHandler" command="_m0DU0Ll8EeeksNRVvWoyTQ"/>
   <bindingTables xmi:id="_6wlLfsgZEeSyMNYR5xypkQ" elementId="gruentausch.bindingtable" bindingContext="_6wlLecgZEeSyMNYR5xypkQ">
     <bindings xmi:id="_6wlLf8gZEeSyMNYR5xypkQ" elementId="gruentausch.keybinding.m1q" keySequence="M1+Q" command="_6wlLfMgZEeSyMNYR5xypkQ"/>
     <bindings xmi:id="_6wlLgsgZEeSyMNYR5xypkQ" elementId="gruentausch.keybinding.m1o" keySequence="M1+O" command="_6wlLgMgZEeSyMNYR5xypkQ"/>
@@ -103,6 +107,7 @@
   <commands xmi:id="_lI5dkLlbEeeksNRVvWoyTQ" elementId="gruentausch.command.deleteemployeecommand" commandName="DeleteEmployeeCommand"/>
   <commands xmi:id="_2LUWsLMOEee7s_JGSTuN6A" elementId="gruentausch.command.sendmailcommand" commandName="SendMailCommand"/>
   <commands xmi:id="_ZGSfQLMkEee6DOUgizHkHw" elementId="gruentausch.command.receivemailcommand" commandName="ReceiveMailCommand"/>
+  <commands xmi:id="_m0DU0Ll8EeeksNRVvWoyTQ" elementId="gruentausch.command.addworkingtimecommand" commandName="AddWorkingTimeCommand"/>
   <addons xmi:id="_6wlLcsgZEeSyMNYR5xypkQ" elementId="org.eclipse.e4.core.commands.service" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
   <addons xmi:id="_6wlLc8gZEeSyMNYR5xypkQ" elementId="org.eclipse.e4.ui.contexts.service" contributionURI="bundleclass://org.eclipse.e4.ui.services/org.eclipse.e4.ui.services.ContextServiceAddon"/>
   <addons xmi:id="_6wlLdMgZEeSyMNYR5xypkQ" elementId="org.eclipse.e4.ui.bindings.service" contributionURI="bundleclass://org.eclipse.e4.ui.bindings/org.eclipse.e4.ui.bindings.BindingServiceAddon"/>

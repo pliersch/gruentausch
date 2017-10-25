@@ -8,6 +8,7 @@ public class Day {
 	private int day;
 	private String begin;
 	private String end;
+	private boolean vacation;
 	
 	public int getDay() {
 		return day;
@@ -26,6 +27,13 @@ public class Day {
 	}
 	public void setEnd(String end) {
 		this.end = end;
+	}
+
+	public boolean isVacation() {
+		return vacation;
+	}
+	public void setVacation(boolean vacation) {
+		this.vacation = vacation;
 	}
 
 }

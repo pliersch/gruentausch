@@ -41,6 +41,22 @@ public class CalendarUtil {
 		calendar.set(Calendar.MINUTE, minutes);
 		return calendar;
 	}
+	
+	/**
+	 * 
+	 * @param string Must be like: 2012-12-24
+	 * @return
+	 */
+  public Calendar toCalendar(String string) {
+    String[] split = string.split("-");
+    int year = Integer.parseInt(split[0]);
+    int month = Integer.parseInt(split[1]);
+    int day = Integer.parseInt(split[2]);
+    Calendar.getInstance().clear();
+    Calendar calendar = Calendar.getInstance();
+    calendar.set(year, month - 1, day, 0, 0);
+    return calendar;
+  }
 
 	private static Calendar convertToFloat(String time) {
 		Calendar calendar = Calendar.getInstance();
