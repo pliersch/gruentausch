@@ -23,7 +23,9 @@ public class DummyCreator {
 		// months, days and times will added in "for i"
 
 		for (int i = 0; i < surnames.length; i++) {
-			Employee employee = new Employee(givennames[i], surnames[i]);
+			Employee employee = new Employee();
+			employee.setGivenname(givennames[i]);
+			employee.setSurname(surnames[i]);
 			team.addEmployee(employee);
 			for (int j = 0; j < years.length; j++) {
 				List<Year> ys = new ArrayList<Year>();

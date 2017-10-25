@@ -1,6 +1,7 @@
 package gruentausch.model;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -9,9 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class Employee extends BaseModel {
 
-	private static int ID_COUNTER = 0;
-
-	private final int id = ID_COUNTER++;
+	private String id =  Calendar.getInstance().getTime().toString();
 	private String surname;
 	private String givenname;
 	private String city;
@@ -21,19 +20,17 @@ public class Employee extends BaseModel {
 
 	public Employee() {
 	}
-
-	public Employee(String givenname, String surname) {
-		super();
-		this.givenname = givenname;
-		this.surname = surname;
+	
+	public String getId() {
+		return id;
+	}
+	
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getSurname() {
 		return surname;
-	}
-
-	public int getId() {
-		return id;
 	}
 
 	public void setSurname(String name) {

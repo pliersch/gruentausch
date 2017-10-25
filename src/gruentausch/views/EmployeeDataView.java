@@ -21,7 +21,7 @@ import gruentausch.model.Employee;
 import gruentausch.util.RegExUtil;
 
 public class EmployeeDataView {
-
+	
 	public interface IEmployeeDataViewHandler {
 		void handleDataChange();
 	}
@@ -116,7 +116,7 @@ public class EmployeeDataView {
 			}
 		}
 	}
-
+	
 	public void setDataViewHandler(IEmployeeDataViewHandler handler) {
 		_handler = handler;
 	}
@@ -164,7 +164,7 @@ public class EmployeeDataView {
 		}
 		if (employee.getCity() != null) {
 			_isValidCity = true;
-			txtCity.setText(employee.getCity());
+			txtCity.setText(employee.getId());
 		} else {
 			_isValidCity = false;
 			txtCity.setText("");
@@ -250,8 +250,7 @@ public class EmployeeDataView {
 					hideWarning(_decoratorSurname);
 					_decoratorSurname = null;
 				}
-			}
-			_handler.handleDataChange();
+			}_handler.handleDataChange();
 		}
 	}
 }
