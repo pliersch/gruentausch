@@ -14,7 +14,6 @@ import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FillLayout;
-import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
@@ -25,7 +24,6 @@ import gruentausch.model.Day;
 
 public class TimeTableView {
 
-	public static final String ID = "de.vogella.jface.tableviewer.view";
 	private static final Image CHECKED = createImageDescriptor("icons/checked.gif");
 	private static final Image UNCHECKED = createImageDescriptor("icons/unchecked.gif");
 	
@@ -47,13 +45,13 @@ public class TimeTableView {
 
 		viewer.setContentProvider(new ArrayContentProvider());
 
-		GridData gridData = new GridData();
-		gridData.verticalAlignment = GridData.FILL;
-		gridData.horizontalSpan = 2;
-		gridData.grabExcessHorizontalSpace = true;
-		gridData.grabExcessVerticalSpace = true;
-		gridData.horizontalAlignment = GridData.FILL;
-		viewer.getControl().setLayoutData(gridData);
+//		GridData gridData = new GridData();
+//		gridData.verticalAlignment = GridData.FILL;
+//		gridData.horizontalSpan = 2;
+//		gridData.grabExcessHorizontalSpace = true;
+//		gridData.grabExcessVerticalSpace = true;
+//		gridData.horizontalAlignment = GridData.FILL;
+//		viewer.getControl().setLayoutData(gridData);
 	}
 
 //	public TableViewer getViewer() {
