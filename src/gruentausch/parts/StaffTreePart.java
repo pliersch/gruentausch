@@ -46,6 +46,7 @@ import gruentausch.model.Month;
 import gruentausch.model.Team;
 import gruentausch.model.Year;
 import gruentausch.util.CalendarUtil;
+import gruentausch.util.WorkingTimeUtil;
 
 public class StaffTreePart {
 
@@ -95,6 +96,7 @@ public class StaffTreePart {
 
 				if (firstElement instanceof Employee) {
 					Employee employee = (Employee) firstElement;
+					new WorkingTimeUtil().getUnresolvedWorkingDays(employee);
 					selectionService.setSelection(employee);					
 				} else if (firstElement instanceof Year) {
 					Year year = (Year) firstElement;
