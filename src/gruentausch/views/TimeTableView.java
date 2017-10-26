@@ -1,6 +1,7 @@
 package gruentausch.views;
 
 import java.net.URL;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 
@@ -21,15 +22,15 @@ import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
 
 import gruentausch.model.Day;
+import gruentausch.util.CalendarUtil;
 
 public class TimeTableView {
 
 	private static final Image CHECKED = createImageDescriptor("icons/checked.gif");
 	private static final Image UNCHECKED = createImageDescriptor("icons/unchecked.gif");
-	
 
 	protected TableViewer viewer;
-	
+
 	@PostConstruct
 	public void createControls(Composite parent) {
 		parent.setLayout(new FillLayout(SWT.NONE));
@@ -45,18 +46,18 @@ public class TimeTableView {
 
 		viewer.setContentProvider(new ArrayContentProvider());
 
-//		GridData gridData = new GridData();
-//		gridData.verticalAlignment = GridData.FILL;
-//		gridData.horizontalSpan = 2;
-//		gridData.grabExcessHorizontalSpace = true;
-//		gridData.grabExcessVerticalSpace = true;
-//		gridData.horizontalAlignment = GridData.FILL;
-//		viewer.getControl().setLayoutData(gridData);
+		// GridData gridData = new GridData();
+		// gridData.verticalAlignment = GridData.FILL;
+		// gridData.horizontalSpan = 2;
+		// gridData.grabExcessHorizontalSpace = true;
+		// gridData.grabExcessVerticalSpace = true;
+		// gridData.horizontalAlignment = GridData.FILL;
+		// viewer.getControl().setLayoutData(gridData);
 	}
 
-//	public TableViewer getViewer() {
-//		return viewer;
-//	}
+	// public TableViewer getViewer() {
+	// return viewer;
+	// }
 
 	// create the columns for the table
 	private void createColumns(final Composite parent, final TableViewer viewer) {
@@ -69,7 +70,7 @@ public class TimeTableView {
 			@Override
 			public String getText(Object element) {
 				Day day = (Day) element;
-				return Integer.toString(day.getDay());
+				return CalendarUtil.toGermanString(day.getCalendar());
 			}
 		});
 
@@ -111,7 +112,10 @@ public class TimeTableView {
 				}
 			}
 		});
+	}
 
+	public void updateTable(List<Day> days) {
+		viewer.setInput(days);
 	}
 
 	private TableViewerColumn createTableViewerColumn(String title, int bound, final int colNumber) {

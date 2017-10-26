@@ -66,6 +66,7 @@ public class TimeTablePart extends TimeTableView {
 			} else {
 				Day newDay = new Day();
 				newDay.setDay(i + 1);
+				newDay.setCalendar(calendar);
 				days.add(newDay);
 			}
 

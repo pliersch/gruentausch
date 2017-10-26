@@ -2,14 +2,16 @@ package gruentausch.model;
 
 import java.util.List;
 
+import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class Month {
+public class Month extends Unmarshaller.Listener {
 
 	private int month;
 	private int year;
 	private List<Day> days;
+	private Year parent;
 
 	public int getMonth() {
 		return month;
@@ -33,5 +35,13 @@ public class Month {
 
 	public void setYear(int year) {
 		this.year = year;
+	}
+	
+	public void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
+		this.parent = (Year) parent;
+	}
+
+	public Year getParent() {
+		return parent;
 	}
 }

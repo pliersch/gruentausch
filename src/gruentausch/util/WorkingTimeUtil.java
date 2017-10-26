@@ -22,7 +22,9 @@ public class WorkingTimeUtil {
 		int position = 0;
 		for (int i = 0; i < daysInMonth; i++) {
 			if (i == size) {
-				unresolvedDays.add(new Day());
+				Day day = new Day();
+				day.setCalendar(CalendarUtil.getCalendar(year.getYear(), month.getMonth(), i));
+				unresolvedDays.add(day);
 				System.out.println("unresolved: " + i);
 			} else {
 				Day day = days.get(position);
@@ -31,14 +33,18 @@ public class WorkingTimeUtil {
 					if (!isDayComplete(day)) {
 						if (!isWeekend(year, month, i + 1)) {
 							System.out.println("unresolved: " + i);
-							unresolvedDays.add(new Day());
+							day = new Day();
+							day.setCalendar(CalendarUtil.getCalendar(year.getYear(), month.getMonth(), i));
+							unresolvedDays.add(day);
 						}
 						
 					}
 				} else {
 					if (!isWeekend(year, month, i + 1)) {
 						System.out.println("unresolved: " + i);
-						unresolvedDays.add(new Day());
+						day = new Day();
+						day.setCalendar(CalendarUtil.getCalendar(year.getYear(), month.getMonth(), i));
+						unresolvedDays.add(day);
 					}
 					size++;
 				}

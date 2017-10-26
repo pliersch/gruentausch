@@ -40,7 +40,7 @@ public class AddWorkingTimePage extends WizardPage implements IEmployeeDataViewH
 			view.createControls(container);
 //		view.setEditable(true);
 //		view.setDataViewHandler(this);
-//			view.updateTable();
+			view.updateTable(unresolvedWorkingDays);
 		}
 	}
 
