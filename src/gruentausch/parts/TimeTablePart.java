@@ -18,7 +18,7 @@ import org.eclipse.swt.widgets.TableItem;
 import gruentausch.model.Day;
 import gruentausch.model.Month;
 import gruentausch.util.CalendarUtil;
-import gruentausch.views.TimeTableView;
+import gruentausch.views.timetable.TimeTableView;
 
 public class TimeTablePart extends TimeTableView {
 

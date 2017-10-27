@@ -13,7 +13,7 @@ import gruentausch.model.Day;
 import gruentausch.model.Employee;
 import gruentausch.util.WorkingTimeUtil;
 import gruentausch.views.EmployeeDataView.IEmployeeDataViewHandler;
-import gruentausch.views.TimeTableView;
+import gruentausch.views.timetable.TimeTableView;
 
 public class AddWorkingTimePage extends WizardPage implements IEmployeeDataViewHandler {
 

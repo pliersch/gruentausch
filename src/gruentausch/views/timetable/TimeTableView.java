@@ -1,4 +1,4 @@
-package gruentausch.views;
+package gruentausch.views.timetable;
 
 import java.net.URL;
 import java.util.List;
@@ -10,6 +10,9 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
+import org.eclipse.jface.viewers.DoubleClickEvent;
+import org.eclipse.jface.viewers.IDoubleClickListener;
+import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
@@ -45,6 +48,16 @@ public class TimeTableView {
 		table.setLinesVisible(true);
 
 		viewer.setContentProvider(new ArrayContentProvider());
+		
+		viewer.addDoubleClickListener(new IDoubleClickListener() {
+
+      @Override
+      public void doubleClick(DoubleClickEvent event) {
+          IStructuredSelection selection = (IStructuredSelection) event.getSelection();
+          Object firstElement = selection.getFirstElement();
+          System.out.println(firstElement.toString());
+      }
+  });
 
 		// GridData gridData = new GridData();
 		// gridData.verticalAlignment = GridData.FILL;
@@ -83,6 +96,7 @@ public class TimeTableView {
 				return day.getBegin();
 			}
 		});
+		col.setEditingSupport(new BeginEditingSupport(viewer));
 
 		// now the gender
 		col = createTableViewerColumn(titles[2], bounds[2], 2);
@@ -93,6 +107,7 @@ public class TimeTableView {
 				return day.getEnd();
 			}
 		});
+		col.setEditingSupport(new EndEditingSupport(viewer));
 
 		// now the status married
 		col = createTableViewerColumn(titles[3], bounds[3], 3);
@@ -112,6 +127,7 @@ public class TimeTableView {
 				}
 			}
 		});
+		col.setEditingSupport(new VacationEditingSupport(viewer));
 	}
 
 	public void updateTable(List<Day> days) {
