@@ -1,4 +1,4 @@
-package gruentausch.views.timetable;
+package gruentausch.views.timetable.editingsupport;
 
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.EditingSupport;

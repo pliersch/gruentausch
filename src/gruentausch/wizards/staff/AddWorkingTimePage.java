@@ -26,20 +26,20 @@ public class AddWorkingTimePage extends WizardPage implements IEmployeeDataViewH
 		setTitle("der titel");
 		setDescription("offene Arbeitszeiten");
 	}
-	
+
 	@Override
 	public void createControl(Composite parent) {
 		parent.setLayout(new FillLayout());
 		Composite container = new Composite(parent, SWT.NONE);
 		List<Day> unresolvedWorkingDays = new WorkingTimeUtil().getUnresolvedWorkingDays(employee);
 		setControl(container);
-		if(unresolvedWorkingDays.size() == 0) {
-			setTitle("Keine offenen Arbeitstage bei/für " + employee.getGivenname() + " " + employee.getSurname());			
+		if (unresolvedWorkingDays.size() == 0) {
+			setTitle("Keine offenen Arbeitstage bei/für " + employee.getGivenname() + " " + employee.getSurname());
 		} else {
 			view = new TimeTableView();
 			view.createControls(container);
-//		view.setEditable(true);
-//		view.setDataViewHandler(this);
+			// view.setEditable(true);
+			view.setDataViewHandler(this);
 			view.updateTable(unresolvedWorkingDays);
 		}
 	}
@@ -47,7 +47,7 @@ public class AddWorkingTimePage extends WizardPage implements IEmployeeDataViewH
 	@Override
 	public boolean isPageComplete() {
 		return false;
-//		return view.fieldsValid();
+		// return view.fieldsValid();
 	}
 
 	public void setEmployee(Employee employee) {

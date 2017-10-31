@@ -2,6 +2,7 @@ package gruentausch.propertytest;
 
 import org.eclipse.core.expressions.PropertyTester;
 
+// TODO not used
 public class SelectionPropertyTester extends PropertyTester {
 	
 	@Override

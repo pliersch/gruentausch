@@ -9,16 +9,25 @@ import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.ArrayContentProvider;
+import org.eclipse.jface.viewers.CellNavigationStrategy;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
-import org.eclipse.jface.viewers.DoubleClickEvent;
-import org.eclipse.jface.viewers.IDoubleClickListener;
-import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.ColumnViewer;
+import org.eclipse.jface.viewers.ColumnViewerEditor;
+import org.eclipse.jface.viewers.ColumnViewerEditorActivationEvent;
+import org.eclipse.jface.viewers.ColumnViewerEditorActivationListener;
+import org.eclipse.jface.viewers.ColumnViewerEditorActivationStrategy;
+import org.eclipse.jface.viewers.ColumnViewerEditorDeactivationEvent;
+import org.eclipse.jface.viewers.FocusCellOwnerDrawHighlighter;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
+import org.eclipse.jface.viewers.TableViewerEditor;
+import org.eclipse.jface.viewers.TableViewerFocusCellManager;
+import org.eclipse.jface.viewers.ViewerCell;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.osgi.framework.Bundle;
@@ -26,6 +35,10 @@ import org.osgi.framework.FrameworkUtil;
 
 import gruentausch.model.Day;
 import gruentausch.util.CalendarUtil;
+import gruentausch.views.EmployeeDataView.IEmployeeDataViewHandler;
+import gruentausch.views.timetable.editingsupport.BeginEditingSupport;
+import gruentausch.views.timetable.editingsupport.EndEditingSupport;
+import gruentausch.views.timetable.editingsupport.VacationEditingSupport;
 
 public class TimeTableView {
 
@@ -33,6 +46,7 @@ public class TimeTableView {
 	private static final Image UNCHECKED = createImageDescriptor("icons/unchecked.gif");
 
 	protected TableViewer viewer;
+	private IEmployeeDataViewHandler _handler;
 
 	@PostConstruct
 	public void createControls(Composite parent) {
@@ -42,23 +56,13 @@ public class TimeTableView {
 
 	private void createViewer(Composite parent) {
 		viewer = new TableViewer(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION | SWT.BORDER);
+		addEditorSupport(viewer);
 		createColumns(parent, viewer);
 		final Table table = viewer.getTable();
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
 
 		viewer.setContentProvider(new ArrayContentProvider());
-		
-		viewer.addDoubleClickListener(new IDoubleClickListener() {
-
-      @Override
-      public void doubleClick(DoubleClickEvent event) {
-          IStructuredSelection selection = (IStructuredSelection) event.getSelection();
-          Object firstElement = selection.getFirstElement();
-          System.out.println(firstElement.toString());
-      }
-  });
-
 		// GridData gridData = new GridData();
 		// gridData.verticalAlignment = GridData.FILL;
 		// gridData.horizontalSpan = 2;
@@ -66,6 +70,65 @@ public class TimeTableView {
 		// gridData.grabExcessVerticalSpace = true;
 		// gridData.horizontalAlignment = GridData.FILL;
 		// viewer.getControl().setLayoutData(gridData);
+	}
+
+	private void addEditorSupport(TableViewer tv) {
+		final CellNavigationStrategy cellNavigation = createCellNavigationStrategy(tv);
+		final TableViewerFocusCellManager focusCellManager = new TableViewerFocusCellManager(tv,
+				new FocusCellOwnerDrawHighlighter(tv), cellNavigation);
+		final ColumnViewerEditorActivationStrategy activationStrategy = createEditorActivationStrategy(tv);
+		TableViewerEditor.create(tv, focusCellManager, activationStrategy,
+				ColumnViewerEditor.TABBING_HORIZONTAL | ColumnViewerEditor.TABBING_MOVE_TO_ROW_NEIGHBOR
+						| ColumnViewerEditor.TABBING_VERTICAL | ColumnViewerEditor.KEYBOARD_ACTIVATION);
+		tv.getColumnViewerEditor().addEditorActivationListener(createEditorActivationListener(tv));
+	}
+
+	private CellNavigationStrategy createCellNavigationStrategy(TableViewer tv) {
+		final Table t = tv.getTable();
+		return new CellNavigationStrategy() {
+			@Override
+			public ViewerCell findSelectedCell(ColumnViewer viewer, ViewerCell currentSelectedCell, Event event) {
+				final ViewerCell cell = super.findSelectedCell(viewer, currentSelectedCell, event);
+				if (cell != null) {
+					t.showColumn(t.getColumn(cell.getColumnIndex()));
+				}
+				return cell;
+			}
+		};
+	}
+
+	private ColumnViewerEditorActivationListener createEditorActivationListener(TableViewer tv) {
+		final Table t = tv.getTable();
+		return new ColumnViewerEditorActivationListener() {
+
+			@Override
+			public void beforeEditorDeactivated(ColumnViewerEditorDeactivationEvent event) {
+			}
+
+			@Override
+			public void beforeEditorActivated(ColumnViewerEditorActivationEvent event) {
+				ViewerCell cell = (ViewerCell) event.getSource();
+				t.showColumn(t.getColumn(cell.getColumnIndex()));
+			}
+
+			@Override
+			public void afterEditorDeactivated(ColumnViewerEditorDeactivationEvent event) {
+			}
+
+			@Override
+			public void afterEditorActivated(ColumnViewerEditorActivationEvent event) {
+			}
+		};
+	}
+
+	private ColumnViewerEditorActivationStrategy createEditorActivationStrategy(TableViewer tv) {
+		return new ColumnViewerEditorActivationStrategy(tv) {
+			protected boolean isEditorActivationEvent(ColumnViewerEditorActivationEvent event) {
+				return event.eventType == ColumnViewerEditorActivationEvent.TRAVERSAL
+						|| event.eventType == ColumnViewerEditorActivationEvent.MOUSE_DOUBLE_CLICK_SELECTION
+						|| (event.eventType == ColumnViewerEditorActivationEvent.KEY_PRESSED && event.keyCode == SWT.CR);
+			}
+		};
 	}
 
 	// public TableViewer getViewer() {
@@ -96,6 +159,8 @@ public class TimeTableView {
 				return day.getBegin();
 			}
 		});
+		// BeginEditingSupport beginEditingSupport = new BeginEditingSupport(viewer);
+		// beginEditingSupport.
 		col.setEditingSupport(new BeginEditingSupport(viewer));
 
 		// now the gender
@@ -153,6 +218,10 @@ public class TimeTableView {
 
 	public void setFocus() {
 		viewer.getControl().setFocus();
+	}
+
+	public void setDataViewHandler(IEmployeeDataViewHandler handler) {
+		_handler = handler;
 	}
 
 }
