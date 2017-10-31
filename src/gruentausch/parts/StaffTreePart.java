@@ -12,8 +12,10 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.model.application.MApplication;
+import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.services.EMenuService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
+import org.eclipse.e4.ui.workbench.modeling.EPartService.PartState;
 import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.JFaceResources;
@@ -21,12 +23,15 @@ import org.eclipse.jface.resource.LocalResourceManager;
 import org.eclipse.jface.resource.ResourceManager;
 import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider;
 import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelProvider;
+import org.eclipse.jface.viewers.DoubleClickEvent;
+import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StyledString;
+import org.eclipse.jface.viewers.TreeSelection;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.TreeViewerColumn;
 import org.eclipse.jface.viewers.Viewer;
@@ -78,12 +83,26 @@ public class StaffTreePart {
 			public void propertyChange(PropertyChangeEvent evt) {
 				Object newValue = evt.getNewValue();
 				viewer.setInput(newValue);
-				System.out.println("event");
 			}
 		});
+		// TODO why condition?
 		if (team != null) {
 			viewer.setInput(team);
 		}	
+		
+		viewer.addDoubleClickListener(new IDoubleClickListener() {
+			
+			@Override
+			public void doubleClick(DoubleClickEvent event) {
+				TreeSelection selection = (TreeSelection) event.getSelection();
+				Object firstElement = selection.getFirstElement();
+				if (firstElement instanceof Month) {
+					displayPart("gruentausch.part.table.month");
+				}
+				System.out.println("double");
+				
+			}
+		});
 
 		viewer.addSelectionChangedListener(new ISelectionChangedListener() {
 
@@ -127,12 +146,12 @@ public class StaffTreePart {
 		});
 	}
 
-//	private void displayPart(String id) {
-//		MPart mpart = partService.findPart(id);
-//		mpart.setVisible(true);
-//		partService.showPart(mpart, PartState.CREATE);
-//		partService.bringToTop(mpart);
-//	}
+	private void displayPart(String id) {
+		MPart mpart = partService.findPart(id);
+		mpart.setVisible(true);
+		partService.showPart(mpart, PartState.CREATE);
+		partService.bringToTop(mpart);
+	}
 
 	// private void hidePart(){
 	// MPart mpart=partService.findPart("gruentausch.part.filebrowser");
@@ -197,12 +216,10 @@ public class StaffTreePart {
 			}
 			return false;
 		}
-
 	}
 
 	class ViewLabelProvider extends LabelProvider implements IStyledLabelProvider {
 
-		private ImageDescriptor directoryImage;
 		private ResourceManager resourceManager;
 
 		@Override
@@ -222,6 +239,7 @@ public class StaffTreePart {
 				StyledString styledString = new StyledString(CalendarUtil.getMonth(month.getMonth()));
 				return styledString;
 			}
+			// TODO
 			return new StyledString("foo");
 		}
 
