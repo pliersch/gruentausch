@@ -12,7 +12,9 @@
               <children xsi:type="menu:HandledMenuItem" xmi:id="_EaOygLlcEeeksNRVvWoyTQ" elementId="gruentausch.handledmenuitem.deleteEmployee" label="Löschen" command="_lI5dkLlbEeeksNRVvWoyTQ">
                 <visibleWhen xsi:type="ui:CoreExpression" xmi:id="_7xxW0Ll6EeeksNRVvWoyTQ" coreExpressionId="gruentausch.definition.isemployee"/>
               </children>
-              <children xsi:type="menu:HandledMenuItem" xmi:id="_D9yn8Ll5EeeksNRVvWoyTQ" elementId="gruentausch.handledmenuitem.arbeitszeit" label="Arbeitszeit " command="_m0DU0Ll8EeeksNRVvWoyTQ"/>
+              <children xsi:type="menu:HandledMenuItem" xmi:id="_D9yn8Ll5EeeksNRVvWoyTQ" elementId="gruentausch.handledmenuitem.arbeitszeit" label="Arbeitszeit " command="_m0DU0Ll8EeeksNRVvWoyTQ">
+                <visibleWhen xsi:type="ui:CoreExpression" xmi:id="_iFfGML5ZEeev0sdYqMvVxQ" coreExpressionId="gruentausch.definition.isemployee"/>
+              </children>
             </menus>
           </children>
         </children>

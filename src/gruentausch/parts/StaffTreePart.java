@@ -2,7 +2,6 @@ package gruentausch.parts;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.io.File;
 import java.net.URL;
 
 import javax.annotation.PostConstruct;
@@ -69,7 +68,7 @@ public class StaffTreePart {
 		TreeViewerColumn mainColumn = new TreeViewerColumn(viewer, SWT.NONE);
 		mainColumn.getColumn().setText("Name");
 		mainColumn.getColumn().setWidth(300);
-		mainColumn.setLabelProvider(new DelegatingStyledCellLabelProvider(new ViewLabelProvider(createImageDescriptor())));
+		mainColumn.setLabelProvider(new DelegatingStyledCellLabelProvider(new ViewLabelProvider()));
 
 		IEclipseContext context = application.getContext();
 		Team team = (Team) context.get(Team.class);
@@ -141,9 +140,9 @@ public class StaffTreePart {
 	// partService.hidePart(mpart);
 	// }
 
-	private ImageDescriptor createImageDescriptor() {
+	private ImageDescriptor createImageDescriptor(String filename) {
 		Bundle bundle = FrameworkUtil.getBundle(ViewLabelProvider.class);
-		URL url = FileLocator.find(bundle, new Path("icons/folder.png"), null);
+		URL url = FileLocator.find(bundle, new Path("icons/" + filename + ".png"), null);
 		return ImageDescriptor.createFromURL(url);
 	}
 
@@ -206,10 +205,6 @@ public class StaffTreePart {
 		private ImageDescriptor directoryImage;
 		private ResourceManager resourceManager;
 
-		public ViewLabelProvider(ImageDescriptor directoryImage) {
-			this.directoryImage = directoryImage;
-		}
-
 		@Override
 		public StyledString getStyledText(Object element) {
 			if (element instanceof Employee) {
@@ -232,10 +227,8 @@ public class StaffTreePart {
 
 		@Override
 		public Image getImage(Object element) {
-			if (element instanceof File) {
-				if (((File) element).isDirectory()) {
-					return getResourceManager().createImage(directoryImage);
-				}
+			if (element instanceof Employee) {
+					return getResourceManager().createImage(createImageDescriptor("avatar"));
 			}
 
 			return super.getImage(element);
