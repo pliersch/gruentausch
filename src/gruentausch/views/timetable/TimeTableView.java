@@ -113,16 +113,19 @@ public class TimeTableView {
 
 			@Override
 			public void afterEditorDeactivated(ColumnViewerEditorDeactivationEvent event) {
+				System.out.println("afterEditorDeactivated");
 			}
 
 			@Override
 			public void afterEditorActivated(ColumnViewerEditorActivationEvent event) {
+				System.out.println("afterEditorActivated");
 			}
 		};
 	}
 
 	private ColumnViewerEditorActivationStrategy createEditorActivationStrategy(TableViewer tv) {
 		return new ColumnViewerEditorActivationStrategy(tv) {
+			@Override
 			protected boolean isEditorActivationEvent(ColumnViewerEditorActivationEvent event) {
 				return event.eventType == ColumnViewerEditorActivationEvent.TRAVERSAL
 						|| event.eventType == ColumnViewerEditorActivationEvent.MOUSE_DOUBLE_CLICK_SELECTION
