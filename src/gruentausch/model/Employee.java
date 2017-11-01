@@ -9,10 +9,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class Employee extends Person {
 
-	private String city;
-	private String street;
-	private int plz;
 	private List<Year> years = new ArrayList<Year>();
+	private Adress adress;
 
 	public Employee() {
 	}
@@ -22,6 +20,7 @@ public class Employee extends Person {
 		return years;
 	}
 
+	// TODO do we need propertyChangeSupport? only "employee" and "employees" are used
 	public void setYears(List<Year> years) {
 		propertyChangeSupport.firePropertyChange("years", this.years, this.years = years);
 	}
@@ -33,27 +32,11 @@ public class Employee extends Person {
 
 	}
 
-	public String getCity() {
-		return city;
+	public Adress getAdress() {
+		return adress;
 	}
 
-	public void setCity(String city) {
-		propertyChangeSupport.firePropertyChange("city", this.city, this.city = city);
-	}
-
-	public String getStreet() {
-		return street;
-	}
-
-	public void setStreet(String street) {
-		propertyChangeSupport.firePropertyChange("street", this.street, this.street = street);
-	}
-
-	public int getPlz() {
-		return plz;
-	}
-
-	public void setPlz(int plz) {
-		propertyChangeSupport.firePropertyChange("plz", this.plz, this.plz = plz);
+	public void setAdress(Adress adress) {
+		this.adress = adress;
 	}
 }

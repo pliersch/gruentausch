@@ -7,6 +7,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 
+import gruentausch.model.Adress;
 import gruentausch.model.Employee;
 import gruentausch.views.EmployeeDataView;
 import gruentausch.views.EmployeeDataView.IEmployeeDataViewHandler;
@@ -39,11 +40,13 @@ public class CreateEmployeePage extends WizardPage implements IEmployeeDataViewH
 
 	public Employee getEmployee() {
 		Employee employee = new Employee();
+		Adress adress = employee.getAdress();
 		employee.setGivenname(view.txtGivenname.getText());
 		employee.setSurname(view.txtSurname.getText());
-		employee.setCity(view.txtCity.getText());
-		employee.setPlz(Integer.valueOf(view.txtPLZ.getText()));
-		employee.setStreet(view.txtStreet.getText());
+		adress.setCity(view.txtCity.getText());
+		adress.setPlz(Integer.valueOf(view.txtPLZ.getText()));
+		adress.setStreet(view.txtStreet.getText());
+		employee.setAdress(adress);
 		return employee;
 	}
 

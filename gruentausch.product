@@ -3,7 +3,6 @@
 
 <product name="gruentausch" id="gruentausch.product" application="org.eclipse.e4.ui.workbench.swt.E4Application" version="1.0.0.qualifier" useFeatures="false" includeLaunchers="true">
 
-
    <configIni use="default">
    </configIni>
 
@@ -16,20 +15,17 @@
 
    <windowImages i16="/gruentausch/images/logo16.png" i32="/gruentausch/images/logo32.png" i48="/gruentausch/images/logo48.png" i64="/gruentausch/images/logo64.png" i128="/gruentausch/images/logo128.png" i256="/gruentausch/images/logo256.png"/>
 
-
    <launcher>
       <win useIco="false">
          <bmp/>
       </win>
    </launcher>
 
-
    <vm>
    </vm>
 
    <plugins>
       <plugin id="com.ibm.icu"/>
-      <plugin id="gruenzeug"/>
       <plugin id="javax.annotation"/>
       <plugin id="javax.inject"/>
       <plugin id="javax.transaction" fragment="true"/>

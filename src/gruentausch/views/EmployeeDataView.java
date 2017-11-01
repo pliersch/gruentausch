@@ -17,6 +17,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
+import gruentausch.model.Adress;
 import gruentausch.model.Employee;
 import gruentausch.util.RegExUtil;
 
@@ -156,6 +157,7 @@ public class EmployeeDataView {
 	}
 
 	private void updateUI(Employee employee) {
+		Adress adress = employee.getAdress();
 		if (employee.getGivenname() != null) {
 			txtGivenname.setText(employee.getGivenname());
 			_isValidGivenname = true;
@@ -170,22 +172,22 @@ public class EmployeeDataView {
 			_isValidSurname = false;
 			txtSurname.setText("");
 		}
-		if (employee.getCity() != null) {
+		if (adress.getCity() != null) {
 			_isValidCity = true;
-			txtCity.setText(employee.getCity());
+			txtCity.setText(adress.getCity());
 		} else {
 			_isValidCity = false;
 			txtCity.setText("");
 		}
-		if (employee.getPlz() != 0) {
+		if (adress.getPlz() != 0) {
 			_isValidPLZ = true;
-			txtPLZ.setText(Integer.toString(employee.getPlz()));
+			txtPLZ.setText(Integer.toString(adress.getPlz()));
 		} else {
 			_isValidPLZ = false;
 			txtPLZ.setText("");
 		}
-		if (employee.getStreet() != null) {
-			txtStreet.setText(employee.getStreet());
+		if (adress.getStreet() != null) {
+			txtStreet.setText(adress.getStreet());
 			_isValidStreet = true;
 		} else {
 			txtStreet.setText("");
