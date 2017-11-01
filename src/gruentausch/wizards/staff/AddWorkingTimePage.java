@@ -12,10 +12,10 @@ import org.eclipse.swt.widgets.Composite;
 import gruentausch.model.Day;
 import gruentausch.model.Employee;
 import gruentausch.util.WorkingTimeUtil;
-import gruentausch.views.EmployeeDataView.IEmployeeDataViewHandler;
+import gruentausch.views.ViewDataChangeHandler;
 import gruentausch.views.timetable.TimeTableView;
 
-public class AddWorkingTimePage extends WizardPage implements IEmployeeDataViewHandler {
+public class AddWorkingTimePage extends WizardPage implements ViewDataChangeHandler {
 
 	private Employee employee;
 	private TimeTableView view;

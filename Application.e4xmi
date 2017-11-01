@@ -17,6 +17,7 @@
               </children>
             </menus>
           </children>
+          <children xsi:type="basic:Part" xmi:id="_OzmHEL8PEeekUfQ_2xFohQ" elementId="gruentausch.part.customers" contributionURI="bundleclass://gruentausch/gruentausch.parts.CustomerTreePart" label="Kunden" iconURI="platform:/plugin/gruentausch/icons/sample.png"/>
         </children>
         <children xsi:type="basic:PartStack" xmi:id="_Jo6joKFPEeee4_RCE8SNaQ" elementId="gruentausch.partstack.0">
           <children xsi:type="basic:Part" xmi:id="_tMgIAK_hEeegLNstlHNCTQ" elementId="gruentausch.part.employee" contributionURI="bundleclass://gruentausch/gruentausch.parts.EmployeePart" label="Employee" closeable="true"/>
@@ -89,6 +90,7 @@
   <handlers xmi:id="_c1swQLMkEee6DOUgizHkHw" elementId="gruentausch.handler.receiveMail" contributionURI="bundleclass://gruentausch/gruentausch.handlers.ReceiveMailHandler" command="_ZGSfQLMkEee6DOUgizHkHw"/>
   <handlers xmi:id="_te0msLlbEeeksNRVvWoyTQ" elementId="gruentausch.handler.DeleteEmployee" contributionURI="bundleclass://gruentausch/gruentausch.handlers.DeleteEmployeeHandler" command="_lI5dkLlbEeeksNRVvWoyTQ"/>
   <handlers xmi:id="_rtGucLl8EeeksNRVvWoyTQ" elementId="gruentausch.handler.AddWorkingTime" contributionURI="bundleclass://gruentausch/gruentausch.handlers.AddWorkingTimeHandler" command="_m0DU0Ll8EeeksNRVvWoyTQ"/>
+  <handlers xmi:id="_WdK40L8VEeekUfQ_2xFohQ" elementId="gruentausch.handler.NewCustomerWizzard" contributionURI="bundleclass://gruentausch/gruentausch.handlers.NewCustomerHandler" command="_qzhWoL8EEeev0sdYqMvVxQ"/>
   <bindingTables xmi:id="_6wlLfsgZEeSyMNYR5xypkQ" elementId="gruentausch.bindingtable" bindingContext="_6wlLecgZEeSyMNYR5xypkQ">
     <bindings xmi:id="_6wlLf8gZEeSyMNYR5xypkQ" elementId="gruentausch.keybinding.m1q" keySequence="M1+Q" command="_6wlLfMgZEeSyMNYR5xypkQ"/>
     <bindings xmi:id="_6wlLgsgZEeSyMNYR5xypkQ" elementId="gruentausch.keybinding.m1o" keySequence="M1+O" command="_6wlLgMgZEeSyMNYR5xypkQ"/>

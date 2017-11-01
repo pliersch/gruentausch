@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Customer extends BaseModel {
 
 	private List<Person> persons = new ArrayList<Person>();
+	private Adress adress;
 
 	@XmlElement(name = "person")
 	public List<Person> getPersons() {
@@ -22,7 +23,7 @@ public class Customer extends BaseModel {
 	
 	public void addPerson(Person person) {
 		persons.add(person);
-		// TODO can´t return team copy at the moment
+		// TODO can´t return persons copy at the moment
 		propertyChangeSupport.firePropertyChange("persons", null, this);
 		propertyChangeSupport.firePropertyChange("person", null, person);
 	}
@@ -56,6 +57,14 @@ public class Customer extends BaseModel {
 				break;
 			}
 		}
+	}
+
+	public Adress getAdress() {
+		return adress;
+	}
+
+	public void setAdress(Adress adress) {
+		this.adress = adress;
 	}
 
 }

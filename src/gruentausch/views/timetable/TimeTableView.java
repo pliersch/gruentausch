@@ -35,7 +35,7 @@ import org.osgi.framework.FrameworkUtil;
 
 import gruentausch.model.Day;
 import gruentausch.util.CalendarUtil;
-import gruentausch.views.EmployeeDataView.IEmployeeDataViewHandler;
+import gruentausch.views.ViewDataChangeHandler;
 import gruentausch.views.timetable.editingsupport.BeginEditingSupport;
 import gruentausch.views.timetable.editingsupport.EndEditingSupport;
 import gruentausch.views.timetable.editingsupport.VacationEditingSupport;
@@ -46,7 +46,7 @@ public class TimeTableView {
 	private static final Image UNCHECKED = createImageDescriptor("icons/unchecked.gif");
 
 	protected TableViewer viewer;
-	private IEmployeeDataViewHandler _handler;
+	private ViewDataChangeHandler _handler;
 
 	@PostConstruct
 	public void createControls(Composite parent) {
@@ -223,7 +223,7 @@ public class TimeTableView {
 		viewer.getControl().setFocus();
 	}
 
-	public void setDataViewHandler(IEmployeeDataViewHandler handler) {
+	public void setDataViewHandler(ViewDataChangeHandler handler) {
 		_handler = handler;
 	}
 

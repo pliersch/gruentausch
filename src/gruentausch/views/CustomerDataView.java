@@ -21,10 +21,10 @@ import gruentausch.model.Adress;
 import gruentausch.model.Employee;
 import gruentausch.util.RegExUtil;
 
-public class EmployeeDataView {
-	
+public class CustomerDataView {
+
 	public Text txtStreet;
-	public Text txtSurname;
+	public Text txtName;
 	public Text txtGivenname;
 	public Text txtPLZ;
 	public Text txtCity;
@@ -57,21 +57,10 @@ public class EmployeeDataView {
 			lblName.setText("Name:");
 		}
 		{
-			txtSurname = new Text(container, SWT.BORDER);
-			txtSurname.addKeyListener(keyListener);
-			txtSurname.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-			txtSurname.setEditable(false);
-		}
-		{
-			Label lblName = new Label(container, SWT.NONE);
-			lblName.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-			lblName.setText("Vorname:");
-		}
-		{
-			txtGivenname = new Text(container, SWT.BORDER);
-			txtGivenname.addKeyListener(keyListener);
-			txtGivenname.setEditable(false);
-			txtGivenname.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+			txtName = new Text(container, SWT.BORDER);
+			txtName.addKeyListener(keyListener);
+			txtName.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
+			txtName.setEditable(false);
 		}
 		{
 			Label lblStrae = new Label(container, SWT.NONE);
@@ -119,8 +108,7 @@ public class EmployeeDataView {
 	}
 
 	public void setEditable(boolean b) {
-		txtSurname.setEditable(true);
-		txtGivenname.setEditable(true);
+		txtName.setEditable(true);
 		txtStreet.setEditable(true);
 		txtPLZ.setEditable(true);
 		txtCity.setEditable(true);
@@ -163,10 +151,10 @@ public class EmployeeDataView {
 		}
 		if (employee.getSurname() != null) {
 			_isValidSurname = true;
-			txtSurname.setText(employee.getSurname());
+			txtName.setText(employee.getSurname());
 		} else {
 			_isValidSurname = false;
-			txtSurname.setText("");
+			txtName.setText("");
 		}
 		if (adress.getCity() != null) {
 			_isValidCity = true;
@@ -193,7 +181,7 @@ public class EmployeeDataView {
 
 	private void clearUI() {
 		txtGivenname.setText("");
-		txtSurname.setText("");
+		txtName.setText("");
 		txtCity.setText("");
 		txtPLZ.setText("");
 		txtStreet.setText("");
@@ -250,11 +238,11 @@ public class EmployeeDataView {
 					hideWarning(_decoratorGivenname);
 					_decoratorGivenname = null;
 				}
-			} else if (source.equals(txtSurname)) {
-				_isValidSurname = RegExUtil.validateName(txtSurname.getText());
+			} else if (source.equals(txtName)) {
+				_isValidSurname = RegExUtil.validateName(txtName.getText());
 				if (!_isValidSurname) {
 					if (_decoratorSurname == null) {
-						_decoratorSurname = new ControlDecoration(txtSurname, SWT.LEFT | SWT.TOP);
+						_decoratorSurname = new ControlDecoration(txtName, SWT.LEFT | SWT.TOP);
 						showWarning(_decoratorSurname);
 					}
 				} else {

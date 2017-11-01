@@ -10,9 +10,9 @@ import org.eclipse.swt.widgets.Composite;
 import gruentausch.model.Adress;
 import gruentausch.model.Employee;
 import gruentausch.views.EmployeeDataView;
-import gruentausch.views.EmployeeDataView.IEmployeeDataViewHandler;
+import gruentausch.views.ViewDataChangeHandler;
 
-public class CreateEmployeePage extends WizardPage implements IEmployeeDataViewHandler {
+public class CreateEmployeePage extends WizardPage implements ViewDataChangeHandler {
 
 	private EmployeeDataView view;
 
