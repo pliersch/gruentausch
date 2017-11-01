@@ -40,7 +40,7 @@ public class CreateEmployeePage extends WizardPage implements IEmployeeDataViewH
 
 	public Employee getEmployee() {
 		Employee employee = new Employee();
-		Adress adress = employee.getAdress();
+		Adress adress = new Adress();
 		employee.setGivenname(view.txtGivenname.getText());
 		employee.setSurname(view.txtSurname.getText());
 		adress.setCity(view.txtCity.getText());
