@@ -8,7 +8,7 @@ import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.jface.wizard.IWizardPage;
 import org.eclipse.jface.wizard.Wizard;
 
-import gruentausch.model.Person;
+import gruentausch.model.Employee;
 import gruentausch.model.Team;
 import gruentausch.util.XMLManager;
 
@@ -33,7 +33,7 @@ public class DeleteEmployeeWizard extends Wizard {
 	@Override
 	public boolean performFinish() {
 		Team team = application.getContext().get(Team.class);
-		Person employee = page1.getEmployee();
+		Employee employee = page1.getEmployee();
 		team.removeEmployee(employee);
 		File file = new XMLManager().writeFile(team, "data/Mitarbeiter.xml");
 		return true;

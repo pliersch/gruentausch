@@ -8,7 +8,6 @@ import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 
 import gruentausch.model.Employee;
-import gruentausch.model.Person;
 import gruentausch.views.EmployeeDataView;
 
 public class DeleteEmployeePage extends WizardPage {
@@ -38,7 +37,7 @@ public class DeleteEmployeePage extends WizardPage {
 		return true;
 	}
 
-	public Person getEmployee() {
+	public Employee getEmployee() {
 		return employee;
 	}
 
