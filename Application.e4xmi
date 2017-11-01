@@ -4,7 +4,7 @@
     <children xsi:type="basic:PartSashContainer" xmi:id="_6wlLksgZEeSyMNYR5xypkQ" elementId="gruentausch.partsashcontainer.sample" horizontal="true">
       <children xsi:type="basic:PartSashContainer" xmi:id="_I5dcoKFPEeee4_RCE8SNaQ" elementId="gruentausch.partsashcontainer.0">
         <children xsi:type="basic:PartStack" xmi:id="_6wlLk8gZEeSyMNYR5xypkQ" elementId="gruentausch.partstack.sample">
-          <children xsi:type="basic:Part" xmi:id="_nXXDoKw-EeeVp4vuU55giw" elementId="gruentausch.part.staff" contributionURI="bundleclass://gruentausch/gruentausch.parts.StaffTreePart" label="Staff">
+          <children xsi:type="basic:Part" xmi:id="_nXXDoKw-EeeVp4vuU55giw" elementId="gruentausch.part.staff" contributionURI="bundleclass://gruentausch/gruentausch.parts.StaffTreePart" label="Team">
             <menus xsi:type="menu:PopupMenu" xmi:id="_kWBzYK_dEeegLNstlHNCTQ" elementId="gruentausch.popupmenu.edit.staff" label="Staff">
               <children xsi:type="menu:HandledMenuItem" xmi:id="_nNqH0K_dEeegLNstlHNCTQ" elementId="gruentausch.handledmenuitem.edit" label="Edit" command="_ltqo0K_qEeegLNstlHNCTQ">
                 <visibleWhen xsi:type="ui:CoreExpression" xmi:id="_Jdf0oLAzEeeA2JCQ9GzHRw" coreExpressionId="gruentausch.definition.isemployee"/>
@@ -18,6 +18,7 @@
             </menus>
           </children>
           <children xsi:type="basic:Part" xmi:id="_OzmHEL8PEeekUfQ_2xFohQ" elementId="gruentausch.part.customers" contributionURI="bundleclass://gruentausch/gruentausch.parts.CustomerTreePart" label="Kunden" iconURI="platform:/plugin/gruentausch/icons/sample.png"/>
+          <children xsi:type="basic:Part" xmi:id="_tkE-cL8fEeekUfQ_2xFohQ" elementId="gruentausch.part.auftrge" label="Aufträge"/>
         </children>
         <children xsi:type="basic:PartStack" xmi:id="_Jo6joKFPEeee4_RCE8SNaQ" elementId="gruentausch.partstack.0">
           <children xsi:type="basic:Part" xmi:id="_tMgIAK_hEeegLNstlHNCTQ" elementId="gruentausch.part.employee" contributionURI="bundleclass://gruentausch/gruentausch.parts.EmployeePart" label="Employee" closeable="true"/>

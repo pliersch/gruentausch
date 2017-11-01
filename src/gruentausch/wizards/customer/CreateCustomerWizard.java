@@ -37,7 +37,7 @@ public class CreateCustomerWizard extends Wizard {
 		team.addEmployee(employee);
 		// TODO implement!
 		Persister.update(employee);
-		File file = new XMLManager().writeFile(team, "data/Mitarbeiter.xml");
+		File file = new XMLManager().writeFile(team, "data/Kunden.xml");
 		return true;
 	}
 

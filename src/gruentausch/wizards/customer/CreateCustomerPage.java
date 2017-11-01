@@ -41,7 +41,6 @@ public class CreateCustomerPage extends WizardPage implements ViewDataChangeHand
 	public Employee getEmployee() {
 		Employee employee = new Employee();
 		Adress adress = new Adress();
-		employee.setGivenname(view.txtGivenname.getText());
 		employee.setSurname(view.txtName.getText());
 		adress.setCity(view.txtCity.getText());
 		adress.setPlz(Integer.valueOf(view.txtPLZ.getText()));

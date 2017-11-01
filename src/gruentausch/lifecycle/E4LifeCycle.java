@@ -47,16 +47,11 @@ public class E4LifeCycle {
 
 		try {
 			FileAndFolderManager.createFolder("data");
+			FileAndFolderManager.createFile("data/Mitarbeiter.xml");
+			FileAndFolderManager.createFile("data/Kunden.xml");
 		} catch (IOException e1) {
 			LoggingPart.log(e1.getMessage());
 			e1.printStackTrace();
-		}
-		try {
-			FileAndFolderManager.createFile("data/Mitarbeiter.xml");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			LoggingPart.log(e.getMessage());
 		}
 	}
 
