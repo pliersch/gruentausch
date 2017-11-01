@@ -5,7 +5,7 @@ import org.eclipse.jface.viewers.EditingSupport;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TextCellEditor;
 
-import gruentausch.model.Employee;
+import gruentausch.model.Person;
 
 public class FirstNameEditingSupport extends EditingSupport {
 
@@ -30,12 +30,12 @@ public class FirstNameEditingSupport extends EditingSupport {
 
   @Override
   protected Object getValue(Object element) {
-      return ((Employee) element).getGivenname();
+      return ((Person) element).getGivenname();
   }
 
   @Override
   protected void setValue(Object element, Object userInputValue) {
-      ((Employee) element).setGivenname(String.valueOf(userInputValue));
+      ((Person) element).setGivenname(String.valueOf(userInputValue));
       viewer.update(element, null);
   }
 }

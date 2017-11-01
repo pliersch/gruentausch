@@ -47,6 +47,7 @@ import org.osgi.framework.FrameworkUtil;
 
 import gruentausch.model.Employee;
 import gruentausch.model.Month;
+import gruentausch.model.Person;
 import gruentausch.model.Team;
 import gruentausch.model.Year;
 import gruentausch.util.CalendarUtil;
@@ -112,7 +113,7 @@ public class StaffTreePart {
 				Object firstElement = selection.getFirstElement();
 
 				if (firstElement instanceof Employee) {
-					Employee employee = (Employee) firstElement;
+					Person employee = (Person) firstElement;
 					selectionService.setSelection(employee);					
 				} else if (firstElement instanceof Year) {
 					Year year = (Year) firstElement;
@@ -225,7 +226,7 @@ public class StaffTreePart {
 		@Override
 		public StyledString getStyledText(Object element) {
 			if (element instanceof Employee) {
-				Employee employee = (Employee) element;
+				Person employee = (Person) element;
 				StyledString styledString = new StyledString(employee.getGivenname());
 				return styledString;
 			}

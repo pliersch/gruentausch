@@ -27,8 +27,8 @@ public class Team extends BaseModel {
 		propertyChangeSupport.firePropertyChange("employee", null, employee);
 	}
 
-	public boolean contain(Employee employee) {
-		for (Employee e : employees) {
+	public boolean contain(Person employee) {
+		for (Person e : employees) {
 			if (e.getId() == employee.getId()) {
 				return true;
 			}
@@ -36,8 +36,8 @@ public class Team extends BaseModel {
 		return false;
 	}
 
-	public void updateEmployee(Employee employee) {
-		for (Employee e : employees) {
+	public void updateEmployee(Person employee) {
+		for (Person e : employees) {
 			if (e.getId() == employee.getId()) {
 				e = employee;
 				propertyChangeSupport.firePropertyChange("employees", null, this);
@@ -47,8 +47,8 @@ public class Team extends BaseModel {
 		}
 	}
 
-	public void removeEmployee(Employee employee) {
-		for (Employee e : employees) {
+	public void removeEmployee(Person employee) {
+		for (Person e : employees) {
 			if (e.getId() == employee.getId()) {
 				employees.remove(employee);
 				propertyChangeSupport.firePropertyChange("employees", null, this);

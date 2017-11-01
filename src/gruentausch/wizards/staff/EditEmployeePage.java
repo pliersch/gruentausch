@@ -8,6 +8,7 @@ import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 
 import gruentausch.model.Employee;
+import gruentausch.model.Person;
 import gruentausch.views.EmployeeDataView;
 import gruentausch.views.EmployeeDataView.IEmployeeDataViewHandler;
 
@@ -40,7 +41,7 @@ public class EditEmployeePage extends WizardPage implements IEmployeeDataViewHan
 		return view.fieldsValid();
 	}
 
-	public Employee getEmployee() {
+	public Person getEmployee() {
 		employee.setGivenname(view.txtGivenname.getText());
 		employee.setSurname(view.txtSurname.getText());
 		employee.setCity(view.txtCity.getText());

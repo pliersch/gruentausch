@@ -59,7 +59,7 @@
           <children xsi:type="menu:HandledMenuItem" xmi:id="_jesQcLlZEeeksNRVvWoyTQ" elementId="gruentausch.handledmenuitem.staff.delete" label="Löschen"/>
         </children>
         <children xsi:type="menu:Menu" xmi:id="_5GBwMLczEeeksNRVvWoyTQ" elementId="gruentausch.menu.kunden" label="Kunden">
-          <children xsi:type="menu:HandledMenuItem" xmi:id="_NJjI4Lc0EeeksNRVvWoyTQ" elementId="gruentausch.handledmenuitem.customer.create" label="Anlegen"/>
+          <children xsi:type="menu:HandledMenuItem" xmi:id="_NJjI4Lc0EeeksNRVvWoyTQ" elementId="gruentausch.handledmenuitem.customer.create" label="Anlegen" command="_qzhWoL8EEeev0sdYqMvVxQ"/>
           <children xsi:type="menu:HandledMenuItem" xmi:id="_QwrnoLc0EeeksNRVvWoyTQ" elementId="gruentausch.handledmenuitem.customer.edit" label="Bearbeiten"/>
         </children>
       </children>
@@ -110,6 +110,7 @@
   <commands xmi:id="_2LUWsLMOEee7s_JGSTuN6A" elementId="gruentausch.command.sendmailcommand" commandName="SendMailCommand"/>
   <commands xmi:id="_ZGSfQLMkEee6DOUgizHkHw" elementId="gruentausch.command.receivemailcommand" commandName="ReceiveMailCommand"/>
   <commands xmi:id="_m0DU0Ll8EeeksNRVvWoyTQ" elementId="gruentausch.command.addworkingtimecommand" commandName="AddWorkingTimeCommand"/>
+  <commands xmi:id="_qzhWoL8EEeev0sdYqMvVxQ" elementId="gruentausch.command.NewCustomerWizzardCommand" commandName="NewCustomerWizzardCommand"/>
   <addons xmi:id="_6wlLcsgZEeSyMNYR5xypkQ" elementId="org.eclipse.e4.core.commands.service" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
   <addons xmi:id="_6wlLc8gZEeSyMNYR5xypkQ" elementId="org.eclipse.e4.ui.contexts.service" contributionURI="bundleclass://org.eclipse.e4.ui.services/org.eclipse.e4.ui.services.ContextServiceAddon"/>
   <addons xmi:id="_6wlLdMgZEeSyMNYR5xypkQ" elementId="org.eclipse.e4.ui.bindings.service" contributionURI="bundleclass://org.eclipse.e4.ui.bindings/org.eclipse.e4.ui.bindings.BindingServiceAddon"/>

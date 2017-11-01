@@ -1,11 +1,11 @@
 package gruentausch.persistence;
 
-import gruentausch.model.Employee;
+import gruentausch.model.Person;
 
 public class Persister {
 
 	// TODO use this not XML Manager
-	public static boolean update(Employee employee) {
+	public static boolean update(Person employee) {
 		return false;
 	}
 }

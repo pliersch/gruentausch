@@ -1,18 +1,14 @@
 package gruentausch.model;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class Employee extends BaseModel {
+public class Employee extends Person {
 
-	private String id =  Calendar.getInstance().getTime().toString();
-	private String surname;
-	private String givenname;
 	private String city;
 	private String street;
 	private int plz;
@@ -21,30 +17,6 @@ public class Employee extends BaseModel {
 	public Employee() {
 	}
 	
-	public String getId() {
-		return id;
-	}
-	
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getSurname() {
-		return surname;
-	}
-
-	public void setSurname(String name) {
-		propertyChangeSupport.firePropertyChange("surname", this.surname, this.surname = name);
-	}
-
-	public String getGivenname() {
-		return givenname;
-	}
-
-	public void setGivenname(String name) {
-		propertyChangeSupport.firePropertyChange("givenname", this.givenname, this.givenname = name);
-	}
-
 	@XmlElement(name = "year")
 	public List<Year> getYears() {
 		return years;
