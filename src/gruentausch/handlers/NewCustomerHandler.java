@@ -6,7 +6,8 @@ import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.widgets.Shell;
 
-import gruentausch.wizards.customer.CreateCustomerPage;
+import gruentausch.wizards.customer.CreateCustomerPage1;
+import gruentausch.wizards.customer.CreateCustomerPage2;
 import gruentausch.wizards.customer.CreateCustomerWizard;
 
 public class NewCustomerHandler {
@@ -16,8 +17,11 @@ public class NewCustomerHandler {
 		// create new context
 		IEclipseContext wizardCtx = ctx.createChild();
 
-		CreateCustomerPage page = ContextInjectionFactory.make(CreateCustomerPage.class, wizardCtx);
-		wizardCtx.set(CreateCustomerPage.class, page);
+		CreateCustomerPage1 page1 = ContextInjectionFactory.make(CreateCustomerPage1.class, wizardCtx);
+		wizardCtx.set(CreateCustomerPage1.class, page1);
+		
+		CreateCustomerPage2 page2 = ContextInjectionFactory.make(CreateCustomerPage2.class, wizardCtx);
+		wizardCtx.set(CreateCustomerPage2.class, page2);
 
 		CreateCustomerWizard wizard = ContextInjectionFactory.make(CreateCustomerWizard.class, wizardCtx);
 

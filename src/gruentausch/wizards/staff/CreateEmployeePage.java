@@ -4,7 +4,6 @@ import javax.inject.Inject;
 
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 
 import gruentausch.model.Adress;
@@ -24,7 +23,6 @@ public class CreateEmployeePage extends WizardPage implements ViewDataChangeHand
 	}
 
 	public void createControl(Composite parent) {
-		parent.setLayout(new FillLayout());
 		Composite container = new Composite(parent, SWT.NONE);
 		view = new EmployeeDataView();
 		view.createControls(container);
