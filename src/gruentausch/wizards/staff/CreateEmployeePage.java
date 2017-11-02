@@ -4,14 +4,14 @@ import javax.inject.Inject;
 
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 
+import gruentausch.model.Adress;
 import gruentausch.model.Employee;
 import gruentausch.views.EmployeeDataView;
-import gruentausch.views.EmployeeDataView.IEmployeeDataViewHandler;
+import gruentausch.views.ViewDataChangeHandler;
 
-public class CreateEmployeePage extends WizardPage implements IEmployeeDataViewHandler {
+public class CreateEmployeePage extends WizardPage implements ViewDataChangeHandler {
 
 	private EmployeeDataView view;
 
@@ -23,7 +23,6 @@ public class CreateEmployeePage extends WizardPage implements IEmployeeDataViewH
 	}
 
 	public void createControl(Composite parent) {
-		parent.setLayout(new FillLayout());
 		Composite container = new Composite(parent, SWT.NONE);
 		view = new EmployeeDataView();
 		view.createControls(container);
@@ -39,11 +38,13 @@ public class CreateEmployeePage extends WizardPage implements IEmployeeDataViewH
 
 	public Employee getEmployee() {
 		Employee employee = new Employee();
+		Adress adress = new Adress();
 		employee.setGivenname(view.txtGivenname.getText());
 		employee.setSurname(view.txtSurname.getText());
-		employee.setCity(view.txtCity.getText());
-		employee.setPlz(Integer.valueOf(view.txtPLZ.getText()));
-		employee.setStreet(view.txtStreet.getText());
+		adress.setCity(view.txtCity.getText());
+		adress.setPlz(Integer.valueOf(view.txtPLZ.getText()));
+		adress.setStreet(view.txtStreet.getText());
+		employee.setAdress(adress);
 		return employee;
 	}
 

@@ -1,55 +1,26 @@
 package gruentausch.model;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class Employee extends BaseModel {
+public class Employee extends Person {
 
-	private String id =  Calendar.getInstance().getTime().toString();
-	private String surname;
-	private String givenname;
-	private String city;
-	private String street;
-	private int plz;
 	private List<Year> years = new ArrayList<Year>();
+	private Adress adress;
 
 	public Employee() {
 	}
 	
-	public String getId() {
-		return id;
-	}
-	
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getSurname() {
-		return surname;
-	}
-
-	public void setSurname(String name) {
-		propertyChangeSupport.firePropertyChange("surname", this.surname, this.surname = name);
-	}
-
-	public String getGivenname() {
-		return givenname;
-	}
-
-	public void setGivenname(String name) {
-		propertyChangeSupport.firePropertyChange("givenname", this.givenname, this.givenname = name);
-	}
-
 	@XmlElement(name = "year")
 	public List<Year> getYears() {
 		return years;
 	}
 
+	// TODO do we need propertyChangeSupport? only "employee" and "employees" are used
 	public void setYears(List<Year> years) {
 		propertyChangeSupport.firePropertyChange("years", this.years, this.years = years);
 	}
@@ -61,27 +32,11 @@ public class Employee extends BaseModel {
 
 	}
 
-	public String getCity() {
-		return city;
+	public Adress getAdress() {
+		return adress;
 	}
 
-	public void setCity(String city) {
-		propertyChangeSupport.firePropertyChange("city", this.city, this.city = city);
-	}
-
-	public String getStreet() {
-		return street;
-	}
-
-	public void setStreet(String street) {
-		propertyChangeSupport.firePropertyChange("street", this.street, this.street = street);
-	}
-
-	public int getPlz() {
-		return plz;
-	}
-
-	public void setPlz(int plz) {
-		propertyChangeSupport.firePropertyChange("plz", this.plz, this.plz = plz);
+	public void setAdress(Adress adress) {
+		this.adress = adress;
 	}
 }

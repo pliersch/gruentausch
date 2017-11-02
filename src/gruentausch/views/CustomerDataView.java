@@ -21,17 +21,15 @@ import gruentausch.model.Adress;
 import gruentausch.model.Employee;
 import gruentausch.util.RegExUtil;
 
-public class EmployeeDataView {
-	
+public class CustomerDataView {
+
 	public Text txtStreet;
-	public Text txtSurname;
-	public Text txtGivenname;
+	public Text txtName;
 	public Text txtPLZ;
 	public Text txtCity;
 
 	protected boolean _isValidStreet;
-	protected boolean _isValidSurname;
-	protected boolean _isValidGivenname;
+	protected boolean _isValidName;
 	protected boolean _isValidPLZ;
 	protected boolean _isValidCity;
 
@@ -51,83 +49,61 @@ public class EmployeeDataView {
 		container.setLayout(gl_container);
 		WizardKeyListener keyListener = new WizardKeyListener();
 
-		{
-			Label lblName = new Label(container, SWT.NONE);
-			lblName.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-			lblName.setText("Name:");
-		}
-		{
-			txtSurname = new Text(container, SWT.BORDER);
-			txtSurname.addKeyListener(keyListener);
-			txtSurname.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-			txtSurname.setEditable(false);
-		}
-		{
-			Label lblName = new Label(container, SWT.NONE);
-			lblName.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-			lblName.setText("Vorname:");
-		}
-		{
-			txtGivenname = new Text(container, SWT.BORDER);
-			txtGivenname.addKeyListener(keyListener);
-			txtGivenname.setEditable(false);
-			txtGivenname.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		}
-		{
-			Label lblStrae = new Label(container, SWT.NONE);
-			lblStrae.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-			lblStrae.setText("Stra\u00DFe:");
-		}
-		{
-			txtStreet = new Text(container, SWT.BORDER);
-			txtStreet.addKeyListener(keyListener);
-			txtStreet.setEditable(false);
-			txtStreet.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
-		}
-		{
-			Label lblPlzOrt = new Label(container, SWT.NONE);
-			lblPlzOrt.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-			lblPlzOrt.setText("PLZ:");
-		}
-		{
-			txtPLZ = new Text(container, SWT.BORDER);
-			txtPLZ.addKeyListener(keyListener);
-			txtPLZ.setEditable(false);
-			GridData gd_text_2 = new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1);
-			gd_text_2.widthHint = 206;
-			txtPLZ.setLayoutData(gd_text_2);
-		}
-		{
-			Label lblPlzOrt = new Label(container, SWT.NONE);
-			lblPlzOrt.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-			lblPlzOrt.setText("Ort:");
-		}
-		{
-			txtCity = new Text(container, SWT.BORDER);
-			txtCity.addKeyListener(keyListener);
-			txtCity.setEditable(false);
-			txtCity.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-			{
-				String[] cities = new String[] { "Aachen", "Berlin", "Bremen", "Bochum", "Goyatz", "Sauen" };
-				new AutoCompleteField(txtCity, new TextContentAdapter(), cities);
-			}
-		}
+		Label lblName = new Label(container, SWT.NONE);
+		lblName.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblName.setText("Name:");
+
+		txtName = new Text(container, SWT.BORDER);
+		txtName.addKeyListener(keyListener);
+		txtName.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
+		txtName.setEditable(false);
+
+		Label lblStrae = new Label(container, SWT.NONE);
+		lblStrae.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblStrae.setText("Stra\u00DFe:");
+
+		txtStreet = new Text(container, SWT.BORDER);
+		txtStreet.addKeyListener(keyListener);
+		txtStreet.setEditable(false);
+		txtStreet.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
+
+		Label lblPlz = new Label(container, SWT.NONE);
+		lblPlz.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblPlz.setText("PLZ:");
+
+		txtPLZ = new Text(container, SWT.BORDER);
+		txtPLZ.addKeyListener(keyListener);
+		txtPLZ.setEditable(false);
+		GridData gd_text_2 = new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1);
+		gd_text_2.widthHint = 206;
+		txtPLZ.setLayoutData(gd_text_2);
+
+		Label lblOrt = new Label(container, SWT.NONE);
+		lblOrt.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblOrt.setText("Ort:");
+
+		txtCity = new Text(container, SWT.BORDER);
+		txtCity.addKeyListener(keyListener);
+		txtCity.setEditable(false);
+		txtCity.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+
+		String[] cities = new String[] { "Aachen", "Berlin", "Bremen", "Bochum", "Goyatz", "Sauen" };
+		new AutoCompleteField(txtCity, new TextContentAdapter(), cities);
 	}
-	
+
 	public void setDataViewHandler(ViewDataChangeHandler handler) {
 		_handler = handler;
 	}
 
 	public void setEditable(boolean b) {
-		txtSurname.setEditable(true);
-		txtGivenname.setEditable(true);
+		txtName.setEditable(true);
 		txtStreet.setEditable(true);
 		txtPLZ.setEditable(true);
 		txtCity.setEditable(true);
 	}
 
 	public boolean fieldsValid() {
-		return _isValidCity && _isValidGivenname && _isValidPLZ && _isValidStreet && _isValidSurname;
+		return _isValidCity && _isValidPLZ && _isValidStreet && _isValidName;
 	}
 
 	private void showWarning(ControlDecoration decoration) {
@@ -145,7 +121,7 @@ public class EmployeeDataView {
 	}
 
 	public void updateEmployee(Employee employee) {
-		if(employee == null) {
+		if (employee == null) {
 			clearUI();
 		} else {
 			updateUI(employee);
@@ -154,19 +130,12 @@ public class EmployeeDataView {
 
 	private void updateUI(Employee employee) {
 		Adress adress = employee.getAdress();
-		if (employee.getGivenname() != null) {
-			txtGivenname.setText(employee.getGivenname());
-			_isValidGivenname = true;
-		} else {
-			txtGivenname.setText("");
-			_isValidGivenname = false;
-		}
 		if (employee.getSurname() != null) {
-			_isValidSurname = true;
-			txtSurname.setText(employee.getSurname());
+			_isValidName = true;
+			txtName.setText(employee.getSurname());
 		} else {
-			_isValidSurname = false;
-			txtSurname.setText("");
+			_isValidName = false;
+			txtName.setText("");
 		}
 		if (adress.getCity() != null) {
 			_isValidCity = true;
@@ -192,8 +161,7 @@ public class EmployeeDataView {
 	}
 
 	private void clearUI() {
-		txtGivenname.setText("");
-		txtSurname.setText("");
+		txtName.setText("");
 		txtCity.setText("");
 		txtPLZ.setText("");
 		txtStreet.setText("");
@@ -202,7 +170,8 @@ public class EmployeeDataView {
 	class WizardKeyListener implements KeyListener {
 
 		@Override
-		public void keyPressed(KeyEvent e) {}
+		public void keyPressed(KeyEvent e) {
+		}
 
 		public void keyReleased(KeyEvent e) {
 			Text source = (Text) e.getSource();
@@ -239,29 +208,19 @@ public class EmployeeDataView {
 					hideWarning(_decoratorStreet);
 					_decoratorStreet = null;
 				}
-			} else if (source.equals(txtGivenname)) {
-				_isValidGivenname = RegExUtil.validateName(txtGivenname.getText());
-				if (!_isValidGivenname) {
-					if (_decoratorGivenname == null) {
-						_decoratorGivenname = new ControlDecoration(txtGivenname, SWT.LEFT | SWT.TOP);
-						showWarning(_decoratorGivenname);
-					}
-				} else {
-					hideWarning(_decoratorGivenname);
-					_decoratorGivenname = null;
-				}
-			} else if (source.equals(txtSurname)) {
-				_isValidSurname = RegExUtil.validateName(txtSurname.getText());
-				if (!_isValidSurname) {
+			} else if (source.equals(txtName)) {
+				_isValidName = RegExUtil.validateName(txtName.getText());
+				if (!_isValidName) {
 					if (_decoratorSurname == null) {
-						_decoratorSurname = new ControlDecoration(txtSurname, SWT.LEFT | SWT.TOP);
+						_decoratorSurname = new ControlDecoration(txtName, SWT.LEFT | SWT.TOP);
 						showWarning(_decoratorSurname);
 					}
 				} else {
 					hideWarning(_decoratorSurname);
 					_decoratorSurname = null;
 				}
-			}_handler.handleDataChange();
+			}
+			_handler.handleDataChange();
 		}
 	}
 }

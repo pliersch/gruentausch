@@ -14,6 +14,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Monitor;
 import org.eclipse.swt.widgets.Shell;
 
+import gruentausch.model.Clients;
 import gruentausch.model.Team;
 import gruentausch.parts.LoggingPart;
 import gruentausch.util.FileAndFolderManager;
@@ -35,7 +36,7 @@ public class E4LifeCycle {
 		// LoginDialog dialog = new LoginDialog(shell);
 
 		// close the static splash screen
-		appContext.applicationRunning();
+//		appContext.applicationRunning();
 
 		// position the shell
 		setLocation(shell.getDisplay(), shell);
@@ -47,16 +48,11 @@ public class E4LifeCycle {
 
 		try {
 			FileAndFolderManager.createFolder("data");
+			FileAndFolderManager.createFile("data/Mitarbeiter.xml");
+			FileAndFolderManager.createFile("data/Kunden.xml");
 		} catch (IOException e1) {
 			LoggingPart.log(e1.getMessage());
 			e1.printStackTrace();
-		}
-		try {
-			FileAndFolderManager.createFile("data/Mitarbeiter.xml");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			LoggingPart.log(e.getMessage());
 		}
 	}
 
@@ -78,6 +74,8 @@ public class E4LifeCycle {
 	void processAdditions(IEclipseContext workbenchContext) {
 		Team team = (Team) new XMLManager().readFile("data/Mitarbeiter.xml", Team.class);
 		workbenchContext.set(Team.class, team);
+		Clients clients = (Clients) new XMLManager().readFile("data/Kunden.xml", Clients.class);
+		workbenchContext.set(Clients.class, clients);
 		System.out.println("@ProcessAdditions");
 	}
 

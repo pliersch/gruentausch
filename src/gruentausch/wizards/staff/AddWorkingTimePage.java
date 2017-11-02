@@ -12,13 +12,13 @@ import org.eclipse.swt.widgets.Composite;
 import gruentausch.model.Day;
 import gruentausch.model.Employee;
 import gruentausch.util.WorkingTimeUtil;
-import gruentausch.views.EmployeeDataView.IEmployeeDataViewHandler;
-import gruentausch.views.timetable.TimeTableView;
+import gruentausch.views.ViewDataChangeHandler;
+import gruentausch.views.timetable.TimeTable;
 
-public class AddWorkingTimePage extends WizardPage implements IEmployeeDataViewHandler {
+public class AddWorkingTimePage extends WizardPage implements ViewDataChangeHandler {
 
 	private Employee employee;
-	private TimeTableView view;
+	private TimeTable view;
 
 	@Inject
 	public AddWorkingTimePage() {
@@ -36,7 +36,7 @@ public class AddWorkingTimePage extends WizardPage implements IEmployeeDataViewH
 		if (unresolvedWorkingDays.size() == 0) {
 			setTitle("Keine offenen Arbeitstage bei/für " + employee.getGivenname() + " " + employee.getSurname());
 		} else {
-			view = new TimeTableView();
+			view = new TimeTable();
 			view.createControls(container);
 			// view.setEditable(true);
 			view.setDataViewHandler(this);

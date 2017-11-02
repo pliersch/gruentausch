@@ -45,14 +45,14 @@ import org.eclipse.swt.widgets.TreeItem;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
 
+import gruentausch.model.Clients;
+import gruentausch.model.Customer;
 import gruentausch.model.Employee;
 import gruentausch.model.Month;
 import gruentausch.model.Person;
-import gruentausch.model.Team;
 import gruentausch.model.Year;
-import gruentausch.util.CalendarUtil;
 
-public class StaffTreePart {
+public class CustomerTreePart {
 
 	@Inject
 	EPartService partService;
@@ -77,8 +77,8 @@ public class StaffTreePart {
 		mainColumn.setLabelProvider(new DelegatingStyledCellLabelProvider(new ViewLabelProvider()));
 
 		IEclipseContext context = application.getContext();
-		Team team = (Team) context.get(Team.class);
-		team.addPropertyChangeListener("employees", new PropertyChangeListener() {
+		Clients clients = (Clients) context.get(Clients.class);
+		clients.addPropertyChangeListener("employees", new PropertyChangeListener() {
 			
 			@Override
 			public void propertyChange(PropertyChangeEvent evt) {
@@ -87,8 +87,8 @@ public class StaffTreePart {
 			}
 		});
 		// TODO why condition?
-		if (team != null) {
-			viewer.setInput(team);
+		if (clients != null) {
+			viewer.setInput(clients);
 		}	
 		
 		viewer.addDoubleClickListener(new IDoubleClickListener() {
@@ -179,19 +179,20 @@ public class StaffTreePart {
 
 		@Override
 		public Object[] getElements(Object inputElement) {
-			Team t = (Team) inputElement;
-			return t.getEmployees().toArray();
+			Clients clients = (Clients) inputElement;
+			return clients.getCustomers().toArray();
 		}
 
 		@Override
 		public Object[] getChildren(Object parentElement) {
-			if (parentElement instanceof Employee) {
-				Employee employee = (Employee) parentElement;
-				return employee.getYears().toArray();
-			} else if (parentElement instanceof Year) {
-				Year year = (Year) parentElement;
-				return year.getMonths().toArray();
-			}
+//			if (parentElement instanceof Customer) {
+//				Customer customer = (Customer) parentElement;
+//				return customer.getYears().toArray();
+//			} 
+//			else if (parentElement instanceof Year) {
+//				Year year = (Year) parentElement;
+//				return year.getMonths().toArray();
+//			}
 			return null;
 		}
 
@@ -206,15 +207,15 @@ public class StaffTreePart {
 
 		@Override
 		public boolean hasChildren(Object element) {
-			if (element instanceof Team) {
-				return true;
-			} else if (element instanceof Employee) {
-				return true;
-			} else if (element instanceof Year) {
-				return true;
-			} else if (element instanceof Month) {
-				return false;
-			}
+//			if (element instanceof Team) {
+//				return true;
+//			} else if (element instanceof Employee) {
+//				return true;
+//			} else if (element instanceof Year) {
+//				return true;
+//			} else if (element instanceof Month) {
+//				return false;
+//			}
 			return false;
 		}
 	}
@@ -225,23 +226,21 @@ public class StaffTreePart {
 
 		@Override
 		public StyledString getStyledText(Object element) {
-			if (element instanceof Employee) {
-				Person employee = (Person) element;
-				StyledString styledString = new StyledString(employee.getGivenname());
-				return styledString;
+			if (element instanceof Customer) {
+				Customer customer = (Customer) element;
+				return new StyledString(customer.getName());
 			}
-			if (element instanceof Year) {
-				Year year = (Year) element;
-				StyledString styledString = new StyledString(Integer.toString(year.getYear()));
-				return styledString;
-			}
-			if (element instanceof Month) {
-				Month month = (Month) element;
-				StyledString styledString = new StyledString(CalendarUtil.getMonth(month.getMonth()));
-				return styledString;
-			}
-			// TODO
-			return new StyledString("foo");
+//			if (element instanceof Year) {
+//				Year year = (Year) element;
+//				StyledString styledString = new StyledString(Integer.toString(year.getYear()));
+//				return styledString;
+//			}
+//			if (element instanceof Month) {
+//				Month month = (Month) element;
+//				StyledString styledString = new StyledString(CalendarUtil.getMonth(month.getMonth()));
+//				return styledString;
+//			}
+			return new StyledString("keine Daten vorhanden");
 		}
 
 		@Override
