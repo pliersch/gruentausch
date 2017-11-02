@@ -17,7 +17,11 @@
               </children>
             </menus>
           </children>
-          <children xsi:type="basic:Part" xmi:id="_OzmHEL8PEeekUfQ_2xFohQ" elementId="gruentausch.part.customers" contributionURI="bundleclass://gruentausch/gruentausch.parts.CustomerTreePart" label="Kunden" iconURI="platform:/plugin/gruentausch/icons/sample.png"/>
+          <children xsi:type="basic:Part" xmi:id="_OzmHEL8PEeekUfQ_2xFohQ" elementId="gruentausch.part.customers" contributionURI="bundleclass://gruentausch/gruentausch.parts.CustomerTreePart" label="Kunden" iconURI="platform:/plugin/gruentausch/icons/sample.png">
+            <menus xsi:type="menu:PopupMenu" xmi:id="_8E9nAL-5EeeBMbhqwz32-w" elementId="gruentausch.popupmenu.clients.edit">
+              <children xsi:type="menu:HandledMenuItem" xmi:id="_HuyJ0L-6EeeBMbhqwz32-w" elementId="gruentausch.handledmenuitem.clients.createClient" label="Auftrag anlegen" command="_6wlLhsgZEeSyMNYR5xypkQ"/>
+            </menus>
+          </children>
           <children xsi:type="basic:Part" xmi:id="_tkE-cL8fEeekUfQ_2xFohQ" elementId="gruentausch.part.auftrge" label="Aufträge"/>
         </children>
         <children xsi:type="basic:PartStack" xmi:id="_Jo6joKFPEeee4_RCE8SNaQ" elementId="gruentausch.partstack.0">

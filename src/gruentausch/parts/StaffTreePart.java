@@ -86,7 +86,6 @@ public class StaffTreePart {
 				viewer.setInput(newValue);
 			}
 		});
-		// TODO why condition?
 		if (team != null) {
 			viewer.setInput(team);
 		}	

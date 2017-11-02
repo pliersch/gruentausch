@@ -69,7 +69,7 @@ public class CustomerTreePart {
 		viewer.setContentProvider(new ViewContentProvider());
 		menuService.registerContextMenu(
         viewer.getControl(),
-        "gruentausch.popupmenu.edit.staff");
+        "gruentausch.popupmenu.clients.edit");
 
 		TreeViewerColumn mainColumn = new TreeViewerColumn(viewer, SWT.NONE);
 		mainColumn.getColumn().setText("Name");
@@ -86,7 +86,6 @@ public class CustomerTreePart {
 				viewer.setInput(newValue);
 			}
 		});
-		// TODO why condition?
 		if (clients != null) {
 			viewer.setInput(clients);
 		}	
