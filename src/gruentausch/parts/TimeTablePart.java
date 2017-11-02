@@ -18,9 +18,9 @@ import org.eclipse.swt.widgets.TableItem;
 import gruentausch.model.Day;
 import gruentausch.model.Month;
 import gruentausch.util.CalendarUtil;
-import gruentausch.views.timetable.TimeTableView;
+import gruentausch.views.timetable.TimeTable;
 
-public class TimeTablePart extends TimeTableView {
+public class TimeTablePart extends TimeTable {
 
 	@Inject
 	void updateMonth(@Optional @Named(IServiceConstants.ACTIVE_SELECTION) Month month) {
