@@ -4,6 +4,7 @@ import java.util.Calendar;
 
 public class Person extends BaseModel {
 
+	// TODO extract superclass IdModel (extends BaseMoldel) ? see Customer class
 	private String id = Calendar.getInstance().getTime().toString();
 	private String surname;
 	private String givenname;

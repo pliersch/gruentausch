@@ -4,12 +4,14 @@ import javax.inject.Inject;
 
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 
 import gruentausch.views.ViewDataChangeHandler;
+import gruentausch.views.timetable.CustomerContactsTable;
 
 public class CreateCustomerPage2 extends WizardPage implements ViewDataChangeHandler {
+
+	private CustomerContactsTable view;
 
 	@Inject
 	public CreateCustomerPage2() {
@@ -20,15 +22,11 @@ public class CreateCustomerPage2 extends WizardPage implements ViewDataChangeHan
 
 	public void createControl(Composite parent) {
 		Composite container = new Composite(parent, SWT.NONE);
-//		view = new CustomerDataView();
-//		view.createControls(container);
+		view = new CustomerContactsTable();
+		view.createControls(container);
 //		view.setEditable(true);
-//		view.setDataViewHandler(this);
+		view.setDataViewHandler(this);
 		setControl(container);
-		
-		Button btnNewButton = new Button(container, SWT.NONE);
-		btnNewButton.setBounds(0, 0, 105, 35);
-		btnNewButton.setText("Test");
 	}
 
 	@Override

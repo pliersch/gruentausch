@@ -7,6 +7,8 @@ import javax.xml.bind.JAXB;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.util.ValidationEventCollector;
 
 public class XMLManager {
 	public boolean writeConsole(Object jaxbElement, Class<?>... classesToBeBound) {
@@ -36,11 +38,37 @@ public class XMLManager {
 	}
 
 	public Object readFile(String path, Class<?> classesToBeBound) {
-		File file;
+		JAXBContext context = null;
+		Unmarshaller unmarshaller = null;
 		try {
+			context = JAXBContext.newInstance( classesToBeBound );
+		} catch (JAXBException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		try {
+			unmarshaller = context.createUnmarshaller();
+		} catch (JAXBException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		File file;
+		final ValidationEventCollector vec = new ValidationEventCollector();
+		try {
+			try {
+				unmarshaller.setEventHandler(vec);
+			} catch (JAXBException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			file = FileAndFolderManager.createFile(path);
-			Object result = JAXB.unmarshal(file, classesToBeBound);
-			return result;
+			try {
+				Object unmarshal = unmarshaller.unmarshal(file);
+				return unmarshal;
+			} catch (JAXBException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

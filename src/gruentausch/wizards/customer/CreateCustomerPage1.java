@@ -8,7 +8,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 
 import gruentausch.model.Adress;
-import gruentausch.model.Employee;
+import gruentausch.model.Customer;
 import gruentausch.views.CustomerDataView;
 import gruentausch.views.ViewDataChangeHandler;
 
@@ -63,19 +63,18 @@ public class CreateCustomerPage1 extends WizardPage implements ViewDataChangeHan
 
 	@Override
 	public boolean isPageComplete() {
-		return true;
-//		return view.fieldsValid();
+		return view.fieldsValid();
 	}
 
-	public Employee getEmployee() {
-		Employee employee = new Employee();
+	public Customer getCustomer() {
+		Customer customer = new Customer();
+		customer.setName(view.txtName.getText());
 		Adress adress = new Adress();
-		employee.setSurname(view.txtName.getText());
 		adress.setCity(view.txtCity.getText());
 		adress.setPlz(Integer.valueOf(view.txtPLZ.getText()));
 		adress.setStreet(view.txtStreet.getText());
-		employee.setAdress(adress);
-		return employee;
+		customer.setAdress(adress);
+		return customer;
 	}
 
 	@Override

@@ -1,13 +1,9 @@
 package gruentausch.views.timetable;
 
-import java.net.URL;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 
-import org.eclipse.core.runtime.FileLocator;
-import org.eclipse.core.runtime.Path;
-import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.CellNavigationStrategy;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
@@ -24,26 +20,19 @@ import org.eclipse.jface.viewers.TableViewerEditor;
 import org.eclipse.jface.viewers.TableViewerFocusCellManager;
 import org.eclipse.jface.viewers.ViewerCell;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
-import org.osgi.framework.Bundle;
-import org.osgi.framework.FrameworkUtil;
 
 import gruentausch.model.Day;
 import gruentausch.util.CalendarUtil;
 import gruentausch.views.ViewDataChangeHandler;
 import gruentausch.views.timetable.editingsupport.BeginEditingSupport;
 import gruentausch.views.timetable.editingsupport.EndEditingSupport;
-import gruentausch.views.timetable.editingsupport.VacationEditingSupport;
 
 public class CustomerContactsTable {
-
-	private static final Image CHECKED = createImageDescriptor("icons/checked.gif");
-	private static final Image UNCHECKED = createImageDescriptor("icons/unchecked.gif");
 
 	protected TableViewer viewer;
 	private ViewDataChangeHandler _handler;
@@ -176,26 +165,6 @@ public class CustomerContactsTable {
 			}
 		});
 		col.setEditingSupport(new EndEditingSupport(viewer));
-
-		// now the status married
-		col = createTableViewerColumn(titles[3], bounds[3], 3);
-		col.setLabelProvider(new ColumnLabelProvider() {
-			@Override
-			public String getText(Object element) {
-				return null;
-			}
-
-			@Override
-			public Image getImage(Object element) {
-				Day day = (Day) element;
-				if (day.isVacation()) {
-					return CHECKED;
-				} else {
-					return UNCHECKED;
-				}
-			}
-		});
-		col.setEditingSupport(new VacationEditingSupport(viewer));
 	}
 
 	public void updateTable(List<Day> days) {
@@ -210,13 +179,6 @@ public class CustomerContactsTable {
 		column.setResizable(true);
 		column.setMoveable(true);
 		return viewerColumn;
-	}
-
-	private static Image createImageDescriptor(String imagePath) {
-		Bundle bundle = FrameworkUtil.getBundle(CustomerContactsTable.class);
-		URL url = FileLocator.find(bundle, new Path(imagePath), null);
-		ImageDescriptor imageDescriptor = ImageDescriptor.createFromURL(url);
-		return imageDescriptor.createImage();
 	}
 
 	public void setFocus() {
