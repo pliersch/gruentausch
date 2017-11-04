@@ -6,19 +6,7 @@
         <children xsi:type="basic:PartSashContainer" xmi:id="_6wlLksgZEeSyMNYR5xypkQ" elementId="gruentausch.partsashcontainer.sample" horizontal="true">
           <children xsi:type="basic:PartSashContainer" xmi:id="_I5dcoKFPEeee4_RCE8SNaQ" elementId="gruentausch.partsashcontainer.0">
             <children xsi:type="basic:PartStack" xmi:id="_6wlLk8gZEeSyMNYR5xypkQ" elementId="gruentausch.partstack.sample">
-              <children xsi:type="basic:Part" xmi:id="_nXXDoKw-EeeVp4vuU55giw" elementId="gruentausch.part.staff" contributionURI="bundleclass://gruentausch/gruentausch.parts.StaffTreePart" label="Team">
-                <menus xsi:type="menu:PopupMenu" xmi:id="_kWBzYK_dEeegLNstlHNCTQ" elementId="gruentausch.popupmenu.edit.staff" label="Staff">
-                  <children xsi:type="menu:HandledMenuItem" xmi:id="_nNqH0K_dEeegLNstlHNCTQ" elementId="gruentausch.handledmenuitem.edit" label="Edit" command="_ltqo0K_qEeegLNstlHNCTQ">
-                    <visibleWhen xsi:type="ui:CoreExpression" xmi:id="_Jdf0oLAzEeeA2JCQ9GzHRw" coreExpressionId="gruentausch.definition.isemployee"/>
-                  </children>
-                  <children xsi:type="menu:HandledMenuItem" xmi:id="_EaOygLlcEeeksNRVvWoyTQ" elementId="gruentausch.handledmenuitem.deleteEmployee" label="Löschen" command="_lI5dkLlbEeeksNRVvWoyTQ">
-                    <visibleWhen xsi:type="ui:CoreExpression" xmi:id="_7xxW0Ll6EeeksNRVvWoyTQ" coreExpressionId="gruentausch.definition.isemployee"/>
-                  </children>
-                  <children xsi:type="menu:HandledMenuItem" xmi:id="_D9yn8Ll5EeeksNRVvWoyTQ" elementId="gruentausch.handledmenuitem.arbeitszeit" label="Arbeitszeit " command="_m0DU0Ll8EeeksNRVvWoyTQ">
-                    <visibleWhen xsi:type="ui:CoreExpression" xmi:id="_iFfGML5ZEeev0sdYqMvVxQ" coreExpressionId="gruentausch.definition.isemployee"/>
-                  </children>
-                </menus>
-              </children>
+              <children xsi:type="advanced:Placeholder" xmi:id="_VrS6MMB5EeeBMbhqwz32-w" elementId="gruentausch.placeholder.0" ref="_nXXDoKw-EeeVp4vuU55giw"/>
               <children xsi:type="basic:Part" xmi:id="_OzmHEL8PEeekUfQ_2xFohQ" elementId="gruentausch.part.customers" contributionURI="bundleclass://gruentausch/gruentausch.parts.CustomerTreePart" label="Kunden" iconURI="platform:/plugin/gruentausch/icons/sample.png">
                 <menus xsi:type="menu:PopupMenu" xmi:id="_8E9nAL-5EeeBMbhqwz32-w" elementId="gruentausch.popupmenu.clients.edit">
                   <children xsi:type="menu:HandledMenuItem" xmi:id="_HuyJ0L-6EeeBMbhqwz32-w" elementId="gruentausch.handledmenuitem.clients.createClient" label="Auftrag anlegen" command="_6wlLhsgZEeSyMNYR5xypkQ"/>
@@ -27,7 +15,6 @@
               <children xsi:type="basic:Part" xmi:id="_tkE-cL8fEeekUfQ_2xFohQ" elementId="gruentausch.part.auftrge" label="Aufträge"/>
             </children>
             <children xsi:type="basic:PartStack" xmi:id="_Jo6joKFPEeee4_RCE8SNaQ" elementId="gruentausch.partstack.0">
-              <children xsi:type="basic:Part" xmi:id="_tMgIAK_hEeegLNstlHNCTQ" elementId="gruentausch.part.employee" contributionURI="bundleclass://gruentausch/gruentausch.parts.EmployeePart" label="Employee" closeable="true"/>
               <children xsi:type="basic:Part" xmi:id="_KHdg0KFPEeee4_RCE8SNaQ" elementId="gruentausch.part.maps" contributionURI="bundleclass://gruentausch/gruentausch.parts.GMapsPart" label="Maps" closeable="true"/>
               <children xsi:type="basic:Part" xmi:id="_ZremEKIEEeee4_RCE8SNaQ" elementId="gruentausch.part.filebrowser" contributionURI="bundleclass://gruentausch/gruentausch.parts.FileBrowserPart" label="File Browser" closeable="true"/>
             </children>
@@ -59,10 +46,10 @@
         <children xsi:type="basic:PartSashContainer" xmi:id="_zyjOcL_FEeeBMbhqwz32-w" elementId="gruentausch.partsashcontainer.3" horizontal="true">
           <children xsi:type="basic:PartSashContainer" xmi:id="_jgsnML_eEeeBMbhqwz32-w" elementId="gruentausch.partsashcontainer.4">
             <children xsi:type="basic:PartStack" xmi:id="_k7ntEL_eEeeBMbhqwz32-w" elementId="gruentausch.partstack.4">
-              <children xsi:type="basic:Part" xmi:id="_nUCV8L_eEeeBMbhqwz32-w" elementId="gruentausch.part.mitarbeiter" contributionURI="bundleclass://gruentausch/gruentausch.parts.EmployeePart" label="Mitarbeiter"/>
+              <children xsi:type="advanced:Placeholder" xmi:id="_gTMtAMB5EeeBMbhqwz32-w" elementId="gruentausch.placeholder.1" ref="_nXXDoKw-EeeVp4vuU55giw"/>
             </children>
             <children xsi:type="basic:PartStack" xmi:id="_oLJkIL_eEeeBMbhqwz32-w" elementId="gruentausch.partstack.5">
-              <children xsi:type="basic:Part" xmi:id="_ozPe4L_eEeeBMbhqwz32-w" elementId="gruentausch.part.team" contributionURI="bundleclass://gruentausch/gruentausch.parts.StaffTreePart" label="Team"/>
+              <children xsi:type="basic:Part" xmi:id="_tMgIAK_hEeegLNstlHNCTQ" elementId="gruentausch.part.employee" contributionURI="bundleclass://gruentausch/gruentausch.parts.EmployeePart" label="Employee" closeable="true"/>
             </children>
           </children>
           <children xsi:type="basic:PartSashContainer" xmi:id="_BeYRAL_hEeeBMbhqwz32-w" elementId="gruentausch.partsashcontainer.5"/>
@@ -106,6 +93,19 @@
       </children>
     </mainMenu>
     <windows xsi:type="basic:TrimmedWindow" xmi:id="_BTFJgKKhEeee4_RCE8SNaQ" elementId="gruentausch.trimmedwindow.einstellungen" visible="false" label="Einstellungen"/>
+    <sharedElements xsi:type="basic:Part" xmi:id="_nXXDoKw-EeeVp4vuU55giw" elementId="gruentausch.part.staff" contributionURI="bundleclass://gruentausch/gruentausch.parts.StaffTreePart" label="Team">
+      <menus xsi:type="menu:PopupMenu" xmi:id="_kWBzYK_dEeegLNstlHNCTQ" elementId="gruentausch.popupmenu.edit.staff" label="Staff">
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_nNqH0K_dEeegLNstlHNCTQ" elementId="gruentausch.handledmenuitem.edit" label="Edit" command="_ltqo0K_qEeegLNstlHNCTQ">
+          <visibleWhen xsi:type="ui:CoreExpression" xmi:id="_Jdf0oLAzEeeA2JCQ9GzHRw" coreExpressionId="gruentausch.definition.isemployee"/>
+        </children>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_EaOygLlcEeeksNRVvWoyTQ" elementId="gruentausch.handledmenuitem.deleteEmployee" label="Löschen" command="_lI5dkLlbEeeksNRVvWoyTQ">
+          <visibleWhen xsi:type="ui:CoreExpression" xmi:id="_7xxW0Ll6EeeksNRVvWoyTQ" coreExpressionId="gruentausch.definition.isemployee"/>
+        </children>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_D9yn8Ll5EeeksNRVvWoyTQ" elementId="gruentausch.handledmenuitem.arbeitszeit" label="Arbeitszeit " command="_m0DU0Ll8EeeksNRVvWoyTQ">
+          <visibleWhen xsi:type="ui:CoreExpression" xmi:id="_iFfGML5ZEeev0sdYqMvVxQ" coreExpressionId="gruentausch.definition.isemployee"/>
+        </children>
+      </menus>
+    </sharedElements>
     <trimBars xmi:id="_6wlLlcgZEeSyMNYR5xypkQ" elementId="gruentausch.trimbar.top">
       <children xsi:type="menu:ToolBar" xmi:id="_6wlLlsgZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.main.toolbar">
         <children xsi:type="menu:HandledToolItem" xmi:id="_6wlLl8gZEeSyMNYR5xypkQ" elementId="gruentausch.handleditem.trimbar.top.open" iconURI="platform:/plugin/gruentausch/icons/sample.png" command="_6wlLgMgZEeSyMNYR5xypkQ"/>
