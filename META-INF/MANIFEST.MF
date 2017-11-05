@@ -19,11 +19,14 @@ Require-Bundle: org.eclipse.e4.ui.css.swt.theme;bundle-version="0.11.0",
  org.eclipse.core.resources;bundle-version="3.12.0",
  org.eclipse.e4.core.commands
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Bundle-ClassPath: lib/jcommon-1.0.23.jar,
+Bundle-ClassPath: lib/commons-logging-1.2.jar,
+ lib/fontbox-2.0.8.jar,
+ lib/jcommon-1.0.23.jar,
  lib/jfreechart-1.0.19.jar,
  lib/jfreechart-1.0.19-experimental.jar,
  lib/jfreechart-1.0.19-swt.jar,
  lib/javax.mail.jar,
+ lib/pdfbox-2.0.8.jar,
  .
 Export-Package: gruentausch.dialog,
  gruentausch.handlers,
