@@ -15,7 +15,7 @@ public class LoggingPart {
 
 	public static void log(String message) {
 
-		messages += message;
+		messages += (message + "\n");
 	}
 	
 	private Text text;
@@ -24,7 +24,7 @@ public class LoggingPart {
 	public void createControls(Composite parent) {
 		parent.setLayout(new FillLayout(SWT.HORIZONTAL));
 		
-		text = new Text(parent, SWT.BORDER);
+		text = new Text(parent, SWT.MULTI | SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
 		text.setBackground(SWTResourceManager.getColor(SWT.COLOR_INFO_BACKGROUND));
 		text.setText(messages);
 	}

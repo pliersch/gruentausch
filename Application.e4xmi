@@ -111,6 +111,7 @@
         <children xsi:type="menu:HandledToolItem" xmi:id="_6wlLl8gZEeSyMNYR5xypkQ" elementId="gruentausch.handleditem.trimbar.top.open" iconURI="platform:/plugin/gruentausch/icons/sample.png" command="_6wlLgMgZEeSyMNYR5xypkQ"/>
         <children xsi:type="menu:HandledToolItem" xmi:id="_6wlLmMgZEeSyMNYR5xypkQ" elementId="gruentausch.handleditem.trimbar.top.save" iconURI="platform:/plugin/gruentausch/icons/save_edit.png" command="_6wlLg8gZEeSyMNYR5xypkQ"/>
         <children xsi:type="menu:HandledToolItem" xmi:id="_tYFQ8MIsEeeBMbhqwz32-w" elementId="gruentausch.handledtoolitem.createpdf" label="Create PDF" iconURI="platform:/plugin/gruentausch/icons/avatar.png" tooltip="Create PDF" command="_hk1sYMIsEeeBMbhqwz32-w"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_AvgBgMJBEeeBMbhqwz32-w" elementId="gruentausch.handledtoolitem.job" label="Job" tooltip="Started den &quot;Tägliche Prüfung&quot; Job" command="_LEccEMJBEeeBMbhqwz32-w"/>
       </children>
       <children xsi:type="menu:ToolControl" xmi:id="_0bWeYL_GEeeBMbhqwz32-w" elementId="gruentausch.toolcontrol.0" contributionURI="bundleclass://gruentausch/toolbars.SpacerControl">
         <tags>stretch</tags>
@@ -134,6 +135,7 @@
   <handlers xmi:id="_CiFZcL_QEeeBMbhqwz32-w" elementId="gruentausch.handler.perspective.employee" contributionURI="bundleclass://gruentausch/gruentausch.handlers.SwitchPerspectiveHandler" command="_mvQacL_JEeeBMbhqwz32-w"/>
   <handlers xmi:id="_t1wPIL_hEeeBMbhqwz32-w" elementId="gruentausch.handler.perspective.customer" contributionURI="bundleclass://gruentausch/gruentausch.handlers.SwitchPerspectiveHandler" command="_uhgOwL_JEeeBMbhqwz32-w"/>
   <handlers xmi:id="_l2knUMIsEeeBMbhqwz32-w" elementId="gruentausch.handler.1" contributionURI="bundleclass://gruentausch/gruentausch.handlers.CreatePdfHandler" command="_hk1sYMIsEeeBMbhqwz32-w"/>
+  <handlers xmi:id="_NxKhAMJBEeeBMbhqwz32-w" elementId="gruentausch.handler.2" contributionURI="bundleclass://gruentausch/gruentausch.handlers.DailyJobHandler" command="_LEccEMJBEeeBMbhqwz32-w"/>
   <bindingTables xmi:id="_6wlLfsgZEeSyMNYR5xypkQ" elementId="gruentausch.bindingtable" bindingContext="_6wlLecgZEeSyMNYR5xypkQ">
     <bindings xmi:id="_6wlLf8gZEeSyMNYR5xypkQ" elementId="gruentausch.keybinding.m1q" keySequence="M1+Q" command="_6wlLfMgZEeSyMNYR5xypkQ"/>
     <bindings xmi:id="_6wlLgsgZEeSyMNYR5xypkQ" elementId="gruentausch.keybinding.m1o" keySequence="M1+O" command="_6wlLgMgZEeSyMNYR5xypkQ"/>
@@ -166,6 +168,7 @@
     <parameters xmi:id="_ohUhEL_hEeeBMbhqwz32-w" elementId="gruentausch.commandparameter.perspective" name="perspective" optional="false"/>
   </commands>
   <commands xmi:id="_hk1sYMIsEeeBMbhqwz32-w" elementId="gruentausch.command.createpdfcommand" commandName="CreatePdfCommand"/>
+  <commands xmi:id="_LEccEMJBEeeBMbhqwz32-w" elementId="gruentausch.command.startdailyjobcommand" commandName="StartDailyJobCommand"/>
   <addons xmi:id="_6wlLcsgZEeSyMNYR5xypkQ" elementId="org.eclipse.e4.core.commands.service" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
   <addons xmi:id="_6wlLc8gZEeSyMNYR5xypkQ" elementId="org.eclipse.e4.ui.contexts.service" contributionURI="bundleclass://org.eclipse.e4.ui.services/org.eclipse.e4.ui.services.ContextServiceAddon"/>
   <addons xmi:id="_6wlLdMgZEeSyMNYR5xypkQ" elementId="org.eclipse.e4.ui.bindings.service" contributionURI="bundleclass://org.eclipse.e4.ui.bindings/org.eclipse.e4.ui.bindings.BindingServiceAddon"/>
