@@ -23,6 +23,10 @@ import gruentausch.util.RegExUtil;
 
 public class EmployeeDataView {
 	
+	public boolean isRendered;
+
+	private Employee employee;
+
 	public Text txtStreet;
 	public Text txtSurname;
 	public Text txtGivenname;
@@ -112,6 +116,7 @@ public class EmployeeDataView {
 				new AutoCompleteField(txtCity, new TextContentAdapter(), cities);
 			}
 		}
+		isRendered = true;
 	}
 	
 	public void setDataViewHandler(ViewDataChangeHandler handler) {
@@ -145,10 +150,13 @@ public class EmployeeDataView {
 	}
 
 	public void updateEmployee(Employee employee) {
-		if(employee == null) {
-			clearUI();
-		} else {
-			updateUI(employee);
+		this.employee = employee;
+		if (isRendered) {
+			if (employee == null) {
+				clearUI();
+			} else {
+				updateUI(employee);
+			}
 		}
 	}
 

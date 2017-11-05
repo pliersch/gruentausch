@@ -34,9 +34,9 @@ public class EmployeePart extends EmployeeDataView {
 	}
 		
 	@Inject
-	void setEmployee(@Optional @Named(IServiceConstants.ACTIVE_SELECTION) Employee employee) {
+	protected void setEmployee(@Optional @Named(IServiceConstants.ACTIVE_SELECTION) Employee employee) {
 		if (employee != null) {
 			updateEmployee(employee);
 		}
-	}	
+	}
 }
