@@ -7,13 +7,15 @@ import org.eclipse.core.runtime.jobs.Job;
 
 public class RepeatingJob extends Job {
 	private boolean running = true;
+	private int repeat;
 
-	public RepeatingJob() {
+	public RepeatingJob(int repeat) {
 		super("Repeating Job");
+		this.repeat = repeat;
 	}
 
 	protected IStatus run(IProgressMonitor monitor) {
-		schedule(10000);
+		schedule(repeat);
 		return Status.OK_STATUS;
 	}
 

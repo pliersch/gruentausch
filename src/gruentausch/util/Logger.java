@@ -1,16 +1,51 @@
 package gruentausch.util;
 
+import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Logger {
 
-	private static List<String> messages = new ArrayList<>();
-	protected static final PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(messages);
+	private static Logger instance;
+	protected final PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
+	private ArrayList<String> messages = new ArrayList<>();
+
+	private Logger() {
+	}
+
+	private static Logger getInstance() {
+		if (Logger.instance == null) {
+			Logger.instance = new Logger();
+		}
+		return Logger.instance;
+	}
+
+
+	public static void addPropertyChangeListener(String propertyName, PropertyChangeListener listener) {
+		getInstance().propertyChangeSupport.addPropertyChangeListener(propertyName, listener);
+	}
+
+	public static void removePropertyChangeListener(PropertyChangeListener listener) {
+		getInstance().propertyChangeSupport.removePropertyChangeListener(listener);
+	}
 
 	public static void log(String msg) {
-		messages.add(msg);
+		getInstance().messages.add(msg);
+		getInstance().propertyChangeSupport.firePropertyChange("logging", null, msg);
+	}
+
+	@SuppressWarnings("unchecked")
+	public static ArrayList<String> getFullLog() {
+		return (ArrayList<String>) getInstance().messages.clone();
+	}
+
+	public static String getFullLogAsString() {
+		ArrayList<String> messages2 = getInstance().messages;
+		String result = "";
+		for (String string : messages2) {
+			result += string + "\n";
+		}
+		return result;
 	}
 
 }

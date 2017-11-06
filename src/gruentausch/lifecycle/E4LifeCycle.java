@@ -16,8 +16,8 @@ import org.eclipse.swt.widgets.Shell;
 
 import gruentausch.model.Clients;
 import gruentausch.model.Team;
-import gruentausch.parts.LoggingPart;
 import gruentausch.util.FileAndFolderManager;
+import gruentausch.util.Logger;
 import gruentausch.util.XMLManager;
 
 /**
@@ -51,7 +51,7 @@ public class E4LifeCycle {
 			FileAndFolderManager.createFile("data/Mitarbeiter.xml");
 			FileAndFolderManager.createFile("data/Kunden.xml");
 		} catch (IOException e1) {
-			LoggingPart.log(e1.getMessage());
+			Logger.log(e1.getMessage());
 			e1.printStackTrace();
 		}
 	}

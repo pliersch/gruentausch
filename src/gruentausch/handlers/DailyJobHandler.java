@@ -6,14 +6,15 @@ import org.eclipse.core.runtime.jobs.IJobChangeListener;
 import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.swt.widgets.Shell;
 
-import gruentausch.parts.LoggingPart;
+import gruentausch.util.Logger;
 import gruentausch.util.RepeatingJob;
 
 public class DailyJobHandler {
 
 	@Execute
 	public void execute(Shell shell) {
-		RepeatingJob job = new RepeatingJob();
+		// TODO current execute job every 60 seconds
+		RepeatingJob job = new RepeatingJob(60000);
 		job.addJobChangeListener(new IJobChangeListener() {
 
 			@Override
@@ -59,7 +60,7 @@ public class DailyJobHandler {
 					msg += "unknown " + code;
 					break;
 				}
-				LoggingPart.log(msg);
+				Logger.log(msg);
 			}
 
 			@Override

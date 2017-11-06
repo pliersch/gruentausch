@@ -6,8 +6,6 @@ import java.net.URL;
 
 import org.eclipse.core.runtime.Platform;
 
-import gruentausch.parts.LoggingPart;
-
 public class FileAndFolderManager {
 
 	public static File createFolder(String path) throws IOException {
@@ -29,7 +27,7 @@ public class FileAndFolderManager {
 	public static File createFile(String path) throws IOException {
 		URL url = Platform.getInstanceLocation().getURL();
 		File file = null;
-		LoggingPart.log(url.getFile() + path);
+		Logger.log(url.getFile() + path);
 		file = new File(url.getFile() + path);
 		if (!file.exists()) {
 			path = file.getAbsolutePath();

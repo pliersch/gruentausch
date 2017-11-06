@@ -34,6 +34,7 @@ import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
 
 import gruentausch.util.FileAndFolderManager;
+import gruentausch.util.Logger;
 
 public class FileBrowserPart {
 
@@ -76,7 +77,7 @@ public class FileBrowserPart {
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-			LoggingPart.log(e1.getMessage());
+			Logger.log(e1.getMessage());
 		}
 		
 
