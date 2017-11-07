@@ -44,4 +44,10 @@ public class Month extends Unmarshaller.Listener {
 	public Year getParent() {
 		return parent;
 	}
+
+	@Override
+	public String toString() {
+		return month + "." + year;
+	}
+
 }

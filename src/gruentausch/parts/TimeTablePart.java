@@ -4,27 +4,78 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.eclipse.e4.core.di.annotations.Optional;
+import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableItem;
+import org.eclipse.swt.widgets.Text;
 
 import gruentausch.model.Day;
+import gruentausch.model.Employee;
 import gruentausch.model.Month;
 import gruentausch.util.CalendarUtil;
 import gruentausch.views.timetable.TimeTable;
 
 public class TimeTablePart extends TimeTable {
+	private Text text;
+	private Employee employee;
+
+	@PostConstruct
+	public void createControls(Composite parent) {
+
+		SashForm sashForm = new SashForm(parent, SWT.VERTICAL);
+		sashForm.setLocation(0, 0);
+		super.createControls(sashForm);
+
+		Group grpFoo = new Group(sashForm, SWT.SHADOW_IN);
+		grpFoo.setText("foo");
+		GridLayout gridLayout = new GridLayout(2, false);
+		gridLayout.marginBottom = 10;
+		gridLayout.marginTop = 10;
+		gridLayout.marginLeft = 10;
+		gridLayout.marginRight = 10;
+		grpFoo.setLayout(gridLayout);
+
+		text = new Text(grpFoo, SWT.BORDER);
+
+		Button btnCheckButton = new Button(grpFoo, SWT.CHECK);
+		btnCheckButton.setText("Check Button");
+
+		sashForm.setWeights(new int[] { 2, 1 });
+
+	}
+
+	@Inject
+	private MPart part;
+
+
+
+	@Inject
+	protected void setEmployee(@Optional @Named(IServiceConstants.ACTIVE_SELECTION) Employee employee) {
+		if (employee != null) {
+			this.employee = employee;
+		}
+	}
 
 	@Inject
 	void updateMonth(@Optional @Named(IServiceConstants.ACTIVE_SELECTION) Month month) {
 		if (month != null) {
+
+			part.setLabel(employee.getGivenname() + " " + CalendarUtil.getMonth(month.getMonth()) + " " + month.getYear());
+
 			if (viewer != null /* && !viewer.isDisposed() */) {
 				List<Day> days = addEmptyDays(month);
 				viewer.setInput(days);
@@ -73,5 +124,4 @@ public class TimeTablePart extends TimeTable {
 		}
 		return days;
 	}
-
 }

@@ -123,9 +123,6 @@ public class StaffTreePart {
 				}
 			}
 		});
-		
-		
-//		
 
 		Tree tree = (Tree) viewer.getControl();
 		tree.addSelectionListener(new SelectionAdapter() {
