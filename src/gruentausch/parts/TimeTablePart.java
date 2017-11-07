@@ -11,9 +11,13 @@ import javax.inject.Named;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.services.IServiceConstants;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
@@ -30,38 +34,69 @@ import gruentausch.util.CalendarUtil;
 import gruentausch.views.timetable.TimeTable;
 
 public class TimeTablePart extends TimeTable {
+
 	private Text text;
 	private Employee employee;
+
+	@Inject
+	private MPart part;
+	private Group groupDetail;
 
 	@PostConstruct
 	public void createControls(Composite parent) {
 
-		SashForm sashForm = new SashForm(parent, SWT.VERTICAL);
+		Composite container = new Composite(parent, SWT.FILL);
+		FillLayout fillLayout = new FillLayout();
+		fillLayout.marginHeight = 20;
+		fillLayout.marginWidth = 20;
+		container.setLayout(fillLayout);
+		SashForm sashForm = new SashForm(container, SWT.VERTICAL);
 		sashForm.setLocation(0, 0);
+
 		super.createControls(sashForm);
 
-		Group grpFoo = new Group(sashForm, SWT.SHADOW_IN);
-		grpFoo.setText("foo");
+		groupDetail = new Group(sashForm, SWT.SHADOW_IN);
+		groupDetail.setText("Detail");
 		GridLayout gridLayout = new GridLayout(2, false);
 		gridLayout.marginBottom = 10;
 		gridLayout.marginTop = 10;
-		gridLayout.marginLeft = 10;
+		gridLayout.marginLeft = 80;
 		gridLayout.marginRight = 10;
-		grpFoo.setLayout(gridLayout);
+		groupDetail.setLayout(gridLayout);
 
-		text = new Text(grpFoo, SWT.BORDER);
+		text = new Text(groupDetail, SWT.BORDER);
 
-		Button btnCheckButton = new Button(grpFoo, SWT.CHECK);
+		Button btnCheckButton = new Button(groupDetail, SWT.CHECK);
 		btnCheckButton.setText("Check Button");
 
 		sashForm.setWeights(new int[] { 2, 1 });
 
+		viewer.addSelectionChangedListener(new ISelectionChangedListener() {
+
+			@Override
+			public void selectionChanged(SelectionChangedEvent event) {
+				IStructuredSelection selection = (IStructuredSelection) event.getSelection();
+				Object firstElement = selection.getFirstElement();
+				if (firstElement instanceof Day) {
+					updateDetail((Day) firstElement);
+				} else {
+					updateDetail(null);
+				}
+			}
+
+			private void updateDetail(Day day) {
+				Display.getDefault().syncExec(new Runnable() {
+					public void run() {
+						if (day != null) {
+							text.setText(day.getBegin());
+						} else {
+							text.setText("");
+						}
+					}
+				});
+			}
+		});
 	}
-
-	@Inject
-	private MPart part;
-
-
 
 	@Inject
 	protected void setEmployee(@Optional @Named(IServiceConstants.ACTIVE_SELECTION) Employee employee) {
@@ -92,8 +127,7 @@ public class TimeTablePart extends TimeTable {
 					if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY
 							|| calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
 						tableItem.setBackground(weekendColor);
-					}
-					else if (!day.isVacation() && day.getBegin() == null) {
+					} else if (!day.isVacation() && day.getBegin() == null) {
 						tableItem.setBackground(missingColor);
 					}
 				}
