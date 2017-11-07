@@ -13,12 +13,12 @@ import gruentausch.model.Day;
 import gruentausch.model.Employee;
 import gruentausch.util.WorkingTimeUtil;
 import gruentausch.views.ViewDataChangeHandler;
-import gruentausch.views.timetable.TimeTable;
+import gruentausch.views.timetable.MonthTable;
 
 public class AddWorkingTimePage extends WizardPage implements ViewDataChangeHandler {
 
 	private Employee employee;
-	private TimeTable view;
+	private MonthTable view;
 
 	@Inject
 	public AddWorkingTimePage() {
@@ -36,7 +36,7 @@ public class AddWorkingTimePage extends WizardPage implements ViewDataChangeHand
 		if (unresolvedWorkingDays.size() == 0) {
 			setTitle("Keine offenen Arbeitstage bei/für " + employee.getGivenname() + " " + employee.getSurname());
 		} else {
-			view = new TimeTable();
+			view = new MonthTable();
 			view.createControls(container);
 			// view.setEditable(true);
 			view.setDataViewHandler(this);

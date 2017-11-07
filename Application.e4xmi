@@ -21,7 +21,7 @@
           </children>
           <children xsi:type="basic:PartSashContainer" xmi:id="_ZiDXEKz2EeeLicm9Za6Psw" elementId="gruentausch.partsashcontainer.2">
             <children xsi:type="basic:PartStack" xmi:id="_fSVRoK0MEeeLicm9Za6Psw" elementId="gruentausch.partstack.3">
-              <children xsi:type="basic:Part" xmi:id="_U2FIgKnHEeeF25w3b0OHmw" elementId="gruentausch.part.table.month" contributionURI="bundleclass://gruentausch/gruentausch.parts.TimeTablePart" label="Tabelle"/>
+              <children xsi:type="basic:Part" xmi:id="_U2FIgKnHEeeF25w3b0OHmw" elementId="gruentausch.part.table.month" contributionURI="bundleclass://gruentausch/gruentausch.parts.MonthTablePart" label="Tabelle"/>
               <children xsi:type="basic:Part" xmi:id="_gep60K0MEeeLicm9Za6Psw" elementId="gruentausch.part.tabtest" contributionURI="bundleclass://gruentausch/gruentausch.parts.TabPart" label="tab test" closeable="true"/>
               <children xsi:type="basic:Part" xmi:id="_3xCjALF8EeeO8sBMUMk4hA" elementId="gruentausch.part.textausgabe" contributionURI="bundleclass://gruentausch/gruentausch.parts.RichTextPart" label="Text Ausgabe"/>
             </children>

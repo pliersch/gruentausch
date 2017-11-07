@@ -31,9 +31,9 @@ import gruentausch.model.Day;
 import gruentausch.model.Employee;
 import gruentausch.model.Month;
 import gruentausch.util.CalendarUtil;
-import gruentausch.views.timetable.TimeTable;
+import gruentausch.views.timetable.MonthTable;
 
-public class TimeTablePart extends TimeTable {
+public class MonthTablePart extends MonthTable {
 
 	private Text text;
 	private Employee employee;

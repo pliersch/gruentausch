@@ -40,7 +40,7 @@ import gruentausch.views.timetable.editingsupport.BeginEditingSupport;
 import gruentausch.views.timetable.editingsupport.EndEditingSupport;
 import gruentausch.views.timetable.editingsupport.VacationEditingSupport;
 
-public class TimeTable {
+public class MonthTable {
 
 	private static final Image CHECKED = createImageDescriptor("icons/checked.gif");
 	private static final Image UNCHECKED = createImageDescriptor("icons/unchecked.gif");
@@ -213,7 +213,7 @@ public class TimeTable {
 	}
 
 	private static Image createImageDescriptor(String imagePath) {
-		Bundle bundle = FrameworkUtil.getBundle(TimeTable.class);
+		Bundle bundle = FrameworkUtil.getBundle(MonthTable.class);
 		URL url = FileLocator.find(bundle, new Path(imagePath), null);
 		ImageDescriptor imageDescriptor = ImageDescriptor.createFromURL(url);
 		return imageDescriptor.createImage();
