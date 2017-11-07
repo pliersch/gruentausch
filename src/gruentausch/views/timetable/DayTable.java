@@ -1,13 +1,9 @@
 package gruentausch.views.timetable;
 
-import java.net.URL;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 
-import org.eclipse.core.runtime.FileLocator;
-import org.eclipse.core.runtime.Path;
-import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.CellNavigationStrategy;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
@@ -24,33 +20,25 @@ import org.eclipse.jface.viewers.TableViewerEditor;
 import org.eclipse.jface.viewers.TableViewerFocusCellManager;
 import org.eclipse.jface.viewers.ViewerCell;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
-import org.osgi.framework.Bundle;
-import org.osgi.framework.FrameworkUtil;
 
 import gruentausch.model.Day;
 import gruentausch.util.CalendarUtil;
 import gruentausch.views.ViewDataChangeHandler;
 import gruentausch.views.timetable.editingsupport.BeginEditingSupport;
 import gruentausch.views.timetable.editingsupport.EndEditingSupport;
-import gruentausch.views.timetable.editingsupport.VacationEditingSupport;
 
-public class MonthTable {
-
-	private static final Image CHECKED = createImageDescriptor("icons/checked.gif");
-	private static final Image UNCHECKED = createImageDescriptor("icons/unchecked.gif");
+public class DayTable {
 
 	protected TableViewer viewer;
 	private ViewDataChangeHandler _handler;
 
 	@PostConstruct
 	public void createControls(Composite parent) {
-		parent.setLayout(new FillLayout(SWT.NONE));
+		// parent.setLayout(new FillLayout(SWT.NONE));
 		createViewer(parent);
 	}
 
@@ -134,16 +122,10 @@ public class MonthTable {
 		};
 	}
 
-	// public TableViewer getViewer() {
-	// return viewer;
-	// }
-
-	// create the columns for the table
 	private void createColumns(final Composite parent, final TableViewer viewer) {
-		String[] titles = { "Tag", "Beginn", "Ende", "Urlaub" };
-		int[] bounds = { 130, 100, 100, 100 };
+		String[] titles = { "Beginn", "Ende", "Kunde", "Tätigkeit", "Kilometer" };
+		int[] bounds = { 100, 100, 100, 100, 100 };
 
-		// first column is for the first name
 		TableViewerColumn col = createTableViewerColumn(titles[0], bounds[0], 0);
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
@@ -153,7 +135,6 @@ public class MonthTable {
 			}
 		});
 
-		// second column is for the last name
 		col = createTableViewerColumn(titles[1], bounds[1], 1);
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
@@ -162,11 +143,8 @@ public class MonthTable {
 				return day.getBegin();
 			}
 		});
-		// BeginEditingSupport beginEditingSupport = new BeginEditingSupport(viewer);
-		// beginEditingSupport.
 		col.setEditingSupport(new BeginEditingSupport(viewer));
 
-		// now the gender
 		col = createTableViewerColumn(titles[2], bounds[2], 2);
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
@@ -177,25 +155,23 @@ public class MonthTable {
 		});
 		col.setEditingSupport(new EndEditingSupport(viewer));
 
-		// now the status married
 		col = createTableViewerColumn(titles[3], bounds[3], 3);
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				return null;
-			}
-
-			@Override
-			public Image getImage(Object element) {
 				Day day = (Day) element;
-				if (day.isVacation()) {
-					return CHECKED;
-				} else {
-					return UNCHECKED;
-				}
+				return day.getEnd();
 			}
 		});
-		col.setEditingSupport(new VacationEditingSupport(viewer));
+
+		col = createTableViewerColumn(titles[4], bounds[4], 4);
+		col.setLabelProvider(new ColumnLabelProvider() {
+			@Override
+			public String getText(Object element) {
+				Day day = (Day) element;
+				return day.getEnd();
+			}
+		});
 	}
 
 	public void updateTable(List<Day> days) {
@@ -212,19 +188,16 @@ public class MonthTable {
 		return viewerColumn;
 	}
 
-	private static Image createImageDescriptor(String imagePath) {
-		Bundle bundle = FrameworkUtil.getBundle(MonthTable.class);
-		URL url = FileLocator.find(bundle, new Path(imagePath), null);
-		ImageDescriptor imageDescriptor = ImageDescriptor.createFromURL(url);
-		return imageDescriptor.createImage();
-	}
-
 	public void setFocus() {
 		viewer.getControl().setFocus();
 	}
 
 	public void setDataViewHandler(ViewDataChangeHandler handler) {
 		_handler = handler;
+	}
+
+	public TableViewer getViewer() {
+		return viewer;
 	}
 
 }

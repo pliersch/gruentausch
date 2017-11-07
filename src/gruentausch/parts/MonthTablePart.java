@@ -1,8 +1,10 @@
 package gruentausch.parts;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -18,24 +20,25 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Group;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableItem;
-import org.eclipse.swt.widgets.Text;
 
 import gruentausch.model.Day;
 import gruentausch.model.Employee;
 import gruentausch.model.Month;
 import gruentausch.util.CalendarUtil;
+import gruentausch.views.timetable.DayTable;
 import gruentausch.views.timetable.MonthTable;
 
 public class MonthTablePart extends MonthTable {
 
-	private Text text;
 	private Employee employee;
 
 	@Inject
@@ -44,6 +47,8 @@ public class MonthTablePart extends MonthTable {
 
 	@PostConstruct
 	public void createControls(Composite parent) {
+
+		Label label;
 
 		Composite container = new Composite(parent, SWT.FILL);
 		FillLayout fillLayout = new FillLayout();
@@ -55,21 +60,36 @@ public class MonthTablePart extends MonthTable {
 
 		super.createControls(sashForm);
 
-		groupDetail = new Group(sashForm, SWT.SHADOW_IN);
+		new Label(sashForm, SWT.NONE);
+		groupDetail = new Group(sashForm, SWT.NONE);
 		groupDetail.setText("Detail");
-		GridLayout gridLayout = new GridLayout(2, false);
-		gridLayout.marginBottom = 10;
-		gridLayout.marginTop = 10;
-		gridLayout.marginLeft = 80;
-		gridLayout.marginRight = 10;
+		GridLayout gridLayout = new GridLayout(4, true);
+		// gridLayout.horizontalSpacing = 4;
+		// gridLayout.marginBottom = 10;
 		groupDetail.setLayout(gridLayout);
 
-		text = new Text(groupDetail, SWT.BORDER);
+		DayTable dayTable = new DayTable();
+		dayTable.createControls(groupDetail);
+		dayTable.getViewer().getTable().setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 4, 5));
 
-		Button btnCheckButton = new Button(groupDetail, SWT.CHECK);
-		btnCheckButton.setText("Check Button");
+		Button btnVacation = new Button(groupDetail, SWT.CHECK);
+		btnVacation.setLayoutData(new GridData(SWT.FILL, SWT.TOP, false, false, 1, 2));
+		btnVacation.setEnabled(false);
+		btnVacation.setText("Urlaub");
 
-		sashForm.setWeights(new int[] { 2, 1 });
+		label = new Label(groupDetail, SWT.NONE);
+		label.setLayoutData(new GridData(SWT.FILL, SWT.BOTTOM, false, false, 1, 1));
+
+		Button btnBearbeiten = new Button(groupDetail, SWT.NONE);
+		btnBearbeiten.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 2, 2));
+		btnBearbeiten.setText("Bearbeiten");
+		new Label(groupDetail, SWT.NONE);
+		new Label(groupDetail, SWT.NONE);
+		new Label(groupDetail, SWT.NONE);
+		new Label(groupDetail, SWT.NONE);
+		new Label(groupDetail, SWT.NONE);
+
+		sashForm.setWeights(new int[] { 20, 1, 10 });
 
 		viewer.addSelectionChangedListener(new ISelectionChangedListener() {
 
@@ -87,10 +107,11 @@ public class MonthTablePart extends MonthTable {
 			private void updateDetail(Day day) {
 				Display.getDefault().syncExec(new Runnable() {
 					public void run() {
+						groupDetail.setText("Detail");
 						if (day != null) {
-							text.setText(day.getBegin());
-						} else {
-							text.setText("");
+							Calendar calendar = day.getCalendar();
+							String format = new SimpleDateFormat("EEEE', 'dd. MMMM yyyy", Locale.GERMAN).format(calendar.getTime());
+							groupDetail.setText(format);
 						}
 					}
 				});
