@@ -18,6 +18,8 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
@@ -80,9 +82,21 @@ public class MonthTablePart extends MonthTable {
 		label = new Label(groupDetail, SWT.NONE);
 		label.setLayoutData(new GridData(SWT.FILL, SWT.BOTTOM, false, false, 1, 1));
 
-		Button btnBearbeiten = new Button(groupDetail, SWT.NONE);
-		btnBearbeiten.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 2, 2));
-		btnBearbeiten.setText("Bearbeiten");
+		Button btnEdit = new Button(groupDetail, SWT.NONE);
+		btnEdit.setEnabled(false);
+		btnEdit.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 2, 2));
+		btnEdit.setText("Bearbeiten");
+		btnEdit.addSelectionListener(new SelectionListener() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				btnVacation.setEnabled(true);
+			}
+
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+			}
+		});
 		new Label(groupDetail, SWT.NONE);
 		new Label(groupDetail, SWT.NONE);
 		new Label(groupDetail, SWT.NONE);
@@ -112,6 +126,9 @@ public class MonthTablePart extends MonthTable {
 							Calendar calendar = day.getCalendar();
 							String format = new SimpleDateFormat("EEEE', 'dd. MMMM yyyy", Locale.GERMAN).format(calendar.getTime());
 							groupDetail.setText(format);
+							btnEdit.setEnabled(true);
+						} else {
+							btnEdit.setEnabled(false);
 						}
 					}
 				});

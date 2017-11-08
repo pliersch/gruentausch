@@ -77,7 +77,7 @@ public class StaffTreePart {
 		mainColumn.setLabelProvider(new DelegatingStyledCellLabelProvider(new ViewLabelProvider()));
 
 		IEclipseContext context = application.getContext();
-		Team team = (Team) context.get(Team.class);
+		Team team = context.get(Team.class);
 		team.addPropertyChangeListener("employees", new PropertyChangeListener() {
 			
 			@Override
@@ -88,7 +88,7 @@ public class StaffTreePart {
 		});
 		if (team != null) {
 			viewer.setInput(team);
-		}	
+		}
 		
 		viewer.addDoubleClickListener(new IDoubleClickListener() {
 			
@@ -113,13 +113,16 @@ public class StaffTreePart {
 
 				if (firstElement instanceof Employee) {
 					Person employee = (Person) firstElement;
-					selectionService.setSelection(employee);					
+					selectionService.setSelection(employee);
 				} else if (firstElement instanceof Year) {
 					Year year = (Year) firstElement;
-					selectionService.setSelection(year);					
+					selectionService.setSelection(year.getParent());
+					selectionService.setSelection(year);
 				} else if (firstElement instanceof Month) {
 					Month month = (Month) firstElement;
-					selectionService.setSelection(month);					
+					selectionService.setSelection(month.getParent().getParent());
+					selectionService.setSelection(month.getParent());
+					selectionService.setSelection(month);
 				}
 			}
 		});
