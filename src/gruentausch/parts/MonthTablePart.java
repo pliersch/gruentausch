@@ -22,8 +22,9 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.layout.FillLayout;
-import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.layout.FormAttachment;
+import org.eclipse.swt.layout.FormData;
+import org.eclipse.swt.layout.FormLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
@@ -47,10 +48,11 @@ public class MonthTablePart extends MonthTable {
 	private MPart part;
 	private Group groupDetail;
 
+	@Override
 	@PostConstruct
 	public void createControls(Composite parent) {
 
-		Label label;
+		Table table;
 
 		Composite container = new Composite(parent, SWT.FILL);
 		FillLayout fillLayout = new FillLayout();
@@ -65,26 +67,41 @@ public class MonthTablePart extends MonthTable {
 		new Label(sashForm, SWT.NONE);
 		groupDetail = new Group(sashForm, SWT.NONE);
 		groupDetail.setText("Detail");
-		GridLayout gridLayout = new GridLayout(4, true);
-		// gridLayout.horizontalSpacing = 4;
-		// gridLayout.marginBottom = 10;
-		groupDetail.setLayout(gridLayout);
+
+		FormLayout formLayout = new FormLayout();
+		formLayout.marginWidth = 5;
+		formLayout.marginHeight = 5;
+
+		groupDetail.setLayout(formLayout);
+
+		FormData data2 = new FormData();
+		data2.left = new FormAttachment(0);
+		data2.right = new FormAttachment(100);
+		data2.top = new FormAttachment(0);
+		data2.bottom = new FormAttachment(90);
 
 		DayTable dayTable = new DayTable();
 		dayTable.createControls(groupDetail);
-		dayTable.getViewer().getTable().setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 4, 5));
+		table = dayTable.getViewer().getTable();
+		table.setLayoutData(data2);
+
+		FormData data1 = new FormData();
+		data1.left = new FormAttachment(0, 5);
+		// data1.top = new FormAttachment(table, 5);
+		data1.bottom = new FormAttachment(100, -10);
 
 		Button btnVacation = new Button(groupDetail, SWT.CHECK);
-		btnVacation.setLayoutData(new GridData(SWT.FILL, SWT.TOP, false, false, 1, 2));
+		btnVacation.setLayoutData(data1);
 		btnVacation.setEnabled(false);
 		btnVacation.setText("Urlaub");
 
-		label = new Label(groupDetail, SWT.NONE);
-		label.setLayoutData(new GridData(SWT.FILL, SWT.BOTTOM, false, false, 1, 1));
+		FormData data3 = new FormData();
+		data3.top = new FormAttachment(table, 5);
+		data3.right = new FormAttachment(100, -10);
 
 		Button btnEdit = new Button(groupDetail, SWT.NONE);
 		btnEdit.setEnabled(false);
-		btnEdit.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 2, 2));
+		btnEdit.setLayoutData(data3);
 		btnEdit.setText("Bearbeiten");
 		btnEdit.addSelectionListener(new SelectionListener() {
 
@@ -97,11 +114,7 @@ public class MonthTablePart extends MonthTable {
 			public void widgetDefaultSelected(SelectionEvent e) {
 			}
 		});
-		new Label(groupDetail, SWT.NONE);
-		new Label(groupDetail, SWT.NONE);
-		new Label(groupDetail, SWT.NONE);
-		new Label(groupDetail, SWT.NONE);
-		new Label(groupDetail, SWT.NONE);
+
 
 		sashForm.setWeights(new int[] { 20, 1, 10 });
 
@@ -120,6 +133,7 @@ public class MonthTablePart extends MonthTable {
 
 			private void updateDetail(Day day) {
 				Display.getDefault().syncExec(new Runnable() {
+					@Override
 					public void run() {
 						groupDetail.setText("Detail");
 						if (day != null) {
