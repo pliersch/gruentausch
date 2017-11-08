@@ -69,7 +69,7 @@ public class Day extends Unmarshaller.Listener {
 	}
 
 	public Calendar getCalendar() {
-		if(calendar == null) {
+		if (calendar == null) {
 			calendar = toCalendar();
 		}
 		return calendar;
