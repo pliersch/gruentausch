@@ -38,7 +38,6 @@ public class DayTable {
 
 	@PostConstruct
 	public void createControls(Composite parent) {
-		// parent.setLayout(new FillLayout(SWT.NONE));
 		createViewer(parent);
 	}
 
@@ -51,13 +50,6 @@ public class DayTable {
 		table.setLinesVisible(true);
 
 		viewer.setContentProvider(new ArrayContentProvider());
-		// GridData gridData = new GridData();
-		// gridData.verticalAlignment = GridData.FILL;
-		// gridData.horizontalSpan = 2;
-		// gridData.grabExcessHorizontalSpace = true;
-		// gridData.grabExcessVerticalSpace = true;
-		// gridData.horizontalAlignment = GridData.FILL;
-		// viewer.getControl().setLayoutData(gridData);
 	}
 
 	private void addEditorSupport(TableViewer tv) {

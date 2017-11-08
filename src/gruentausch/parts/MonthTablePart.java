@@ -48,6 +48,8 @@ public class MonthTablePart extends MonthTable {
 	private MPart part;
 	private Group groupDetail;
 
+	private DayTable dayTable;
+
 	@Override
 	@PostConstruct
 	public void createControls(Composite parent) {
@@ -80,10 +82,11 @@ public class MonthTablePart extends MonthTable {
 		data2.top = new FormAttachment(0);
 		data2.bottom = new FormAttachment(90);
 
-		DayTable dayTable = new DayTable();
+		dayTable = new DayTable();
 		dayTable.createControls(groupDetail);
 		table = dayTable.getViewer().getTable();
 		table.setLayoutData(data2);
+		table.setEnabled(false);
 
 		FormData data1 = new FormData();
 		data1.left = new FormAttachment(0, 5);
@@ -94,6 +97,16 @@ public class MonthTablePart extends MonthTable {
 		btnVacation.setLayoutData(data1);
 		btnVacation.setEnabled(false);
 		btnVacation.setText("Urlaub");
+		btnVacation.addSelectionListener(new SelectionListener() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				table.setEnabled(!btnVacation.getSelection());
+			}
+
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+			}
+		});
 
 		FormData data3 = new FormData();
 		data3.top = new FormAttachment(table, 5);
@@ -107,7 +120,14 @@ public class MonthTablePart extends MonthTable {
 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				btnVacation.setEnabled(true);
+				boolean enabled = btnVacation.getEnabled();
+				btnVacation.setEnabled(!enabled);
+				table.setEnabled(!enabled);
+				if (enabled) {
+					btnEdit.setText("Bearbeiten");
+				} else {
+					btnEdit.setText("Abbrechen");
+				}
 			}
 
 			@Override
@@ -166,6 +186,8 @@ public class MonthTablePart extends MonthTable {
 			if (viewer != null /* && !viewer.isDisposed() */) {
 				List<Day> days = addEmptyDays(month);
 				viewer.setInput(days);
+				dayTable.getViewer().setInput(days);
+
 				Table table = viewer.getTable();
 				TableItem[] items = table.getItems();
 				Day day;
