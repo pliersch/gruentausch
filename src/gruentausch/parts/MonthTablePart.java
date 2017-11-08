@@ -161,6 +161,7 @@ public class MonthTablePart extends MonthTable {
 							String format = new SimpleDateFormat("EEEE', 'dd. MMMM yyyy", Locale.GERMAN).format(calendar.getTime());
 							groupDetail.setText(format);
 							btnEdit.setEnabled(true);
+							dayTable.getViewer().setInput(day);
 						} else {
 							btnEdit.setEnabled(false);
 						}
@@ -186,7 +187,6 @@ public class MonthTablePart extends MonthTable {
 			if (viewer != null /* && !viewer.isDisposed() */) {
 				List<Day> days = addEmptyDays(month);
 				viewer.setInput(days);
-				dayTable.getViewer().setInput(days);
 
 				Table table = viewer.getTable();
 				TableItem[] items = table.getItems();

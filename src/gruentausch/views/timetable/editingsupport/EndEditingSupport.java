@@ -2,7 +2,7 @@ package gruentausch.views.timetable.editingsupport;
 
 import org.eclipse.jface.viewers.TableViewer;
 
-import gruentausch.model.Day;
+import gruentausch.model.Activity;
 
 public class EndEditingSupport extends TimeEditingSupport {
 
@@ -13,7 +13,7 @@ public class EndEditingSupport extends TimeEditingSupport {
 	@Override
 	protected Object getValue(Object element) {
 		if (element != null) {
-			String end = ((Day) element).getEnd();
+			String end = ((Activity) element).getEnd();
 			if (end != null) {
 				return end;
 			}
@@ -23,7 +23,7 @@ public class EndEditingSupport extends TimeEditingSupport {
 
 	@Override
 	protected void setValue(Object element, Object userInputValue) {
-		((Day) element).setEnd(String.valueOf(userInputValue));
+		((Activity) element).setEnd(String.valueOf(userInputValue));
 		viewer.update(element, null);
 	}
 }

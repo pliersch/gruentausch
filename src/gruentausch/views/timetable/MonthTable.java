@@ -36,9 +36,6 @@ import org.osgi.framework.FrameworkUtil;
 import gruentausch.model.Day;
 import gruentausch.util.CalendarUtil;
 import gruentausch.views.ViewDataChangeHandler;
-import gruentausch.views.timetable.editingsupport.BeginEditingSupport;
-import gruentausch.views.timetable.editingsupport.EndEditingSupport;
-import gruentausch.views.timetable.editingsupport.VacationEditingSupport;
 
 public class MonthTable {
 
@@ -63,13 +60,6 @@ public class MonthTable {
 		table.setLinesVisible(true);
 
 		viewer.setContentProvider(new ArrayContentProvider());
-		// GridData gridData = new GridData();
-		// gridData.verticalAlignment = GridData.FILL;
-		// gridData.horizontalSpan = 2;
-		// gridData.grabExcessHorizontalSpace = true;
-		// gridData.grabExcessVerticalSpace = true;
-		// gridData.horizontalAlignment = GridData.FILL;
-		// viewer.getControl().setLayoutData(gridData);
 	}
 
 	private void addEditorSupport(TableViewer tv) {
@@ -162,9 +152,6 @@ public class MonthTable {
 				return day.getBegin();
 			}
 		});
-		// BeginEditingSupport beginEditingSupport = new BeginEditingSupport(viewer);
-		// beginEditingSupport.
-		col.setEditingSupport(new BeginEditingSupport(viewer));
 
 		// now the gender
 		col = createTableViewerColumn(titles[2], bounds[2], 2);
@@ -175,7 +162,6 @@ public class MonthTable {
 				return day.getEnd();
 			}
 		});
-		col.setEditingSupport(new EndEditingSupport(viewer));
 
 		// now the status married
 		col = createTableViewerColumn(titles[3], bounds[3], 3);
@@ -195,7 +181,6 @@ public class MonthTable {
 				}
 			}
 		});
-		col.setEditingSupport(new VacationEditingSupport(viewer));
 	}
 
 	public void updateTable(List<Day> days) {

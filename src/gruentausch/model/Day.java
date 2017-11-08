@@ -1,6 +1,7 @@
 package gruentausch.model;
 
 import java.util.Calendar;
+import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -12,11 +13,10 @@ import gruentausch.util.CalendarUtil;
 public class Day extends Unmarshaller.Listener {
 
 	private int day;
-	private String begin;
-	private String end;
 	private boolean vacation;
 	private Month parent;
 	private Calendar calendar;
+	private List<Activity> activities;
 
 	public Day() {
 
@@ -30,28 +30,20 @@ public class Day extends Unmarshaller.Listener {
 		this.day = day;
 	}
 
-	public String getBegin() {
-		return begin;
-	}
-
-	public void setBegin(String begin) {
-		this.begin = begin;
-	}
-
-	public String getEnd() {
-		return end;
-	}
-
-	public void setEnd(String end) {
-		this.end = end;
-	}
-
 	public boolean isVacation() {
 		return vacation;
 	}
 
 	public void setVacation(boolean vacation) {
 		this.vacation = vacation;
+	}
+
+	public List<Activity> getActivities() {
+		return activities;
+	}
+
+	public void setActivities(List<Activity> activities) {
+		this.activities = activities;
 	}
 
 	public void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
@@ -79,4 +71,22 @@ public class Day extends Unmarshaller.Listener {
 	public void setCalendar(Calendar calendar) {
 		this.calendar = calendar;
 	}
+
+	public String getBegin() {
+		String begin = null;
+		if (activities != null && activities.get(0) != null) {
+			begin = activities.get(0).getBegin();
+		}
+		return begin;
+	}
+
+	public String getEnd() {
+		String end = null;
+		if (activities != null) {
+			Activity activity = activities.get(activities.size() - 1);
+			end = activity.getEnd();
+		}
+		return end;
+	}
+
 }

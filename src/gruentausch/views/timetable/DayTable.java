@@ -25,8 +25,8 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 
+import gruentausch.model.Activity;
 import gruentausch.model.Day;
-import gruentausch.util.CalendarUtil;
 import gruentausch.views.ViewDataChangeHandler;
 import gruentausch.views.timetable.editingsupport.BeginEditingSupport;
 import gruentausch.views.timetable.editingsupport.EndEditingSupport;
@@ -122,46 +122,41 @@ public class DayTable {
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				Day day = (Day) element;
-				return CalendarUtil.toGermanString(day.getCalendar());
+				return ((Activity) element).getBegin();
 			}
 		});
+		col.setEditingSupport(new BeginEditingSupport(viewer));
 
 		col = createTableViewerColumn(titles[1], bounds[1], 1);
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				Day day = (Day) element;
-				return day.getBegin();
+				return ((Activity) element).getEnd();
 			}
 		});
-		col.setEditingSupport(new BeginEditingSupport(viewer));
+		col.setEditingSupport(new EndEditingSupport(viewer));
 
 		col = createTableViewerColumn(titles[2], bounds[2], 2);
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				Day day = (Day) element;
-				return day.getEnd();
+				return ((Activity) element).getCustomerId().toString();
 			}
 		});
-		col.setEditingSupport(new EndEditingSupport(viewer));
 
 		col = createTableViewerColumn(titles[3], bounds[3], 3);
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				Day day = (Day) element;
-				return day.getEnd();
+				return ((Activity) element).getTask();
 			}
 		});
-
+		
 		col = createTableViewerColumn(titles[4], bounds[4], 4);
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				Day day = (Day) element;
-				return day.getEnd();
+				return Integer.toString(((Activity) element).getKilometers());
 			}
 		});
 	}

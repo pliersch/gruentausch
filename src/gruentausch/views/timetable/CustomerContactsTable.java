@@ -123,16 +123,12 @@ public class CustomerContactsTable {
 		};
 	}
 
-	// public TableViewer getViewer() {
-	// return viewer;
-	// }
-
 	// create the columns for the table
 	private void createColumns(final Composite parent, final TableViewer viewer) {
 		String[] titles = { "Tag", "Beginn", "Ende", "Urlaub" };
 		int[] bounds = { 100, 100, 100, 100 };
 
-		// first column is for the first name
+
 		TableViewerColumn col = createTableViewerColumn(titles[0], bounds[0], 0);
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
@@ -142,26 +138,26 @@ public class CustomerContactsTable {
 			}
 		});
 
-		// second column is for the last name
 		col = createTableViewerColumn(titles[1], bounds[1], 1);
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				Day day = (Day) element;
-				return day.getBegin();
+				return "not implemented";
+				// Day day = (Day) element;
+				// return day.getBegin();
 			}
 		});
-		// BeginEditingSupport beginEditingSupport = new BeginEditingSupport(viewer);
-		// beginEditingSupport.
+
 		col.setEditingSupport(new BeginEditingSupport(viewer));
 
-		// now the gender
+
 		col = createTableViewerColumn(titles[2], bounds[2], 2);
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				Day day = (Day) element;
-				return day.getEnd();
+				// Day day = (Day) element;
+				// return day.getEnd();
+				return "not implemented";
 			}
 		});
 		col.setEditingSupport(new EndEditingSupport(viewer));
@@ -188,5 +184,9 @@ public class CustomerContactsTable {
 	public void setDataViewHandler(ViewDataChangeHandler handler) {
 		_handler = handler;
 	}
+
+	// public TableViewer getViewer() {
+	// return viewer;
+	// }
 
 }

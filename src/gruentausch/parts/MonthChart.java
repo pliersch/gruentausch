@@ -73,12 +73,18 @@ public class MonthChart {
 		String series1 = "Paul";
 
 		List<Day> days = month.getDays();
-
+		int hour;
+		float min;
 		int date = 1;
 		for (Day day : days) {
-			Calendar workingTime = CalendarUtil.getWorkingTime(day.getBegin(), day.getEnd());
-			int hour = workingTime.get(Calendar.HOUR_OF_DAY);
-			float min = workingTime.get(Calendar.MINUTE) / 60f;
+			if (day.getBegin() != null && day.getEnd() != null) {
+				Calendar workingTime = CalendarUtil.getWorkingTime(day.getBegin(), day.getEnd());
+				hour = workingTime.get(Calendar.HOUR_OF_DAY);
+				min = workingTime.get(Calendar.MINUTE) / 60f;
+			} else {
+				hour = 0;
+				min = 0;
+			}
 			dataset.addValue(hour + min, series1, date++ + "");
 		}
 		return dataset;

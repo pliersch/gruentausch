@@ -44,8 +44,6 @@ public class DummyCreator {
 					for (int l = 0; l < daysInMonth; l++) {
 						Day day = new Day();
 						day.setDay(l+1);
-						day.setBegin(getRandomBegin());
-						day.setEnd(getRandomEnd());
 						days.add(day);
 						month.setDays(days);
 						
