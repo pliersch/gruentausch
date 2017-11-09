@@ -1,5 +1,6 @@
 package gruentausch.views.timetable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -30,11 +31,14 @@ import gruentausch.model.Day;
 import gruentausch.views.ViewDataChangeHandler;
 import gruentausch.views.timetable.editingsupport.BeginEditingSupport;
 import gruentausch.views.timetable.editingsupport.EndEditingSupport;
+import gruentausch.views.timetable.editingsupport.VacationEditingSupport;
 
 public class DayTable {
 
-	protected TableViewer viewer;
+	protected TableViewerExtended viewer;
 	private ViewDataChangeHandler _handler;
+
+	boolean addExtraRow = true;
 
 	@PostConstruct
 	public void createControls(Composite parent) {
@@ -42,7 +46,7 @@ public class DayTable {
 	}
 
 	private void createViewer(Composite parent) {
-		viewer = new TableViewer(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION | SWT.BORDER);
+		viewer = new TableViewerExtended(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION | SWT.BORDER);
 		addEditorSupport(viewer);
 		createColumns(parent, viewer);
 		final Table table = viewer.getTable();
@@ -50,6 +54,15 @@ public class DayTable {
 		table.setLinesVisible(true);
 
 		viewer.setContentProvider(new ArrayContentProvider());
+		List<Activity> activities = new ArrayList<>();
+		Activity activity = new Activity();
+		activity.setBegin("08:10");
+		activity.setEnd("18:10");
+		activity.setKilometers(10);
+		activity.setCustomerId("DE77100100100");
+		activity.setTask("Wald");
+		activities.add(activity);
+		viewer.setInput(activities);
 	}
 
 	private void addEditorSupport(TableViewer tv) {
@@ -143,6 +156,7 @@ public class DayTable {
 				return ((Activity) element).getCustomerId().toString();
 			}
 		});
+		col.setEditingSupport(new EndEditingSupport(viewer));
 
 		col = createTableViewerColumn(titles[3], bounds[3], 3);
 		col.setLabelProvider(new ColumnLabelProvider() {
@@ -151,6 +165,7 @@ public class DayTable {
 				return ((Activity) element).getTask();
 			}
 		});
+		col.setEditingSupport(new EndEditingSupport(viewer));
 		
 		col = createTableViewerColumn(titles[4], bounds[4], 4);
 		col.setLabelProvider(new ColumnLabelProvider() {
@@ -159,10 +174,11 @@ public class DayTable {
 				return Integer.toString(((Activity) element).getKilometers());
 			}
 		});
+		col.setEditingSupport(new VacationEditingSupport(viewer));
 	}
 
-	public void updateTable(List<Day> days) {
-		viewer.setInput(days);
+	public void updateTable(Day day) {
+		// viewer.setInput(day.getActivities());
 	}
 
 	private TableViewerColumn createTableViewerColumn(String title, int bound, final int colNumber) {
