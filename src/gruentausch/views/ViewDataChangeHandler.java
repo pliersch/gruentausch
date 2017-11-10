@@ -1,5 +1,5 @@
 package gruentausch.views;
 
 public interface ViewDataChangeHandler {
-	void handleDataChange();
+	void handleDataChange(Object object);
 }

@@ -57,7 +57,7 @@ public class EditEmployeePage extends WizardPage implements ViewDataChangeHandle
 	}
 
 	@Override
-	public void handleDataChange() {
+	public void handleDataChange(Object object) {
 		getWizard().getContainer().updateButtons();
 	}
 }

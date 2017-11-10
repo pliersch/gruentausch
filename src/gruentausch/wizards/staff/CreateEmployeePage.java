@@ -22,6 +22,7 @@ public class CreateEmployeePage extends WizardPage implements ViewDataChangeHand
 		setDescription("die beschreibung");
 	}
 
+	@Override
 	public void createControl(Composite parent) {
 		Composite container = new Composite(parent, SWT.NONE);
 		view = new EmployeeDataView();
@@ -49,7 +50,7 @@ public class CreateEmployeePage extends WizardPage implements ViewDataChangeHand
 	}
 
 	@Override
-	public void handleDataChange() {
+	public void handleDataChange(Object object) {
 		getWizard().getContainer().updateButtons();
 	}
 }

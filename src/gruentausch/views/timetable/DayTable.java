@@ -30,15 +30,19 @@ import gruentausch.model.Activity;
 import gruentausch.model.Day;
 import gruentausch.views.ViewDataChangeHandler;
 import gruentausch.views.timetable.editingsupport.BeginEditingSupport;
+import gruentausch.views.timetable.editingsupport.CustomerIdEditingSupport;
 import gruentausch.views.timetable.editingsupport.EndEditingSupport;
-import gruentausch.views.timetable.editingsupport.VacationEditingSupport;
+import gruentausch.views.timetable.editingsupport.KilometerEditingSupport;
+import gruentausch.views.timetable.editingsupport.TaskEditingSupport;
 
 public class DayTable {
 
-	protected TableViewerExtended viewer;
+	// protected TableViewerExtended viewer;
+	protected TableViewer viewer;
 	private ViewDataChangeHandler _handler;
 
 	boolean addExtraRow = true;
+	private List<Activity> activities;
 
 	@PostConstruct
 	public void createControls(Composite parent) {
@@ -46,7 +50,7 @@ public class DayTable {
 	}
 
 	private void createViewer(Composite parent) {
-		viewer = new TableViewerExtended(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION | SWT.BORDER);
+		viewer = new TableViewer(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION | SWT.BORDER);
 		addEditorSupport(viewer);
 		createColumns(parent, viewer);
 		final Table table = viewer.getTable();
@@ -54,7 +58,7 @@ public class DayTable {
 		table.setLinesVisible(true);
 
 		viewer.setContentProvider(new ArrayContentProvider());
-		List<Activity> activities = new ArrayList<>();
+		activities = new ArrayList<>();
 		Activity activity = new Activity();
 		activity.setBegin("08:10");
 		activity.setEnd("18:10");
@@ -62,6 +66,15 @@ public class DayTable {
 		activity.setCustomerId("DE77100100100");
 		activity.setTask("Wald");
 		activities.add(activity);
+
+		activity = new Activity();
+		activity.setBegin("");
+		activity.setEnd("");
+		activity.setCustomerId("");
+		activity.setTask("");
+		// activity.setKilometers(11);
+		activities.add(activity);
+
 		viewer.setInput(activities);
 	}
 
@@ -106,12 +119,13 @@ public class DayTable {
 
 			@Override
 			public void afterEditorDeactivated(ColumnViewerEditorDeactivationEvent event) {
-				System.out.println("afterEditorDeactivated");
+				ViewerCell source = (ViewerCell) event.getSource();
+				Activity activity = (Activity) source.getElement();
+				_handler.handleDataChange(activity);
 			}
 
 			@Override
 			public void afterEditorActivated(ColumnViewerEditorActivationEvent event) {
-				System.out.println("afterEditorActivated");
 			}
 		};
 	}
@@ -156,7 +170,7 @@ public class DayTable {
 				return ((Activity) element).getCustomerId().toString();
 			}
 		});
-		col.setEditingSupport(new EndEditingSupport(viewer));
+		col.setEditingSupport(new CustomerIdEditingSupport(viewer));
 
 		col = createTableViewerColumn(titles[3], bounds[3], 3);
 		col.setLabelProvider(new ColumnLabelProvider() {
@@ -165,20 +179,40 @@ public class DayTable {
 				return ((Activity) element).getTask();
 			}
 		});
-		col.setEditingSupport(new EndEditingSupport(viewer));
-		
+		col.setEditingSupport(new TaskEditingSupport(viewer));
+
 		col = createTableViewerColumn(titles[4], bounds[4], 4);
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				return Integer.toString(((Activity) element).getKilometers());
+				String result = null;
+				int kilometers = ((Activity) element).getKilometers();
+				if (kilometers > 0) {
+					result = String.valueOf(kilometers);
+				}
+				return result;
 			}
 		});
-		col.setEditingSupport(new VacationEditingSupport(viewer));
+		col.setEditingSupport(new KilometerEditingSupport(viewer));
 	}
 
 	public void updateTable(Day day) {
-		// viewer.setInput(day.getActivities());
+		activities = day.getActivities();
+		if (activities.isEmpty()) {
+			addNewEmptyRow();
+		}
+		viewer.setInput(activities);
+	}
+
+	public void addNewEmptyRow() {
+		Activity activity = new Activity();
+		activity.setBegin("");
+		activity.setEnd("");
+		activity.setCustomerId("");
+		activity.setTask("");
+		// activity.setKilometers(11);
+		activities.add(activity);
+		viewer.setInput(activities);
 	}
 
 	private TableViewerColumn createTableViewerColumn(String title, int bound, final int colNumber) {
@@ -202,5 +236,4 @@ public class DayTable {
 	public TableViewer getViewer() {
 		return viewer;
 	}
-
 }

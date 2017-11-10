@@ -20,6 +20,7 @@ public class CreateCustomerPage2 extends WizardPage implements ViewDataChangeHan
 		setDescription("die beschreibung 2");
 	}
 
+	@Override
 	public void createControl(Composite parent) {
 		Composite container = new Composite(parent, SWT.NONE);
 		view = new CustomerContactsTable();
@@ -36,7 +37,7 @@ public class CreateCustomerPage2 extends WizardPage implements ViewDataChangeHan
 	}
 
 	@Override
-	public void handleDataChange() {
+	public void handleDataChange(Object object) {
 		getWizard().getContainer().updateButtons();
 	}
 }

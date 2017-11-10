@@ -173,6 +173,7 @@ public class CustomerDataView {
 		public void keyPressed(KeyEvent e) {
 		}
 
+		@Override
 		public void keyReleased(KeyEvent e) {
 			Text source = (Text) e.getSource();
 			if (source.equals(txtCity)) {
@@ -220,7 +221,7 @@ public class CustomerDataView {
 					_decoratorSurname = null;
 				}
 			}
-			_handler.handleDataChange();
+			_handler.handleDataChange(null);
 		}
 	}
 }

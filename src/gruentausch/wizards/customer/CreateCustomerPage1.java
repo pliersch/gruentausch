@@ -29,6 +29,7 @@ public class CreateCustomerPage1 extends WizardPage implements ViewDataChangeHan
 		setDescription("die beschreibung");
 	}
 
+	@Override
 	public void createControl(Composite parent) {
 		Composite container = new Composite(parent, SWT.NONE);
 		view = new CustomerDataView();
@@ -40,23 +41,23 @@ public class CreateCustomerPage1 extends WizardPage implements ViewDataChangeHan
 		
 //		final Composite rootComposite = new Composite(parent, SWT.NONE);
 //		rootComposite.setLayout(GridLayoutFactory.fillDefaults().create());
-//		
+//
 //		final ScrolledComposite sc = new ScrolledComposite(rootComposite, SWT.BORDER | SWT.V_SCROLL);
 //		sc.setLayoutData(GridDataFactory.fillDefaults().grab(true, true).hint(SWT.DEFAULT, 200).create());
 //		sc.setExpandHorizontal(true);
 //		sc.setExpandVertical(true);
-//		
+//
 //		final Composite containerMain = new Composite(sc, SWT.NULL);
 //		containerMain.setLayout(GridLayoutFactory.swtDefaults().numColumns(2).create());
-//		
+//
 //		for (int i = 0; i < 50; i++) {
 //			final Label label = new Label(containerMain, SWT.NONE);
 //			label.setText("Label " + i + 1);
 //		}
-//		
+//
 //		sc.setContent(containerMain);
 //		sc.setMinSize(containerMain.computeSize(SWT.DEFAULT, SWT.DEFAULT));
-//		
+//
 //		setControl(rootComposite);
 
 	}
@@ -78,7 +79,7 @@ public class CreateCustomerPage1 extends WizardPage implements ViewDataChangeHan
 	}
 
 	@Override
-	public void handleDataChange() {
+	public void handleDataChange(Object object) {
 		getWizard().getContainer().updateButtons();
 	}
 }

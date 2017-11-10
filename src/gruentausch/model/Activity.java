@@ -65,4 +65,12 @@ public class Activity extends Unmarshaller.Listener {
 		this.parent = (Day) parent;
 	}
 
+	public boolean isValid() {
+		boolean validBegin = begin != null && begin != "";
+		boolean validEnd = end != null && end != "";
+		boolean validTask = task != null && task != "";
+		boolean validCustomer = customerId != null && customerId != "";
+		return validBegin && validEnd && validCustomer && validTask;
+	}
+
 }

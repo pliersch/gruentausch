@@ -55,7 +55,7 @@ public class AddWorkingTimePage extends WizardPage implements ViewDataChangeHand
 	}
 
 	@Override
-	public void handleDataChange() {
+	public void handleDataChange(Object object) {
 		getWizard().getContainer().updateButtons();
 	}
 }

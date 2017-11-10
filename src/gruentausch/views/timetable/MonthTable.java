@@ -33,11 +33,12 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
 
+import gruentausch.model.Activity;
 import gruentausch.model.Day;
 import gruentausch.util.CalendarUtil;
 import gruentausch.views.ViewDataChangeHandler;
 
-public class MonthTable {
+public class MonthTable implements ViewDataChangeHandler {
 
 	private static final Image CHECKED = createImageDescriptor("icons/checked.gif");
 	private static final Image UNCHECKED = createImageDescriptor("icons/unchecked.gif");
@@ -210,6 +211,12 @@ public class MonthTable {
 
 	public void setDataViewHandler(ViewDataChangeHandler handler) {
 		_handler = handler;
+	}
+
+	@Override
+	public void handleDataChange(Object object) {
+		Activity activity = (Activity) object;
+		
 	}
 
 }

@@ -33,14 +33,16 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableItem;
 
+import gruentausch.model.Activity;
 import gruentausch.model.Day;
 import gruentausch.model.Employee;
 import gruentausch.model.Month;
 import gruentausch.util.CalendarUtil;
+import gruentausch.views.ViewDataChangeHandler;
 import gruentausch.views.timetable.DayTable;
 import gruentausch.views.timetable.MonthTable;
 
-public class MonthTablePart extends MonthTable {
+public class MonthTablePart extends MonthTable implements ViewDataChangeHandler {
 
 	private Employee employee;
 
@@ -49,6 +51,12 @@ public class MonthTablePart extends MonthTable {
 	private Group groupDetail;
 
 	private DayTable dayTable;
+
+	private Button btnEdit;
+	private Button btnSave;
+	private Button btnVacation;
+
+	private ViewDataChangeHandler _handler;
 
 	@Override
 	@PostConstruct
@@ -84,6 +92,7 @@ public class MonthTablePart extends MonthTable {
 
 		dayTable = new DayTable();
 		dayTable.createControls(groupDetail);
+		dayTable.setDataViewHandler(this);
 		table = dayTable.getViewer().getTable();
 		table.setLayoutData(data2);
 		table.setEnabled(false);
@@ -93,7 +102,7 @@ public class MonthTablePart extends MonthTable {
 		// data1.top = new FormAttachment(table, 5);
 		data1.bottom = new FormAttachment(100, -10);
 
-		Button btnVacation = new Button(groupDetail, SWT.CHECK);
+		btnVacation = new Button(groupDetail, SWT.CHECK);
 		btnVacation.setLayoutData(data1);
 		btnVacation.setEnabled(false);
 		btnVacation.setText("Urlaub");
@@ -101,6 +110,7 @@ public class MonthTablePart extends MonthTable {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				table.setEnabled(!btnVacation.getSelection());
+				btnSave.setEnabled(btnVacation.getSelection());
 			}
 
 			@Override
@@ -112,7 +122,7 @@ public class MonthTablePart extends MonthTable {
 		data3.top = new FormAttachment(table, 5);
 		data3.right = new FormAttachment(100, -10);
 
-		Button btnEdit = new Button(groupDetail, SWT.NONE);
+		btnEdit = new Button(groupDetail, SWT.NONE);
 		btnEdit.setEnabled(false);
 		btnEdit.setLayoutData(data3);
 		btnEdit.setText("Bearbeiten");
@@ -120,6 +130,37 @@ public class MonthTablePart extends MonthTable {
 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
+				boolean enabled = btnVacation.getEnabled();
+				btnVacation.setEnabled(!enabled);
+				table.setEnabled(!enabled);
+				if (enabled) {
+					btnVacation.setSelection(false);
+					btnSave.setEnabled(false);
+					btnEdit.setText("Bearbeiten");
+				} else {
+					btnEdit.setText("Abbrechen");
+				}
+			}
+
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+			}
+		});
+
+		FormData data4 = new FormData();
+		data4.top = new FormAttachment(table, 5);
+		data4.right = new FormAttachment(btnEdit, -10);
+
+		btnSave = new Button(groupDetail, SWT.NONE);
+		btnSave.setEnabled(false);
+		btnSave.setLayoutData(data4);
+		btnSave.setText("Speichern");
+		btnSave.addSelectionListener(new SelectionListener() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				btnSave.setEnabled(false);
+				dayTable.addNewEmptyRow();
 				boolean enabled = btnVacation.getEnabled();
 				btnVacation.setEnabled(!enabled);
 				table.setEnabled(!enabled);
@@ -184,6 +225,10 @@ public class MonthTablePart extends MonthTable {
 
 			part.setLabel(employee.getGivenname() + " " + CalendarUtil.getMonth(month.getMonth()) + " " + month.getYear());
 
+			btnEdit.setEnabled(false);
+			btnEdit.setText("Bearbeiten");
+			btnVacation.setEnabled(false);
+
 			if (viewer != null /* && !viewer.isDisposed() */) {
 				List<Day> days = addEmptyDays(month);
 				viewer.setInput(days);
@@ -231,5 +276,15 @@ public class MonthTablePart extends MonthTable {
 
 		}
 		return days;
+	}
+
+	@Override
+	public void handleDataChange(Object object) {
+		Activity activity = (Activity) object;
+		if (activity.isValid()) {
+			btnSave.setEnabled(true);
+		} else {
+			btnSave.setEnabled(false);
+		}
 	}
 }

@@ -1,5 +1,6 @@
 package gruentausch.model;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -39,6 +40,9 @@ public class Day extends Unmarshaller.Listener {
 	}
 
 	public List<Activity> getActivities() {
+		if (activities == null) {
+			activities = new ArrayList<>();
+		}
 		return activities;
 	}
 
