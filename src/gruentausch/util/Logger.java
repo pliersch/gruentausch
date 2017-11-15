@@ -32,6 +32,7 @@ public class Logger {
 	public static void log(String msg) {
 		getInstance().messages.add(msg);
 		getInstance().propertyChangeSupport.firePropertyChange("logging", null, msg);
+		System.out.println(msg);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -40,9 +41,9 @@ public class Logger {
 	}
 
 	public static String getFullLogAsString() {
-		ArrayList<String> messages2 = getInstance().messages;
+		ArrayList<String> fullLog = getFullLog();
 		String result = "";
-		for (String string : messages2) {
+		for (String string : fullLog) {
 			result += string + "\n";
 		}
 		return result;

@@ -1,7 +1,5 @@
 package gruentausch.wizards.staff;
 
-import java.io.File;
-
 import javax.inject.Inject;
 
 import org.eclipse.e4.ui.model.application.MApplication;
@@ -11,7 +9,6 @@ import org.eclipse.jface.wizard.Wizard;
 import gruentausch.model.Employee;
 import gruentausch.model.Team;
 import gruentausch.persistence.Persister;
-import gruentausch.util.XMLManager;
 
 public class CreateEmployeeWizard extends Wizard {
 	
@@ -35,10 +32,7 @@ public class CreateEmployeeWizard extends Wizard {
 		Team team = application.getContext().get(Team.class);
 		Employee employee = page1.getEmployee();
 		team.addEmployee(employee);
-		// TODO implement!
-		Persister.update(employee);
-		File file = new XMLManager().writeFile(team, "data/Mitarbeiter.xml");
-		return true;
+		return Persister.getInstance().addEmployee(employee);
 	}
 
 	@Override

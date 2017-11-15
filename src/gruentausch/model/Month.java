@@ -1,5 +1,6 @@
 package gruentausch.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
@@ -28,6 +29,17 @@ public class Month extends Unmarshaller.Listener {
 	public void setDays(List<Day> days) {
 		this.days = days;
 	}
+
+	public void addDay(Day day) {
+		if (days == null) {
+			days = new ArrayList<>();
+		}
+		days.add(day);
+	}
+
+	// public Day getDay() {
+	//
+	// }
 
 	public int getYear() {
 		return year;

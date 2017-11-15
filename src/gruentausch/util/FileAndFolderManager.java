@@ -37,4 +37,11 @@ public class FileAndFolderManager {
 		}
 		return file;
 	}
+
+	public static boolean existFile(String path) throws IOException {
+		URL url = Platform.getInstanceLocation().getURL();
+		Logger.log(url.getFile() + path);
+		File file = new File(url.getFile() + path);
+		return file.exists();
+	}
 }

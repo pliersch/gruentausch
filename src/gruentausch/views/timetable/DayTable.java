@@ -67,14 +67,6 @@ public class DayTable {
 		activity.setTask("Wald");
 		activities.add(activity);
 
-		activity = new Activity();
-		activity.setBegin("");
-		activity.setEnd("");
-		activity.setCustomerId("");
-		activity.setTask("");
-		// activity.setKilometers(11);
-		activities.add(activity);
-
 		viewer.setInput(activities);
 	}
 

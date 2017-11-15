@@ -161,21 +161,16 @@ public class MonthTablePart extends MonthTable implements ViewDataChangeHandler 
 			public void widgetSelected(SelectionEvent e) {
 				btnSave.setEnabled(false);
 				dayTable.addNewEmptyRow();
-				boolean enabled = btnVacation.getEnabled();
-				btnVacation.setEnabled(!enabled);
-				table.setEnabled(!enabled);
-				if (enabled) {
-					btnEdit.setText("Bearbeiten");
-				} else {
-					btnEdit.setText("Abbrechen");
-				}
+				btnVacation.setSelection(false);
+				btnVacation.setEnabled(false);
+				table.setEnabled(false);
+				btnEdit.setText("Bearbeiten");
 			}
 
 			@Override
 			public void widgetDefaultSelected(SelectionEvent e) {
 			}
 		});
-
 
 		sashForm.setWeights(new int[] { 20, 1, 10 });
 

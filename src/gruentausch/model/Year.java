@@ -31,7 +31,15 @@ public class Year {
 
 	public void addMonth(Month month) {
 		months.add(month);
-		
+	}
+
+	public Month getMonth(int month) {
+		for (Month m : months) {
+			if (m.getMonth() == month) {
+				return m;
+			}
+		}
+		return null;
 	}
 
 	public Employee getParent() {

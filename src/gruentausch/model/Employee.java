@@ -29,7 +29,15 @@ public class Employee extends Person {
 		List<Year> oldYears = years;
 		years.add(year);
 		propertyChangeSupport.firePropertyChange("years", oldYears, this.years);
+	}
 
+	public Year getYear(int year) {
+		for (Year y : years) {
+			if (y.getYear() == year) {
+				return y;
+			}
+		}
+		return null;
 	}
 
 	public Adress getAdress() {

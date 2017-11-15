@@ -14,6 +14,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Monitor;
 import org.eclipse.swt.widgets.Shell;
 
+import gruentausch.handlers.DailyJobHandler;
 import gruentausch.model.Clients;
 import gruentausch.model.Team;
 import gruentausch.util.FileAndFolderManager;
@@ -45,6 +46,8 @@ public class E4LifeCycle {
 		// // close the application
 		// System.exit(-1);
 		// }
+
+		new DailyJobHandler().execute(shell);
 
 		try {
 			FileAndFolderManager.createFolder("data");

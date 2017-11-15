@@ -67,7 +67,6 @@ public class FileBrowserPart {
 		fileSizeColumn.getColumn().setAlignment(SWT.RIGHT);
 		fileSizeColumn.setLabelProvider(new DelegatingStyledCellLabelProvider(new FileSizeLabelProvider()));
 		
-		new FileAndFolderManager();
 		File file;
 		try {
 			file = FileAndFolderManager.createFolder("data");
