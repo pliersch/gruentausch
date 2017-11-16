@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 @XmlRootElement
 public class Month extends Unmarshaller.Listener {
@@ -55,6 +56,11 @@ public class Month extends Unmarshaller.Listener {
 
 	public Year getParent() {
 		return parent;
+	}
+
+	@XmlTransient
+	public void setParent(Year year) {
+		this.parent = year;
 	}
 
 	@Override

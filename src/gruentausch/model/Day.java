@@ -57,6 +57,11 @@ public class Day extends Unmarshaller.Listener {
 	public Month getParent() {
 		return parent;
 	}
+
+	@XmlTransient
+	public void setParent(Month month) {
+		this.parent = month;
+	}
 	
 	public Calendar toCalendar() {
 		int month = parent.getMonth();

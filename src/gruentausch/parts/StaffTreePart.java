@@ -64,12 +64,10 @@ public class StaffTreePart {
 
 	@PostConstruct
 	public void createControls(Composite parent, EMenuService menuService, MApplication application) {
-		
+
 		viewer = new TreeViewer(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL);
 		viewer.setContentProvider(new ViewContentProvider());
-		menuService.registerContextMenu(
-        viewer.getControl(),
-        "gruentausch.popupmenu.edit.staff");
+		menuService.registerContextMenu(viewer.getControl(), "gruentausch.popupmenu.edit.staff");
 
 		TreeViewerColumn mainColumn = new TreeViewerColumn(viewer, SWT.NONE);
 		mainColumn.getColumn().setText("Name");
@@ -89,9 +87,9 @@ public class StaffTreePart {
 		if (team != null) {
 			viewer.setInput(team);
 		}
-		
+
 		viewer.addDoubleClickListener(new IDoubleClickListener() {
-			
+
 			@Override
 			public void doubleClick(DoubleClickEvent event) {
 				TreeSelection selection = (TreeSelection) event.getSelection();
@@ -99,8 +97,6 @@ public class StaffTreePart {
 				if (firstElement instanceof Month) {
 					displayPart("gruentausch.part.table.month");
 				}
-				System.out.println("double");
-				
 			}
 		});
 
@@ -131,12 +127,12 @@ public class StaffTreePart {
 		tree.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-//				Object data = item.getData();
-//				if (data instanceof Employee) {
-//					displayPart("gruentausch.part.filebrowser");
-//				} else if (data instanceof Year) {
-//					displayPart("gruentausch.part.mitarbeiter");
-//				}
+				// Object data = item.getData();
+				// if (data instanceof Employee) {
+				// displayPart("gruentausch.part.filebrowser");
+				// } else if (data instanceof Year) {
+				// displayPart("gruentausch.part.mitarbeiter");
+				// }
 				TreeItem item = (TreeItem) e.item;
 				if (item.getItemCount() > 0) {
 					item.setExpanded(!item.getExpanded());
@@ -166,10 +162,9 @@ public class StaffTreePart {
 	}
 
 	class ViewContentProvider implements ITreeContentProvider {
-		
+
 		@Override
 		public void inputChanged(Viewer v, Object oldInput, Object newInput) {
-			System.out.println("inputChanged");
 		}
 
 		@Override
@@ -196,11 +191,13 @@ public class StaffTreePart {
 
 		@Override
 		public Object getParent(Object element) {
-//			File file = (File) element;
-//			return file.getParentFile();
-			//TODO
-			System.err.println("StaffTreePart#ViewContentProvider#getParent should be return a valid obj");
-			return null;
+			Object parent = null;
+			if (element instanceof Year) {
+				parent = ((Year) element).getParent();
+			} else if (element instanceof Month) {
+				parent = ((Month) element).getParent();
+			}
+			return parent;
 		}
 
 		@Override
@@ -239,14 +236,13 @@ public class StaffTreePart {
 				StyledString styledString = new StyledString(CalendarUtil.getMonth(month.getMonth()));
 				return styledString;
 			}
-			// TODO
-			return new StyledString("foo");
+			return null;
 		}
 
 		@Override
 		public Image getImage(Object element) {
 			if (element instanceof Employee) {
-					return getResourceManager().createImage(createImageDescriptor("avatar"));
+				return getResourceManager().createImage(createImageDescriptor("avatar"));
 			}
 
 			return super.getImage(element);

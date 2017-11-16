@@ -43,6 +43,7 @@ public class DayTable {
 
 	boolean addExtraRow = true;
 	private List<Activity> activities;
+	private List<Activity> initalActivities;
 
 	@PostConstruct
 	public void createControls(Composite parent) {
@@ -191,10 +192,9 @@ public class DayTable {
 	}
 
 	public void updateTable(Day day) {
-		activities = day.getActivities();
-		if (activities.isEmpty()) {
-			addNewEmptyRow();
-		}
+		initalActivities = day.getActivities();
+		activities = new ArrayList<>(initalActivities);
+		addNewEmptyRow();
 		viewer.setInput(activities);
 	}
 
@@ -232,5 +232,10 @@ public class DayTable {
 	public List<Activity> getActivities() {
 		activities.remove(activities.size() - 1);
 		return activities;
+	}
+
+	public void cleanUp() {
+		activities = new ArrayList<>(initalActivities);
+		viewer.setInput(activities);
 	}
 }

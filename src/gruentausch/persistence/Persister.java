@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
 
+import org.eclipse.e4.core.contexts.IEclipseContext;
+
 import gruentausch.model.Clients;
 import gruentausch.model.Day;
 import gruentausch.model.Employee;
@@ -17,8 +19,8 @@ import gruentausch.util.XMLManager;
 public class Persister {
 
 	private static Persister instance;
-	private Team team;
 	private Clients clients;
+	private IEclipseContext workbenchContext;
 
 	private Persister() {
 
@@ -33,6 +35,7 @@ public class Persister {
 
 
 	public boolean update(Employee employee) {
+		Team team = workbenchContext.get(Team.class);
 		File file = new XMLManager().writeFile(team, "data/Mitarbeiter.xml");
 		return false;
 	}
@@ -121,12 +124,7 @@ public class Persister {
 		return true;
 	}
 
-	public void setTeam(Team team) {
-		this.team = team;
+	public void setWorkbenchContext(IEclipseContext workbenchContext) {
+		this.workbenchContext = workbenchContext;
 	}
-
-	public void setClients(Clients clients) {
-		this.clients = clients;
-	}
-
 }

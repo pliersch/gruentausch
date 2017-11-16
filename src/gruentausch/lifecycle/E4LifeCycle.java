@@ -32,6 +32,8 @@ import gruentausch.util.XMLManager;
 @SuppressWarnings("restriction")
 public class E4LifeCycle {
 
+	private IEclipseContext workbenchContext;
+
 	@PostContextCreate
 	void postContextCreate(IApplicationContext appContext) {
 		final Shell shell = new Shell(SWT.SHELL_TRIM);
@@ -76,12 +78,12 @@ public class E4LifeCycle {
 
 	@ProcessAdditions
 	void processAdditions(IEclipseContext workbenchContext) {
+		this.workbenchContext = workbenchContext;
 		Team team = (Team) new XMLManager().readFile("data/Mitarbeiter.xml", Team.class);
 		workbenchContext.set(Team.class, team);
 		Clients clients = (Clients) new XMLManager().readFile("data/Kunden.xml", Clients.class);
 		workbenchContext.set(Clients.class, clients);
-		Persister.getInstance().setTeam(team);
-		Persister.getInstance().setClients(clients);
+		Persister.getInstance().setWorkbenchContext(workbenchContext);
 		System.out.println("@ProcessAdditions");
 	}
 

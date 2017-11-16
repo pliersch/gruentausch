@@ -46,7 +46,6 @@ public class DummyCreator {
 						day.setDay(l+1);
 						days.add(day);
 						month.setDays(days);
-						
 					}
 				}
 			}

@@ -1,7 +1,6 @@
 package gruentausch.parts;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
@@ -138,6 +137,7 @@ public class MonthTablePart extends MonthTable implements ViewDataChangeHandler 
 					btnVacation.setSelection(false);
 					btnSave.setEnabled(false);
 					btnEdit.setText("Bearbeiten");
+					dayTable.cleanUp();
 				} else {
 					btnEdit.setText("Abbrechen");
 				}
@@ -212,18 +212,18 @@ public class MonthTablePart extends MonthTable implements ViewDataChangeHandler 
 		});
 	}
 
-	@Inject
-	protected void setEmployee(@Optional @Named(IServiceConstants.ACTIVE_SELECTION) Employee employee) {
-		if (employee != null) {
-			this.employee = employee;
-		}
-	}
-
 	private void disableDetail() {
 		btnEdit.setEnabled(false);
 		btnEdit.setText("Bearbeiten");
 		btnVacation.setEnabled(false);
 		dayTable.getViewer().getTable().setEnabled(false);
+	}
+
+	@Inject
+	protected void setEmployee(@Optional @Named(IServiceConstants.ACTIVE_SELECTION) Employee employee) {
+		if (employee != null) {
+			this.employee = employee;
+		}
 	}
 
 	@Inject
@@ -233,7 +233,9 @@ public class MonthTablePart extends MonthTable implements ViewDataChangeHandler 
 			part.setLabel(employee.getGivenname() + " " + CalendarUtil.getMonth(month.getMonth()) + " " + month.getYear());
 			disableDetail();
 			if (viewer != null /* && !viewer.isDisposed() */) {
-				List<Day> days = addEmptyDays(month);
+				// List<Day> days = addEmptyDays(month);
+				List<Day> days = month.getDays();
+
 				viewer.setInput(days);
 
 				Table table = viewer.getTable();
@@ -257,28 +259,29 @@ public class MonthTablePart extends MonthTable implements ViewDataChangeHandler 
 		}
 	}
 
-	private List<Day> addEmptyDays(Month month) {
-		Calendar calendar = CalendarUtil.getCalendar(month.getYear(), month.getMonth(), 1);
-		int daysInMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
-		List<Day> employeeDays = month.getDays();
-		List<Day> days = new ArrayList<>(daysInMonth);
-
-		int position = 0;
-
-		for (int i = 0; i < daysInMonth; i++) {
-			Day day = employeeDays.get(position);
-			if (day.getDay() == i + 1) {
-				position++;
-				days.add(day);
-			} else {
-				Day newDay = new Day();
-				newDay.setDay(i + 1);
-				newDay.setCalendar(calendar);
-				days.add(newDay);
-			}
-		}
-		return days;
-	}
+	// private List<Day> addEmptyDays(Month month) {
+	// Calendar calendar = CalendarUtil.getCalendar(month.getYear(),
+	// month.getMonth(), 1);
+	// int daysInMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+	// List<Day> employeeDays = month.getDays();
+	// List<Day> days = new ArrayList<>(daysInMonth);
+	//
+	// int position = 0;
+	//
+	// for (int i = 0; i < daysInMonth; i++) {
+	// Day day = employeeDays.get(position);
+	// if (day.getDay() == i + 1) {
+	// position++;
+	// days.add(day);
+	// } else {
+	// Day newDay = new Day();
+	// newDay.setDay(i + 1);
+	// newDay.setCalendar(calendar);
+	// days.add(newDay);
+	// }
+	// }
+	// return days;
+	// }
 
 	@Override
 	public void handleDataChange(Object object) {

@@ -49,8 +49,8 @@ public class Team extends BaseModel {
 
 	public void removeEmployee(Employee employee) {
 		for (Employee e : employees) {
-			if (e.getId() == employee.getId()) {
-				employees.remove(employee);
+			if (e.getId().equals(employee.getId())) {
+				employees.remove(e);
 				propertyChangeSupport.firePropertyChange("employees", null, this);
 				propertyChangeSupport.firePropertyChange("employee", null, null);
 				break;

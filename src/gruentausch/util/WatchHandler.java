@@ -2,7 +2,6 @@ package gruentausch.util;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.StandardWatchEventKinds;
 import java.nio.file.WatchEvent;
 import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
@@ -30,12 +29,8 @@ public class WatchHandler extends Thread {
 			try {
 				WatchKey key = watchService.take(); // blockiert
 				List<WatchEvent<?>> eventList = key.pollEvents();
-				System.out.println("size = " + eventList.size());
 				for (WatchEvent<?> e : eventList) {
-
-					if (e.kind() == StandardWatchEventKinds.ENTRY_CREATE) {
-						listener.handleFilesChanged();
-					}
+					listener.handleFilesChanged();
 					System.out.print(e.kind() + " -> ");
 					Path name = (Path) e.context();
 					// System.out.print(name.getParent());
