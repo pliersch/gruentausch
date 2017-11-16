@@ -1,12 +1,14 @@
 package gruentausch.persistence;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
 
+import gruentausch.model.Clients;
 import gruentausch.model.Day;
 import gruentausch.model.Employee;
 import gruentausch.model.Month;
-import gruentausch.model.Person;
+import gruentausch.model.Team;
 import gruentausch.util.CalendarUtil;
 import gruentausch.util.FileAndFolderManager;
 import gruentausch.util.Logger;
@@ -15,6 +17,8 @@ import gruentausch.util.XMLManager;
 public class Persister {
 
 	private static Persister instance;
+	private Team team;
+	private Clients clients;
 
 	private Persister() {
 
@@ -27,8 +31,9 @@ public class Persister {
 		return Persister.instance;
 	}
 
-	public boolean update(Person employee) {
-		// getInstance()
+
+	public boolean update(Employee employee) {
+		File file = new XMLManager().writeFile(team, "data/Mitarbeiter.xml");
 		return false;
 	}
 
@@ -114,6 +119,14 @@ public class Persister {
 		new XMLManager().writeFile(m, path);
 
 		return true;
+	}
+
+	public void setTeam(Team team) {
+		this.team = team;
+	}
+
+	public void setClients(Clients clients) {
+		this.clients = clients;
 	}
 
 }

@@ -116,7 +116,7 @@
       <children xsi:type="menu:ToolControl" xmi:id="_0bWeYL_GEeeBMbhqwz32-w" elementId="gruentausch.toolcontrol.0" contributionURI="bundleclass://gruentausch/toolbars.SpacerControl">
         <tags>stretch</tags>
       </children>
-      <children xsi:type="menu:ToolControl" xmi:id="_02lo4L_GEeeBMbhqwz32-w" elementId="gruentausch.toolcontrol.1" contributionURI="bundleclass://gruentausch/toolbars.PerspectiveControl"/>
+      <children xsi:type="menu:ToolControl" xmi:id="_02lo4L_GEeeBMbhqwz32-w" elementId="gruentausch.toolcontrol.1" contributionURI="bundleclass://gruentausch/gruentausch.views.toolbars.PerspectiveControl"/>
     </trimBars>
   </children>
   <handlers xmi:id="_6wlLfcgZEeSyMNYR5xypkQ" elementId="gruentausch.handler.quitCommand" contributionURI="bundleclass://gruentausch/gruentausch.handlers.QuitHandler" command="_6wlLfMgZEeSyMNYR5xypkQ"/>

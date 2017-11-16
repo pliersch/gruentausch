@@ -113,7 +113,9 @@ public class DayTable {
 			public void afterEditorDeactivated(ColumnViewerEditorDeactivationEvent event) {
 				ViewerCell source = (ViewerCell) event.getSource();
 				Activity activity = (Activity) source.getElement();
-				_handler.handleDataChange(activity);
+				if (activity.isValid()) {
+					_handler.handleDataChange(activities);
+				}
 			}
 
 			@Override
@@ -202,9 +204,7 @@ public class DayTable {
 		activity.setEnd("");
 		activity.setCustomerId("");
 		activity.setTask("");
-		// activity.setKilometers(11);
 		activities.add(activity);
-		viewer.setInput(activities);
 	}
 
 	private TableViewerColumn createTableViewerColumn(String title, int bound, final int colNumber) {
@@ -227,5 +227,10 @@ public class DayTable {
 
 	public TableViewer getViewer() {
 		return viewer;
+	}
+
+	public List<Activity> getActivities() {
+		activities.remove(activities.size() - 1);
+		return activities;
 	}
 }

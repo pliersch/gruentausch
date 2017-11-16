@@ -40,7 +40,7 @@ public class MonthChart {
 	@Inject
 	void updateMonth(@Optional @Named(IServiceConstants.ACTIVE_SELECTION) Month month) {
 		if (month != null) {
-			updateChart(month);
+			// updateChart(month);
 		}
 	}
 
@@ -77,8 +77,10 @@ public class MonthChart {
 		float min;
 		int date = 1;
 		for (Day day : days) {
-			if (day.getBegin() != null && day.getEnd() != null) {
-				Calendar workingTime = CalendarUtil.getWorkingTime(day.getBegin(), day.getEnd());
+			String begin = day.getBegin();
+			String end = day.getEnd();
+			if (begin != null && end != null) {
+				Calendar workingTime = CalendarUtil.getWorkingTime(begin, end);
 				hour = workingTime.get(Calendar.HOUR_OF_DAY);
 				min = workingTime.get(Calendar.MINUTE) / 60f;
 			} else {

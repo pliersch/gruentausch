@@ -1,4 +1,4 @@
-package toolbars;
+package gruentausch.views.toolbars;
 
 import java.util.HashMap;
 import java.util.Map;

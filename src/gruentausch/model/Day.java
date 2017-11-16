@@ -78,7 +78,7 @@ public class Day extends Unmarshaller.Listener {
 
 	public String getBegin() {
 		String begin = null;
-		if (activities != null && activities.get(0) != null) {
+		if (activities != null && !activities.isEmpty() && activities.get(0) != null) {
 			begin = activities.get(0).getBegin();
 		}
 		return begin;
@@ -86,7 +86,7 @@ public class Day extends Unmarshaller.Listener {
 
 	public String getEnd() {
 		String end = null;
-		if (activities != null) {
+		if (activities != null && !activities.isEmpty() && activities.get(activities.size() - 1) != null) {
 			Activity activity = activities.get(activities.size() - 1);
 			end = activity.getEnd();
 		}

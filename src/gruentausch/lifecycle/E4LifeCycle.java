@@ -17,6 +17,7 @@ import org.eclipse.swt.widgets.Shell;
 import gruentausch.handlers.DailyJobHandler;
 import gruentausch.model.Clients;
 import gruentausch.model.Team;
+import gruentausch.persistence.Persister;
 import gruentausch.util.FileAndFolderManager;
 import gruentausch.util.Logger;
 import gruentausch.util.XMLManager;
@@ -79,6 +80,8 @@ public class E4LifeCycle {
 		workbenchContext.set(Team.class, team);
 		Clients clients = (Clients) new XMLManager().readFile("data/Kunden.xml", Clients.class);
 		workbenchContext.set(Clients.class, clients);
+		Persister.getInstance().setTeam(team);
+		Persister.getInstance().setClients(clients);
 		System.out.println("@ProcessAdditions");
 	}
 

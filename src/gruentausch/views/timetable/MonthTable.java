@@ -33,12 +33,11 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
 
-import gruentausch.model.Activity;
 import gruentausch.model.Day;
 import gruentausch.util.CalendarUtil;
 import gruentausch.views.ViewDataChangeHandler;
 
-public class MonthTable implements ViewDataChangeHandler {
+public class MonthTable {
 
 	private static final Image CHECKED = createImageDescriptor("icons/checked.gif");
 	private static final Image UNCHECKED = createImageDescriptor("icons/unchecked.gif");
@@ -125,16 +124,10 @@ public class MonthTable implements ViewDataChangeHandler {
 		};
 	}
 
-	// public TableViewer getViewer() {
-	// return viewer;
-	// }
-
-	// create the columns for the table
 	private void createColumns(final Composite parent, final TableViewer viewer) {
 		String[] titles = { "Tag", "Beginn", "Ende", "Urlaub" };
 		int[] bounds = { 130, 100, 100, 100 };
 
-		// first column is for the first name
 		TableViewerColumn col = createTableViewerColumn(titles[0], bounds[0], 0);
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
@@ -144,7 +137,6 @@ public class MonthTable implements ViewDataChangeHandler {
 			}
 		});
 
-		// second column is for the last name
 		col = createTableViewerColumn(titles[1], bounds[1], 1);
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
@@ -154,7 +146,6 @@ public class MonthTable implements ViewDataChangeHandler {
 			}
 		});
 
-		// now the gender
 		col = createTableViewerColumn(titles[2], bounds[2], 2);
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
@@ -164,7 +155,6 @@ public class MonthTable implements ViewDataChangeHandler {
 			}
 		});
 
-		// now the status married
 		col = createTableViewerColumn(titles[3], bounds[3], 3);
 		col.setLabelProvider(new ColumnLabelProvider() {
 			@Override
@@ -212,11 +202,4 @@ public class MonthTable implements ViewDataChangeHandler {
 	public void setDataViewHandler(ViewDataChangeHandler handler) {
 		_handler = handler;
 	}
-
-	@Override
-	public void handleDataChange(Object object) {
-		Activity activity = (Activity) object;
-		
-	}
-
 }

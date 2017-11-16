@@ -13,8 +13,7 @@ public class DailyJobHandler {
 
 	@Execute
 	public void execute(Shell shell) {
-		// TODO current execute job every 60 seconds
-		RepeatingJob job = new RepeatingJob(60 * 1000);
+		RepeatingJob job = new RepeatingJob(60 * 60 * 1000); // 60min
 		job.addJobChangeListener(new IJobChangeListener() {
 
 			@Override

@@ -33,18 +33,16 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableItem;
 
-import gruentausch.model.Activity;
 import gruentausch.model.Day;
 import gruentausch.model.Employee;
 import gruentausch.model.Month;
+import gruentausch.persistence.Persister;
 import gruentausch.util.CalendarUtil;
 import gruentausch.views.ViewDataChangeHandler;
 import gruentausch.views.timetable.DayTable;
 import gruentausch.views.timetable.MonthTable;
 
 public class MonthTablePart extends MonthTable implements ViewDataChangeHandler {
-
-	private Employee employee;
 
 	@Inject
 	private MPart part;
@@ -57,6 +55,9 @@ public class MonthTablePart extends MonthTable implements ViewDataChangeHandler 
 	private Button btnVacation;
 
 	private ViewDataChangeHandler _handler;
+
+	private Employee employee;
+	private Day day;
 
 	@Override
 	@PostConstruct
@@ -165,6 +166,9 @@ public class MonthTablePart extends MonthTable implements ViewDataChangeHandler 
 				btnVacation.setEnabled(false);
 				table.setEnabled(false);
 				btnEdit.setText("Bearbeiten");
+
+				day.setActivities(dayTable.getActivities());
+				Persister.getInstance().update(employee);
 			}
 
 			@Override
@@ -181,7 +185,8 @@ public class MonthTablePart extends MonthTable implements ViewDataChangeHandler 
 				IStructuredSelection selection = (IStructuredSelection) event.getSelection();
 				Object firstElement = selection.getFirstElement();
 				if (firstElement instanceof Day) {
-					updateDetail((Day) firstElement);
+					day = (Day) firstElement;
+					updateDetail(day);
 				} else {
 					updateDetail(null);
 				}
@@ -214,16 +219,19 @@ public class MonthTablePart extends MonthTable implements ViewDataChangeHandler 
 		}
 	}
 
+	private void disableDetail() {
+		btnEdit.setEnabled(false);
+		btnEdit.setText("Bearbeiten");
+		btnVacation.setEnabled(false);
+		dayTable.getViewer().getTable().setEnabled(false);
+	}
+
 	@Inject
 	void updateMonth(@Optional @Named(IServiceConstants.ACTIVE_SELECTION) Month month) {
 		if (month != null) {
 
 			part.setLabel(employee.getGivenname() + " " + CalendarUtil.getMonth(month.getMonth()) + " " + month.getYear());
-
-			btnEdit.setEnabled(false);
-			btnEdit.setText("Bearbeiten");
-			btnVacation.setEnabled(false);
-
+			disableDetail();
 			if (viewer != null /* && !viewer.isDisposed() */) {
 				List<Day> days = addEmptyDays(month);
 				viewer.setInput(days);
@@ -268,18 +276,12 @@ public class MonthTablePart extends MonthTable implements ViewDataChangeHandler 
 				newDay.setCalendar(calendar);
 				days.add(newDay);
 			}
-
 		}
 		return days;
 	}
 
 	@Override
 	public void handleDataChange(Object object) {
-		Activity activity = (Activity) object;
-		if (activity.isValid()) {
-			btnSave.setEnabled(true);
-		} else {
-			btnSave.setEnabled(false);
-		}
+		btnSave.setEnabled(true);
 	}
 }
