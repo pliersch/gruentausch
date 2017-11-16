@@ -113,7 +113,7 @@
         <children xsi:type="menu:HandledToolItem" xmi:id="_tYFQ8MIsEeeBMbhqwz32-w" elementId="gruentausch.handledtoolitem.createpdf" label="Create PDF" iconURI="platform:/plugin/gruentausch/icons/avatar.png" tooltip="Create PDF" command="_hk1sYMIsEeeBMbhqwz32-w"/>
         <children xsi:type="menu:HandledToolItem" xmi:id="_AvgBgMJBEeeBMbhqwz32-w" elementId="gruentausch.handledtoolitem.job" label="Job" tooltip="Started den &quot;Tägliche Prüfung&quot; Job" command="_LEccEMJBEeeBMbhqwz32-w"/>
       </children>
-      <children xsi:type="menu:ToolControl" xmi:id="_0bWeYL_GEeeBMbhqwz32-w" elementId="gruentausch.toolcontrol.0" contributionURI="bundleclass://gruentausch/toolbars.SpacerControl">
+      <children xsi:type="menu:ToolControl" xmi:id="_0bWeYL_GEeeBMbhqwz32-w" elementId="gruentausch.toolcontrol.0" contributionURI="bundleclass://gruentausch/gruentausch.views.toolbars.SpacerControl">
         <tags>stretch</tags>
       </children>
       <children xsi:type="menu:ToolControl" xmi:id="_02lo4L_GEeeBMbhqwz32-w" elementId="gruentausch.toolcontrol.1" contributionURI="bundleclass://gruentausch/gruentausch.views.toolbars.PerspectiveControl"/>
