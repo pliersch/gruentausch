@@ -158,14 +158,20 @@ public class MonthTablePart extends MonthTable implements ViewDataChangeHandler 
 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
+				boolean isVacation = btnVacation.getSelection();
 				btnSave.setEnabled(false);
 				dayTable.addNewEmptyRow();
 				btnVacation.setSelection(false);
-				btnVacation.setEnabled(false);
+				// btnVacation.setEnabled(false);
 				table.setEnabled(false);
 				btnEdit.setText("Bearbeiten");
 
-				day.setActivities(dayTable.getActivities());
+				if (isVacation) {
+					day.setVacation(isVacation);
+					day.setActivities(null);
+				} else {
+					day.setActivities(dayTable.getActivities());
+				}
 				Persister.getInstance().update(employee);
 			}
 
@@ -243,6 +249,7 @@ public class MonthTablePart extends MonthTable implements ViewDataChangeHandler 
 				Calendar today = Calendar.getInstance();
 				Color weekendColor = Display.getDefault().getSystemColor(SWT.COLOR_GRAY);
 				Color missingColor = Display.getDefault().getSystemColor(SWT.COLOR_RED);
+				Color vacationColor = Display.getDefault().getSystemColor(SWT.COLOR_CYAN);
 
 				for (TableItem tableItem : items) {
 					day = (Day) tableItem.getData();
@@ -250,7 +257,9 @@ public class MonthTablePart extends MonthTable implements ViewDataChangeHandler 
 					if (workingCalendar.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY
 							|| workingCalendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
 						tableItem.setBackground(weekendColor);
-					} else if (!day.isVacation() && day.getBegin() == null && workingCalendar.before(today)) {
+					} else if (day.isVacation()) {
+						tableItem.setBackground(vacationColor);
+					} else if (day.getBegin() == null && workingCalendar.before(today)) {
 						tableItem.setBackground(missingColor);
 					}
 				}
