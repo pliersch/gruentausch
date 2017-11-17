@@ -27,7 +27,6 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 
 import gruentausch.model.Activity;
-import gruentausch.model.Day;
 import gruentausch.views.ViewDataChangeHandler;
 import gruentausch.views.timetable.editingsupport.BeginEditingSupport;
 import gruentausch.views.timetable.editingsupport.CustomerIdEditingSupport;
@@ -44,6 +43,7 @@ public class DayTable {
 	boolean addExtraRow = true;
 	private List<Activity> activities;
 	private List<Activity> initalActivities;
+	private boolean emptyRow;
 
 	@PostConstruct
 	public void createControls(Composite parent) {
@@ -182,20 +182,26 @@ public class DayTable {
 		col.setEditingSupport(new KilometerEditingSupport(viewer));
 	}
 
-	public void updateTable(Day day) {
-		initalActivities = day.getActivities();
-		activities = new ArrayList<>(initalActivities);
+	public void updateTable(List<Activity> employeeActivities) {
+		emptyRow = false;
+		System.out.println("new input -> emptyRow = false");
+		initalActivities = employeeActivities;
+		this.activities = new ArrayList<>(initalActivities);
 		addNewEmptyRow();
 		viewer.setInput(activities);
 	}
 
-	public void addNewEmptyRow() {
-		Activity activity = new Activity();
-		activity.setBegin("");
-		activity.setEnd("");
-		activity.setCustomerId("");
-		activity.setTask("");
-		activities.add(activity);
+	private void addNewEmptyRow() {
+		if (!emptyRow) {
+			Activity activity = new Activity();
+			activity.setBegin("");
+			activity.setEnd("");
+			activity.setCustomerId("");
+			activity.setTask("");
+			activities.add(activity);
+			emptyRow = true;
+			System.out.println("emptyRow = true");
+		}
 	}
 
 	private TableViewerColumn createTableViewerColumn(String title, int bound, final int colNumber) {
@@ -221,13 +227,27 @@ public class DayTable {
 	}
 
 	public List<Activity> getActivities() {
-		activities.remove(activities.size() - 1);
+		if (emptyRow) {
+			System.out.println("fuck");
+			// activities.remove(activities.size() - 1);
+		}
 		return activities;
 	}
 
-	public void cleanUp() {
+	public void restore() {
 		activities = new ArrayList<>(initalActivities);
+		viewer.setInput(activities);
+	}
+
+	public void removeActivities() {
+		viewer.getTable().removeAll();
+		activities = new ArrayList<>();
 		addNewEmptyRow();
 		viewer.setInput(activities);
+	}
+
+	public void handleSave() {
+		emptyRow = false;
+		System.out.println("emptyRow = false");
 	}
 }
