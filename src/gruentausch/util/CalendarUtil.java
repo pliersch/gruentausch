@@ -25,13 +25,7 @@ public class CalendarUtil {
 		calendar.set(Calendar.YEAR, year);
 		calendar.set(Calendar.MONTH, month);
 		calendar.set(Calendar.DAY_OF_MONTH, day);
-		return calendar;
-	}
-
-	public static Calendar getCalendar(int year, int month) {
-		Calendar calendar = Calendar.getInstance();
-		calendar.set(Calendar.YEAR, year);
-		calendar.set(Calendar.MONTH, month);
+		calendar.set(Calendar.HOUR, 0);
 		return calendar;
 	}
 

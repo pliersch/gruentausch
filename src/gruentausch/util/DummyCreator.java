@@ -37,7 +37,7 @@ public class DummyCreator {
 					Month month = new Month();
 					month.setMonth(k);
 					month.setYear(year.getYear());
-					Calendar calendar = CalendarUtil.getCalendar(years[j], k);
+					Calendar calendar = CalendarUtil.getCalendar(years[j], k, 0);
 					int daysInMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
 					year.addMonth(month);
 					List<Day> days = new ArrayList<Day>();

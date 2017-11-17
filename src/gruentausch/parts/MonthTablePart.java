@@ -53,8 +53,6 @@ public class MonthTablePart extends MonthTable implements ViewDataChangeHandler 
 	private Button btnSave;
 	private Button btnVacation;
 
-	private ViewDataChangeHandler _handler;
-
 	private Employee employee;
 	private Day day;
 
@@ -241,17 +239,18 @@ public class MonthTablePart extends MonthTable implements ViewDataChangeHandler 
 				Table table = viewer.getTable();
 				TableItem[] items = table.getItems();
 				Day day;
-				Calendar calendar;
+				Calendar workingCalendar;
+				Calendar today = Calendar.getInstance();
 				Color weekendColor = Display.getDefault().getSystemColor(SWT.COLOR_GRAY);
 				Color missingColor = Display.getDefault().getSystemColor(SWT.COLOR_RED);
 
 				for (TableItem tableItem : items) {
 					day = (Day) tableItem.getData();
-					calendar = CalendarUtil.getCalendar(month.getYear(), month.getMonth(), day.getDay());
-					if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY
-							|| calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
+					workingCalendar = CalendarUtil.getCalendar(month.getYear(), month.getMonth(), day.getDay());
+					if (workingCalendar.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY
+							|| workingCalendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
 						tableItem.setBackground(weekendColor);
-					} else if (!day.isVacation() && day.getBegin() == null) {
+					} else if (!day.isVacation() && day.getBegin() == null && workingCalendar.before(today)) {
 						tableItem.setBackground(missingColor);
 					}
 				}
