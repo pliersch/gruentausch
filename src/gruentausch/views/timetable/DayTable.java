@@ -60,15 +60,6 @@ public class DayTable {
 
 		viewer.setContentProvider(new ArrayContentProvider());
 		activities = new ArrayList<>();
-		Activity activity = new Activity();
-		activity.setBegin("08:10");
-		activity.setEnd("18:10");
-		activity.setKilometers(10);
-		activity.setCustomerId("DE77100100100");
-		activity.setTask("Wald");
-		activities.add(activity);
-
-		viewer.setInput(activities);
 	}
 
 	private void addEditorSupport(TableViewer tv) {
@@ -236,6 +227,7 @@ public class DayTable {
 
 	public void cleanUp() {
 		activities = new ArrayList<>(initalActivities);
+		addNewEmptyRow();
 		viewer.setInput(activities);
 	}
 }

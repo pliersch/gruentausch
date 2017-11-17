@@ -43,6 +43,10 @@ import gruentausch.views.timetable.MonthTable;
 
 public class MonthTablePart extends MonthTable implements ViewDataChangeHandler {
 
+	private final String txtEdit = "Bearbeiten";
+	private final String txtCancel = "Abbrechen";
+	private final String txtSave = "Speichern";
+
 	@Inject
 	private MPart part;
 	private Group groupDetail;
@@ -97,7 +101,6 @@ public class MonthTablePart extends MonthTable implements ViewDataChangeHandler 
 
 		FormData data1 = new FormData();
 		data1.left = new FormAttachment(0, 5);
-		// data1.top = new FormAttachment(table, 5);
 		data1.bottom = new FormAttachment(100, -10);
 
 		btnVacation = new Button(groupDetail, SWT.CHECK);
@@ -107,8 +110,10 @@ public class MonthTablePart extends MonthTable implements ViewDataChangeHandler 
 		btnVacation.addSelectionListener(new SelectionListener() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				table.setEnabled(!btnVacation.getSelection());
-				btnSave.setEnabled(btnVacation.getSelection());
+				boolean isVaction = btnVacation.getSelection();
+				table.setEnabled(!isVaction);
+				dayTable.cleanUp();
+				btnSave.setEnabled(isVaction);
 			}
 
 			@Override
@@ -123,22 +128,19 @@ public class MonthTablePart extends MonthTable implements ViewDataChangeHandler 
 		btnEdit = new Button(groupDetail, SWT.NONE);
 		btnEdit.setEnabled(false);
 		btnEdit.setLayoutData(data3);
-		btnEdit.setText("Bearbeiten");
+		btnEdit.setText(txtEdit);
 		btnEdit.addSelectionListener(new SelectionListener() {
 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				boolean enabled = btnVacation.getEnabled();
-				btnVacation.setEnabled(!enabled);
-				table.setEnabled(!enabled);
-				if (enabled) {
-					btnVacation.setSelection(false);
-					btnSave.setEnabled(false);
-					btnEdit.setText("Bearbeiten");
-					dayTable.cleanUp();
+				boolean isEditMode = btnEdit.getText().equals(txtEdit);
+				if (isEditMode) {
+					enableDetail();
 				} else {
-					btnEdit.setText("Abbrechen");
+					btnVacation.setSelection(day.isVacation());
+					disableDetail();
 				}
+				// dayTable.cleanUp();
 			}
 
 			@Override
@@ -153,18 +155,16 @@ public class MonthTablePart extends MonthTable implements ViewDataChangeHandler 
 		btnSave = new Button(groupDetail, SWT.NONE);
 		btnSave.setEnabled(false);
 		btnSave.setLayoutData(data4);
-		btnSave.setText("Speichern");
+		btnSave.setText(txtSave);
 		btnSave.addSelectionListener(new SelectionListener() {
 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
+				disableDetail();
 				boolean isVacation = btnVacation.getSelection();
-				btnSave.setEnabled(false);
 				dayTable.addNewEmptyRow();
-				btnVacation.setSelection(false);
 				// btnVacation.setEnabled(false);
-				table.setEnabled(false);
-				btnEdit.setText("Bearbeiten");
+				btnEdit.setText(txtEdit);
 
 				if (isVacation) {
 					day.setVacation(isVacation);
@@ -173,6 +173,11 @@ public class MonthTablePart extends MonthTable implements ViewDataChangeHandler 
 					day.setActivities(dayTable.getActivities());
 				}
 				Persister.getInstance().update(employee);
+
+				Month month = day.getParent();
+				List<Day> days = month.getDays();
+				viewer.setInput(days);
+				highlightRows(month);
 			}
 
 			@Override
@@ -196,31 +201,44 @@ public class MonthTablePart extends MonthTable implements ViewDataChangeHandler 
 				}
 			}
 
-			private void updateDetail(Day day) {
-				Display.getDefault().syncExec(new Runnable() {
-					@Override
-					public void run() {
-						groupDetail.setText("Detail");
-						if (day != null) {
-							Calendar calendar = day.getCalendar();
-							String format = new SimpleDateFormat("EEEE', 'dd. MMMM yyyy", Locale.GERMAN).format(calendar.getTime());
-							groupDetail.setText(format);
-							btnEdit.setEnabled(true);
-							dayTable.updateTable(day);
-						} else {
-							btnEdit.setEnabled(false);
-						}
+		});
+	}
+
+	private void updateDetail(Day day) {
+		Display.getDefault().syncExec(new Runnable() {
+			@Override
+			public void run() {
+				groupDetail.setText("Detail");
+				if (day != null) {
+					Calendar calendar = day.getCalendar();
+					String format = new SimpleDateFormat("EEEE', 'dd. MMMM yyyy", Locale.GERMAN).format(calendar.getTime());
+					groupDetail.setText(format);
+					btnEdit.setEnabled(true);
+					dayTable.updateTable(day);
+					if (day.isVacation()) {
+						btnVacation.setSelection(true);
 					}
-				});
+				} else {
+					btnEdit.setEnabled(false);
+				}
 			}
 		});
 	}
 
 	private void disableDetail() {
-		btnEdit.setEnabled(false);
-		btnEdit.setText("Bearbeiten");
+		btnEdit.setEnabled(true);
+		btnSave.setEnabled(false);
+		btnEdit.setText(txtEdit);
 		btnVacation.setEnabled(false);
 		dayTable.getViewer().getTable().setEnabled(false);
+	}
+
+	private void enableDetail() {
+		btnEdit.setEnabled(true);
+		btnEdit.setText(txtCancel);
+		btnVacation.setEnabled(true);
+		boolean isVacation = btnVacation.getSelection();
+		dayTable.getViewer().getTable().setEnabled(!isVacation);
 	}
 
 	@Inject
@@ -241,28 +259,32 @@ public class MonthTablePart extends MonthTable implements ViewDataChangeHandler 
 				List<Day> days = month.getDays();
 
 				viewer.setInput(days);
+				highlightRows(month);
 
-				Table table = viewer.getTable();
-				TableItem[] items = table.getItems();
-				Day day;
-				Calendar workingCalendar;
-				Calendar today = Calendar.getInstance();
-				Color weekendColor = Display.getDefault().getSystemColor(SWT.COLOR_GRAY);
-				Color missingColor = Display.getDefault().getSystemColor(SWT.COLOR_RED);
-				Color vacationColor = Display.getDefault().getSystemColor(SWT.COLOR_CYAN);
+			}
+		}
+	}
 
-				for (TableItem tableItem : items) {
-					day = (Day) tableItem.getData();
-					workingCalendar = CalendarUtil.getCalendar(month.getYear(), month.getMonth(), day.getDay());
-					if (workingCalendar.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY
-							|| workingCalendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
-						tableItem.setBackground(weekendColor);
-					} else if (day.isVacation()) {
-						tableItem.setBackground(vacationColor);
-					} else if (day.getBegin() == null && workingCalendar.before(today)) {
-						tableItem.setBackground(missingColor);
-					}
-				}
+	private void highlightRows(Month month) {
+		Table table = viewer.getTable();
+		TableItem[] items = table.getItems();
+		Day day;
+		Calendar workingCalendar;
+		Calendar today = Calendar.getInstance();
+		Color weekendColor = Display.getDefault().getSystemColor(SWT.COLOR_GRAY);
+		Color missingColor = Display.getDefault().getSystemColor(SWT.COLOR_RED);
+		Color vacationColor = Display.getDefault().getSystemColor(SWT.COLOR_CYAN);
+
+		for (TableItem tableItem : items) {
+			day = (Day) tableItem.getData();
+			workingCalendar = CalendarUtil.getCalendar(month.getYear(), month.getMonth(), day.getDay());
+			if (workingCalendar.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY
+					|| workingCalendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
+				tableItem.setBackground(weekendColor);
+			} else if (day.isVacation()) {
+				tableItem.setBackground(vacationColor);
+			} else if (day.getBegin() == null && workingCalendar.before(today)) {
+				tableItem.setBackground(missingColor);
 			}
 		}
 	}
